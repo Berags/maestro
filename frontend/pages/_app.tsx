@@ -1,8 +1,10 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { MantineProvider } from '@mantine/core'
+import { SessionProvider } from "next-auth/react"
 
-function MyApp({ Component, pageProps }: AppProps) {
+
+function MyApp({ Component, pageProps: {session, ...pageProps}}: AppProps) {
   return (
     <MantineProvider
       withGlobalStyles
@@ -18,7 +20,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         },
       }}
     >
-      <Component {...pageProps} />
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
     </MantineProvider>
   )
 }
