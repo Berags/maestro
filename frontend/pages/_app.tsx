@@ -1,29 +1,19 @@
-import '../styles/globals.css'
+//import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { MantineProvider } from '@mantine/core'
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from 'next-auth/react'
+import { ChakraProvider } from '@chakra-ui/react'
+import Head from 'next/head'
 
-
-function MyApp({ Component, pageProps: {session, ...pageProps}}: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      theme={{
-        colorScheme: 'light',
-        breakpoints: {
-          xs: 500,
-          sm: 800,
-          md: 1000,
-          lg: 1200,
-          xl: 1400,
-        },
-      }}
-    >
+    <ChakraProvider>
       <SessionProvider session={session}>
+        <Head>
+          <title>Maestro</title>
+        </Head>
         <Component {...pageProps} />
       </SessionProvider>
-    </MantineProvider>
+    </ChakraProvider>
   )
 }
 

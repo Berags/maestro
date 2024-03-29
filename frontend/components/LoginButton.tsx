@@ -1,4 +1,4 @@
-import { Button } from '@mantine/core'
+import { Button } from '@chakra-ui/react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 
 export default function Component() {
@@ -14,7 +14,7 @@ export default function Component() {
   }
   return (
     <>
-      <Button onClick={() => signIn()}>Sign in</Button>
+      <Button onClick={() => signIn()}>login</Button>
     </>
   )
 }
