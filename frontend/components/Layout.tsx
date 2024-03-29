@@ -5,7 +5,6 @@ import {
   useColorModeValue,
   Icon,
   useDisclosure,
-  Collapse,
   Drawer,
   DrawerOverlay,
   DrawerContent,
@@ -14,15 +13,28 @@ import {
   InputLeftElement,
   Input,
   Avatar,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  Button,
+  VStack,
+  Link,
+  chakra,
 } from '@chakra-ui/react'
 import { ReactNode } from 'react'
-import { FaBell, FaClipboardCheck, FaRss } from 'react-icons/fa'
-import { AiFillGift } from 'react-icons/ai'
-import { BsGearFill } from 'react-icons/bs'
+import { FaBell } from 'react-icons/fa'
+import { IoMdSettings } from 'react-icons/io'
+import { BsGearFill, BsMusicNote } from 'react-icons/bs'
 import { FiMenu, FiSearch } from 'react-icons/fi'
-import { HiCode, HiCollection } from 'react-icons/hi'
-import { MdHome, MdKeyboardArrowRight } from 'react-icons/md'
-import { useSession } from 'next-auth/react'
+import { MdHome } from 'react-icons/md'
+import { signOut, useSession } from 'next-auth/react'
+import { BsFilePerson } from 'react-icons/bs'
+import { BiAlbum } from 'react-icons/bi'
+import { IoAlbumsOutline } from 'react-icons/io5'
+import { GiMusicalScore } from 'react-icons/gi'
+import NextLink from 'next/link'
+import PlayerFooter from './PlayerFooter'
 
 type Props = {
   children: ReactNode
@@ -116,30 +128,12 @@ export default function Component(props: Props) {
         aria-label="Main Navigation"
       >
         <NavItem icon={MdHome}>Home</NavItem>
-        <NavItem icon={FaRss}>Composers</NavItem>
-        <NavItem icon={HiCollection}>Performers</NavItem>
-        <NavItem icon={FaClipboardCheck}>Albums</NavItem>
-        <NavItem icon={HiCode} onClick={integrations.onToggle}>
-          Integrations
-          <Icon
-            as={MdKeyboardArrowRight}
-            ml="auto"
-            transform={integrations.isOpen && 'rotate(90deg)' as any}
-          />
-        </NavItem>
-        <Collapse in={integrations.isOpen}>
-          <NavItem pl="12" py="2">
-            Shopify
-          </NavItem>
-          <NavItem pl="12" py="2">
-            Slack
-          </NavItem>
-          <NavItem pl="12" py="2">
-            Zapier
-          </NavItem>
-        </Collapse>
-        <NavItem icon={AiFillGift}>Recordings</NavItem>
-        <NavItem icon={BsGearFill}>Settings</NavItem>
+        <NavItem icon={BsFilePerson}>Composers</NavItem>
+        <NavItem icon={BsMusicNote}>Performers</NavItem>
+        <NavItem icon={IoAlbumsOutline}>Albums</NavItem>
+        <NavItem icon={GiMusicalScore}>Opus</NavItem>
+        <NavItem icon={BiAlbum}>Recordings</NavItem>
+        <NavItem icon={IoMdSettings}>Settings</NavItem>
       </Flex>
     </Box>
   )
@@ -215,20 +209,71 @@ export default function Component(props: Props) {
 
           <Flex align="center">
             <Icon color="gray.500" as={FaBell} cursor="pointer" />
-            <Avatar
-              ml="4"
-              size="sm"
-              name="anubra266"
-              src={session.data!.user!.image as string}
-              cursor="pointer"
-            />
+            <Popover>
+              <PopoverTrigger>
+                <Avatar
+                  ml="4"
+                  size="sm"
+                  name="anubra266"
+                  src={session.data!.user!.image as string}
+                  cursor="pointer"
+                />
+              </PopoverTrigger>
+              <PopoverContent>
+                <PopoverBody>
+                  <VStack>
+                    <Link as={NextLink} href="/profile">
+                      Profile
+                    </Link>
+                    <Button
+                      colorScheme="teal"
+                      variant="link"
+                      onClick={() => signOut()}
+                    >
+                      Logout
+                    </Button>
+                  </VStack>
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
           </Flex>
         </Flex>
 
         <Box as="main" p="4">
           {/* Add content here, remove div below  */}
           <Box borderWidth="4px" borderStyle="dashed" rounded="md" h="96" />
+          {props.children}
         </Box>
+
+        <Flex
+          w="full"
+          bg="#edf3f8"
+          _dark={{ bg: '#3e3e3e' }}
+          alignItems="center"
+          justifyContent="center"
+          position={'fixed'}
+          bottom={0}
+        >
+          <Flex
+            w="full"
+            as="footer"
+            flexDir={{ base: 'column', sm: 'row' }}
+            align="center"
+            justify="left"
+            px="6"
+            py="4"
+            bg="white"
+            _dark={{
+              bg: 'gray.800',
+            }}
+          >
+            <PlayerFooter
+              streamUrl={"http://conquest.imslp.info/files/imglnks/usimg/2/21/IMSLP805710-PMLP3848-Luis_Kolodin_plays_Chopin's_Nocturne_No._20_in_C_m_Op._posth..mp3"}
+              trackTitle={'test'}
+              preloadType="auto"
+            />
+          </Flex>
+        </Flex>
       </Box>
     </Box>
   )
