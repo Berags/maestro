@@ -1,15 +1,11 @@
 import type {
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
-  NextPage,
 } from 'next'
-import Image from 'next/image'
-import Head from 'next/head'
-import LoginButton from '../components/LoginButton'
 import { useWindowSize } from '../utils/useWindowSize'
-import { getProviders, signIn, useSession } from 'next-auth/react'
+import { getProviders, signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { Box, Button, chakra, Icon, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, chakra, Stack, Text } from '@chakra-ui/react'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]'
 
@@ -18,11 +14,6 @@ const Home: any = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const size = useWindowSize()
   const router = useRouter()
-  //const { data: session } = useSession()
-
-  //  if (session) {
-  //router.push('/home')
-  // }
 
   return (
     <Box px={8} py={24} mx="auto">
@@ -58,9 +49,7 @@ const Home: any = ({
           color="gray.600"
           _dark={{ color: 'gray.300' }}
         >
-          Hellonext is a feature voting software where you can allow your users
-          to vote on features, publish roadmap, and complete your customer
-          feedback loop.
+          maestro is the next generation classical music player
         </chakra.p>
         <Stack
           direction={{ base: 'column', sm: 'row' }}

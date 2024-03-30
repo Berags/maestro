@@ -127,7 +127,7 @@ export default function Component(props: Props) {
         color="gray.600"
         aria-label="Main Navigation"
       >
-        <NavItem icon={MdHome}>Home</NavItem>
+        <NavItem icon={MdHome}><NextLink href={"/home"}>Home</NextLink></NavItem>
         <NavItem icon={BsFilePerson}>Composers</NavItem>
         <NavItem icon={BsMusicNote}>Performers</NavItem>
         <NavItem icon={IoAlbumsOutline}>Albums</NavItem>
@@ -215,14 +215,14 @@ export default function Component(props: Props) {
                   ml="4"
                   size="sm"
                   name="anubra266"
-                  src={session.data!.user!.image as string}
+                  src={session.data ? session.data!.user!.image as string : ""}
                   cursor="pointer"
                 />
               </PopoverTrigger>
               <PopoverContent>
                 <PopoverBody>
                   <VStack>
-                    <Link as={NextLink} href="/profile">
+                    <Link as={NextLink} href={"/profile/"}>
                       Profile
                     </Link>
                     <Button
@@ -241,7 +241,7 @@ export default function Component(props: Props) {
 
         <Box as="main" p="4">
           {/* Add content here, remove div below  */}
-          <Box borderWidth="4px" borderStyle="dashed" rounded="md" h="96" />
+          {/*<Box borderWidth="4px" borderStyle="dashed" rounded="md" h="96" />*/}
           {props.children}
         </Box>
 

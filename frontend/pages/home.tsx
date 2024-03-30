@@ -11,11 +11,11 @@ import LoginButton from '../components/LoginButton'
 const Home: NextPage = () => {
   const router = useRouter()
   const size = useWindowSize()
-  const { data: session } = useSession()
+  const {data}: any = useSession()
 
-  if (!session) return <NotLoggedIn />
+  if (!data) return <NotLoggedIn />
 
-  return <Layout><LoginButton /></Layout>
+  return <Layout>ciao</Layout>
 }
 
 export default Home
