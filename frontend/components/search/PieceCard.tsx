@@ -7,7 +7,6 @@ import {
   Text,
   Image,
   useColorModeValue,
-  Container,
   Tag,
   StackProps,
 } from '@chakra-ui/react'
@@ -72,14 +71,7 @@ interface TagsProps extends StackProps {
 
 const Tags = ({ skills, ...props }: TagsProps) => {
   return (
-    <Stack
-      spacing={1}
-      mt={3}
-      isInline
-      alignItems="center"
-      flexWrap="wrap"
-      {...props}
-    >
+    <Stack spacing={1} mt={3} alignItems="center" flexWrap="wrap" {...props}>
       {skills.map((skill) => (
         <Tag key={skill} m="2px" size="sm">
           {skill}

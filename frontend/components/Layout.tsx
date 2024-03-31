@@ -127,7 +127,9 @@ export default function Component(props: Props) {
         color="gray.600"
         aria-label="Main Navigation"
       >
-        <NavItem icon={MdHome}><NextLink href={"/home"}>Home</NextLink></NavItem>
+        <NextLink href={'/home'}>
+          <NavItem icon={MdHome}>Home</NavItem>
+        </NextLink>
         <NavItem icon={BsFilePerson}>Composers</NavItem>
         <NavItem icon={BsMusicNote}>Performers</NavItem>
         <NavItem icon={IoAlbumsOutline}>Albums</NavItem>
@@ -215,14 +217,16 @@ export default function Component(props: Props) {
                   ml="4"
                   size="sm"
                   name="anubra266"
-                  src={session.data ? session.data!.user!.image as string : ""}
+                  src={
+                    session.data ? (session.data!.user!.image as string) : ''
+                  }
                   cursor="pointer"
                 />
               </PopoverTrigger>
               <PopoverContent>
                 <PopoverBody>
                   <VStack>
-                    <Link as={NextLink} href={"/profile/"}>
+                    <Link as={NextLink} href={'/profile/my-profile'}>
                       Profile
                     </Link>
                     <Button
@@ -268,7 +272,9 @@ export default function Component(props: Props) {
             }}
           >
             <PlayerFooter
-              streamUrl={"http://conquest.imslp.info/files/imglnks/usimg/2/21/IMSLP805710-PMLP3848-Luis_Kolodin_plays_Chopin's_Nocturne_No._20_in_C_m_Op._posth..mp3"}
+              streamUrl={
+                "http://conquest.imslp.info/files/imglnks/usimg/2/21/IMSLP805710-PMLP3848-Luis_Kolodin_plays_Chopin's_Nocturne_No._20_in_C_m_Op._posth..mp3"
+              }
               trackTitle={'test'}
               preloadType="auto"
             />

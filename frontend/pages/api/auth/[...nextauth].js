@@ -29,11 +29,12 @@ export const authOptions = {
     },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
+      session.user.email = ''
       session.accountId = token.accountId
       session.provider = token.provider
       return session
-    }
-  }  
+    },
+  },
 }
 
 export default NextAuth(authOptions)

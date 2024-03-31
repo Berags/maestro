@@ -16,6 +16,7 @@ import {
 import LoginButton from '../components/LoginButton'
 import ComposerCard from '../components/search/ComposerCard'
 import PieceCard from '../components/search/PieceCard'
+import Separator from '../components/Separator'
 
 const Search: NextPage = () => {
   const router = useRouter()
@@ -26,12 +27,7 @@ const Search: NextPage = () => {
 
   return (
     <Layout>
-      <Box position="relative" padding="10">
-        <Divider />
-        <AbsoluteCenter bg={'#F7FAFC'} px="4">
-          Composers
-        </AbsoluteCenter>
-      </Box>
+      <Separator text="Composers" />
       <SimpleGrid minChildWidth="250px" spacing={5}>
         <ComposerCard
           composerData={{
@@ -61,12 +57,7 @@ const Search: NextPage = () => {
           }}
         />
       </SimpleGrid>
-      <Box position="relative" padding="10">
-        <Divider />
-        <AbsoluteCenter bg={'#F7FAFC'} px="4">
-          Pieces
-        </AbsoluteCenter>
-      </Box>
+      <Separator text="Pieces" />
       <SimpleGrid minChildWidth={'250px'} spacing={5}>
         <PieceCard />
         <PieceCard />

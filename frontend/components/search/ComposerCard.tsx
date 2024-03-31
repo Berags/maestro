@@ -1,16 +1,5 @@
 import * as React from 'react'
-import {
-  Box,
-  Text,
-  Heading,
-  Flex,
-  Avatar,
-  Link,
-  VStack,
-  IconButton,
-  Divider,
-  Fade,
-} from '@chakra-ui/react'
+import { Box, Text, Heading, Avatar, VStack, Fade } from '@chakra-ui/react'
 // Here we have used framer-motion package for animations
 import { motion } from 'framer-motion'
 
