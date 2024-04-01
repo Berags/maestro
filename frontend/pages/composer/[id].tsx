@@ -99,7 +99,7 @@ const Composer = () => {
           </Box>
         </Box>
       </Box>
-      <SimpleGrid minChildWidth={'350px'} spacing={5} mb={'10%'}>
+      <SimpleGrid minChildWidth={'350px'} spacing={5} mb={'10%'} px={5}>
         <OpusCard
           opusData={{
             name: 'Don Giovanni',

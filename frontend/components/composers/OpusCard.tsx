@@ -47,10 +47,8 @@ const OpusCard = (props: Props) => {
         >
           <Image
             src={opusData.image}
-            size="sm"
             width={33}
             height={33}
-            layout="fixed"
             rounded="md"
             objectFit="cover"
             alt="cover image"
