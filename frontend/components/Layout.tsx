@@ -1,3 +1,4 @@
+'use client'
 import {
   Box,
   Text,
@@ -9,50 +10,37 @@ import {
   DrawerOverlay,
   DrawerContent,
   IconButton,
-  InputGroup,
-  InputLeftElement,
-  Input,
   Avatar,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
   Button,
   VStack,
-  Link,
-  chakra,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Heading,
-  Stack,
+  Center,
 } from '@chakra-ui/react'
+import { FaPlay } from 'react-icons/fa6'
 import { ReactNode } from 'react'
-import { FaBell } from 'react-icons/fa'
-import { IoMdSettings } from 'react-icons/io'
-import { RiFlashlightFill, RiNeteaseCloudMusicLine } from 'react-icons/ri'
-import {
-  BsCalendarCheck,
-  BsFolder2,
-  BsGearFill,
-  BsMusicNote,
-} from 'react-icons/bs'
-import { FiMenu, FiSearch } from 'react-icons/fi'
+import { IoMdPlay, IoMdSettings } from 'react-icons/io'
+import { RiNeteaseCloudMusicLine } from 'react-icons/ri'
+import { BsMusicNote } from 'react-icons/bs'
+import { FiMenu } from 'react-icons/fi'
 import { MdHome } from 'react-icons/md'
 import { signOut, useSession } from 'next-auth/react'
 import { BsFilePerson } from 'react-icons/bs'
 import { BiAlbum } from 'react-icons/bi'
-import { IoAlbumsOutline } from 'react-icons/io5'
+import { IoAlbumsOutline, IoPlaySkipForward } from 'react-icons/io5'
 import { GiMusicalScore } from 'react-icons/gi'
 import NextLink from 'next/link'
-import PlayerFooter from './PlayerFooter'
+import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
+import 'react-h5-audio-player/lib/styles.css'
+import React from 'react'
 
 type Props = {
   children: ReactNode
 }
 
-export default function Component(props: Props) {
+const Layout = (props: Props) => {
   const { isOpen, onClose, onOpen } = useDisclosure()
   const session = useSession()
 
@@ -199,13 +187,15 @@ export default function Component(props: Props) {
             align="center"
             w="full"
             px="4"
-            d={{ base: 'flex', md: 'none' }}
             borderBottomWidth="1px"
             borderColor={useColorModeValue('inherit', 'gray.700')}
             bg={useColorModeValue('white', 'gray.800')}
             justifyContent={{ base: 'space-between', md: 'flex-end' }}
             boxShadow="lg"
             h="14"
+            top={'0'}
+            position={'sticky'}
+            zIndex={55}
           >
             <IconButton
               aria-label="Menu"
@@ -222,40 +212,31 @@ export default function Component(props: Props) {
 
           <Box
             as="main"
-            minH="30rem"
+            minH="50rem"
             bg={useColorModeValue('auto', 'gray.800')}
             pb={50}
           >
             {props.children}
           </Box>
           <Flex
+            bottom={'0'}
+            position={'sticky'}
+            as="footer"
+            align="center"
             w="full"
-            bg="#edf3f8"
-            _dark={{ bg: '#3e3e3e' }}
-            alignItems="center"
-            justifyContent="center"
-            position={'fixed'}
-            bottom={0}
+            borderColor={useColorModeValue('inherit', 'gray.700')}
+            bg={useColorModeValue('white', 'gray.800')}
+            justifyContent={{ md: 'flex-start' }}
+            boxShadow="lg"
           >
-            <Flex
-              w="full"
-              as="footer"
-              flexDir={{ base: 'column', sm: 'row' }}
-              align="center"
-              justify="left"
-              px="6"
-              py="4"
-              bg="white"
-              _dark={{
-                bg: 'gray.800',
-              }}
-            >
-              <PlayerFooter
-                streamUrl={
-                  "http://conquest.imslp.info/files/imglnks/usimg/2/21/IMSLP805710-PMLP3848-Luis_Kolodin_plays_Chopin's_Nocturne_No._20_in_C_m_Op._posth..mp3"
-                }
-                trackTitle={'test'}
-                preloadType="auto"
+            <Flex align={'center'} flexGrow={'1'}>
+              <AudioPlayer
+                src="http://conquest.imslp.info/files/imglnks/usimg/2/21/IMSLP805710-PMLP3848-Luis_Kolodin_plays_Chopin's_Nocturne_No._20_in_C_m_Op._posth..mp3"
+                onPlay={(e) => console.log('onPlay')}
+                preload="metadata"
+                showSkipControls
+                showJumpControls={false}
+                header={<Center>Chopin</Center>}
               />
             </Flex>
           </Flex>
@@ -264,3 +245,5 @@ export default function Component(props: Props) {
     </>
   )
 }
+
+export default Layout

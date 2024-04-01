@@ -13,9 +13,9 @@ const Profile: any = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Center>This is your profile {router.query.id}</Center>
-    </Layout>
+    </>
   )
 }
 

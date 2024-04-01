@@ -32,7 +32,7 @@ const Profile: any = () => {
   console.table(data)
 
   return (
-    <Layout>
+    <>
       <Container maxW="5xl" p={{ base: 5, md: 12 }}>
         <Flex direction={['column', 'column', 'row']}>
           <MotionBox
@@ -104,7 +104,7 @@ const Profile: any = () => {
           <PlaylistCard />
         </SimpleGrid>
       </Container>
-    </Layout>
+    </>
   )
 }
 

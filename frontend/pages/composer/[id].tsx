@@ -30,7 +30,7 @@ const Composer = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Box>
         <Stack
           pos="relative"
@@ -131,7 +131,7 @@ const Composer = () => {
           }}
         />
       </SimpleGrid>
-    </Layout>
+    </>
   )
 }
 

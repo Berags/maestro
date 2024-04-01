@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
-import useSound from 'use-sound' // for handling the sound
-import { IconContext } from 'react-icons' // for customazing the icons
+import useSound from 'use-sound'
+import AudioPlayer from 'react-h5-audio-player'
+import 'react-h5-audio-player/lib/styles.css';
+import { IconContext } from 'react-icons'
 import {
   TbPlayerTrackNextFilled,
   TbPlayerTrackPrevFilled,
@@ -73,6 +75,11 @@ const PlayerFooter = (props: any) => {
 
   return (
     <Flex>
+    </Flex>
+  )
+
+  /*return (
+    <Flex>
       <Flex marginLeft={10}>
         <Button colorScheme="blue" variant="ghost">
           <IconContext.Provider value={{ size: '2em', color: '#2B6CB0' }}>
@@ -125,6 +132,6 @@ const PlayerFooter = (props: any) => {
         </Slider>
       </VStack>
     </Flex>
-  )
+  )*/
 }
 export default PlayerFooter

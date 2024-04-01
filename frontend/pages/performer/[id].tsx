@@ -45,7 +45,7 @@ const Performer = () => {
   }
 
   return (
-    <Layout>
+    <>
       <Box>
         <Stack
           pos="relative"
@@ -103,7 +103,7 @@ const Performer = () => {
           </Box>
         </Box>
       </Box>
-      <SimpleGrid minChildWidth={'350px'} spacing={5}>
+      <SimpleGrid minChildWidth={'350px'} spacing={5} px={4}>
         <PieceCard />
         <PieceCard />
         <PieceCard />
@@ -179,7 +179,7 @@ const Performer = () => {
           <ModalBody>{composerData.longDescription}</ModalBody>
         </ModalContent>
       </Modal>
-    </Layout>
+    </>
   )
 }
 

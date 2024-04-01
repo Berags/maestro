@@ -26,7 +26,7 @@ const Search: NextPage = () => {
   if (!data) return <NotLoggedIn />
 
   return (
-    <Layout>
+    <Box px={4}>
       <Separator text="Composers" />
       <SimpleGrid minChildWidth="250px" spacing={5}>
         <ComposerCard
@@ -63,7 +63,7 @@ const Search: NextPage = () => {
         <PieceCard />
         <PieceCard />
       </SimpleGrid>
-    </Layout>
+    </Box>
   )
 }
 

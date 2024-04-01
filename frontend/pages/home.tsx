@@ -16,11 +16,7 @@ const Home: NextPage = () => {
 
   if (!data) return <NotLoggedIn />
 
-  return (
-    <Layout>
-      <Separator text="Recently played" />
-    </Layout>
-  )
+  return <Separator text="Recently played" />
 }
 
 export default Home
