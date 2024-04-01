@@ -21,11 +21,23 @@ import {
   VStack,
   Link,
   chakra,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Heading,
+  Stack,
 } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 import { FaBell } from 'react-icons/fa'
 import { IoMdSettings } from 'react-icons/io'
-import { BsGearFill, BsMusicNote } from 'react-icons/bs'
+import { RiFlashlightFill, RiNeteaseCloudMusicLine } from 'react-icons/ri'
+import {
+  BsCalendarCheck,
+  BsFolder2,
+  BsGearFill,
+  BsMusicNote,
+} from 'react-icons/bs'
 import { FiMenu, FiSearch } from 'react-icons/fi'
 import { MdHome } from 'react-icons/md'
 import { signOut, useSession } from 'next-auth/react'
@@ -41,35 +53,27 @@ type Props = {
 }
 
 export default function Component(props: Props) {
-  const sidebar = useDisclosure()
-  const integrations = useDisclosure()
-  const color = useColorModeValue('gray.600', 'gray.300')
+  const { isOpen, onClose, onOpen } = useDisclosure()
   const session = useSession()
 
   const NavItem = (props: any) => {
-    const { icon, children, ...rest } = props
+    const color = useColorModeValue('gray.600', 'gray.300')
+
+    const { icon, children } = props
     return (
       <Flex
         align="center"
         px="4"
-        pl="4"
         py="3"
         cursor="pointer"
-        color="inherit"
-        _dark={{
-          color: 'gray.400',
-        }}
-        _hover={{
-          bg: 'gray.100',
-          _dark: {
-            bg: 'gray.900',
-          },
-          color: 'gray.900',
-        }}
         role="group"
         fontWeight="semibold"
         transition=".15s ease"
-        {...rest}
+        color={useColorModeValue('inherit', 'gray.400')}
+        _hover={{
+          bg: useColorModeValue('gray.100', 'gray.900'),
+          color: useColorModeValue('gray.900', 'gray.200'),
+        }}
       >
         {icon && (
           <Icon
@@ -94,193 +98,169 @@ export default function Component(props: Props) {
       left="0"
       zIndex="sticky"
       h="full"
-      pb="10"
+      // pb="10"
       overflowX="hidden"
       overflowY="auto"
-      bg="white"
-      _dark={{
-        bg: 'gray.800',
-      }}
-      border
-      color="inherit"
+      bg={useColorModeValue('white', 'gray.800')}
+      borderColor={useColorModeValue('inherit', 'gray.700')}
       borderRightWidth="1px"
       w="60"
       {...props}
     >
-      <Flex px="4" py="5" align="center">
-        <Text
-          fontSize="2xl"
-          ml="2"
-          color="brand.500"
-          _dark={{
-            color: 'white',
-          }}
-          fontWeight="semibold"
-        >
-          Maestro
-        </Text>
-      </Flex>
-      <Flex
-        direction="column"
-        as="nav"
-        fontSize="sm"
-        color="gray.600"
-        aria-label="Main Navigation"
+      <VStack
+        h="full"
+        w="full"
+        alignItems="flex-start"
+        justifyContent="space-between"
       >
-        <NextLink href={'/home'}>
-          <NavItem icon={MdHome}>Home</NavItem>
-        </NextLink>
-        <NavItem icon={BsFilePerson}>Composers</NavItem>
-        <NavItem icon={BsMusicNote}>Performers</NavItem>
-        <NavItem icon={IoAlbumsOutline}>Albums</NavItem>
-        <NavItem icon={GiMusicalScore}>Opus</NavItem>
-        <NavItem icon={BiAlbum}>Recordings</NavItem>
-        <NavItem icon={IoMdSettings}>Settings</NavItem>
-      </Flex>
+        <Box w="full">
+          <Flex
+            px="4"
+            py="5"
+            align="center"
+            onClick={() => {
+              isOpen ? onClose() : null
+            }}
+          >
+            <Icon as={RiNeteaseCloudMusicLine} h={8} w={8} />
+            <Text
+              fontSize="2xl"
+              ml="2"
+              color={useColorModeValue('brand.500', 'white')}
+              fontWeight="semibold"
+            >
+              Maestro
+            </Text>
+          </Flex>
+          <Flex
+            direction="column"
+            as="nav"
+            fontSize="md"
+            color="gray.600"
+            aria-label="Main Navigation"
+          >
+            <NextLink href={'/home'}>
+              <NavItem icon={MdHome}>Home</NavItem>
+            </NextLink>
+            <NavItem icon={BsFilePerson}>Composers</NavItem>
+            <NavItem icon={BsMusicNote}>Performers</NavItem>
+            <NavItem icon={IoAlbumsOutline}>Albums</NavItem>
+            <NavItem icon={GiMusicalScore}>Opus</NavItem>
+            <NavItem icon={BiAlbum}>Recordings</NavItem>
+            <NavItem icon={IoMdSettings}>Settings</NavItem>
+          </Flex>
+        </Box>
+
+        <Flex px="4" py="5" mt={10} justifyContent="center" alignItems="center">
+          <Menu>
+            <MenuButton
+              as={Button}
+              size={'sm'}
+              rounded={'full'}
+              variant={'link'}
+              cursor={'pointer'}
+              _hover={{ textDecoration: 'none' }}
+            >
+              <Avatar
+                size={'sm'}
+                name="Ahmad"
+                src={session.data ? (session.data!.user!.image as string) : ''}
+              />
+            </MenuButton>
+            <MenuList fontSize={17} zIndex={5555}>
+              <MenuItem as={NextLink} href={'/profile/my-profile'}>
+                Profile
+              </MenuItem>
+              <MenuItem onClick={() => signOut()}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
+        </Flex>
+      </VStack>
     </Box>
   )
 
   return (
-    <Box
-      as="section"
-      bg="gray.50"
-      _dark={{
-        bg: 'gray.700',
-      }}
-      minH="100vh"
-    >
-      <SidebarContent
-        display={{
-          base: 'none',
-          md: 'unset',
-        }}
-      />
-      <Drawer
-        isOpen={sidebar.isOpen}
-        onClose={sidebar.onClose}
-        placement="left"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <SidebarContent w="full" borderRight="none" />
-        </DrawerContent>
-      </Drawer>
+    <>
       <Box
-        ml={{
-          base: 0,
-          md: 60,
-        }}
-        transition=".3s ease"
+        as="section"
+        bg={useColorModeValue('gray.50', 'gray.700')}
+        minH="100vh"
       >
-        <Flex
-          as="header"
-          align="center"
-          justify="space-between"
-          w="full"
-          px="4"
-          bg="white"
-          _dark={{
-            bg: 'gray.800',
-          }}
-          borderBottomWidth="1px"
-          color="inherit"
-          h="14"
-        >
-          <IconButton
-            aria-label="Menu"
-            display={{
-              base: 'inline-flex',
-              md: 'none',
-            }}
-            onClick={sidebar.onOpen}
-            icon={<FiMenu />}
-            size="sm"
-          />
-          <InputGroup
-            w="96"
-            display={{
-              base: 'none',
-              md: 'flex',
-            }}
+        <SidebarContent display={{ base: 'none', md: 'unset' }} />
+        <Drawer isOpen={isOpen} onClose={onClose} placement="left">
+          <DrawerOverlay />
+          <DrawerContent>
+            <SidebarContent w="full" borderRight="none" />
+          </DrawerContent>
+        </Drawer>
+        <Box ml={{ base: 0, md: 60 }} transition=".3s ease">
+          <Flex
+            as="header"
+            align="center"
+            w="full"
+            px="4"
+            d={{ base: 'flex', md: 'none' }}
+            borderBottomWidth="1px"
+            borderColor={useColorModeValue('inherit', 'gray.700')}
+            bg={useColorModeValue('white', 'gray.800')}
+            justifyContent={{ base: 'space-between', md: 'flex-end' }}
+            boxShadow="lg"
+            h="14"
           >
-            <InputLeftElement color="gray.500">
-              <FiSearch />
-            </InputLeftElement>
-            <Input placeholder="Search" />
-          </InputGroup>
+            <IconButton
+              aria-label="Menu"
+              display={{ base: 'inline-flex', md: 'none' }}
+              onClick={onOpen}
+              icon={<FiMenu />}
+              size="md"
+            />
 
-          <Flex align="center">
-            <Icon color="gray.500" as={FaBell} cursor="pointer" />
-            <Popover>
-              <PopoverTrigger>
-                <Avatar
-                  ml="4"
-                  size="sm"
-                  name="anubra266"
-                  src={
-                    session.data ? (session.data!.user!.image as string) : ''
-                  }
-                  cursor="pointer"
-                />
-              </PopoverTrigger>
-              <PopoverContent>
-                <PopoverBody>
-                  <VStack>
-                    <Link as={NextLink} href={'/profile/my-profile'}>
-                      Profile
-                    </Link>
-                    <Button
-                      colorScheme="teal"
-                      variant="link"
-                      onClick={() => signOut()}
-                    >
-                      Logout
-                    </Button>
-                  </VStack>
-                </PopoverBody>
-              </PopoverContent>
-            </Popover>
+            <Flex align="center">
+              <Icon as={RiNeteaseCloudMusicLine} h={8} w={8} />
+            </Flex>
           </Flex>
-        </Flex>
 
-        <Box as="main" p="4">
-          {/* Add content here, remove div below  */}
-          {/*<Box borderWidth="4px" borderStyle="dashed" rounded="md" h="96" />*/}
-          {props.children}
-        </Box>
-
-        <Flex
-          w="full"
-          bg="#edf3f8"
-          _dark={{ bg: '#3e3e3e' }}
-          alignItems="center"
-          justifyContent="center"
-          position={'fixed'}
-          bottom={0}
-        >
+          <Box
+            as="main"
+            minH="30rem"
+            bg={useColorModeValue('auto', 'gray.800')}
+            pb={50}
+          >
+            {props.children}
+          </Box>
           <Flex
             w="full"
-            as="footer"
-            flexDir={{ base: 'column', sm: 'row' }}
-            align="center"
-            justify="left"
-            px="6"
-            py="4"
-            bg="white"
-            _dark={{
-              bg: 'gray.800',
-            }}
+            bg="#edf3f8"
+            _dark={{ bg: '#3e3e3e' }}
+            alignItems="center"
+            justifyContent="center"
+            position={'fixed'}
+            bottom={0}
           >
-            <PlayerFooter
-              streamUrl={
-                "http://conquest.imslp.info/files/imglnks/usimg/2/21/IMSLP805710-PMLP3848-Luis_Kolodin_plays_Chopin's_Nocturne_No._20_in_C_m_Op._posth..mp3"
-              }
-              trackTitle={'test'}
-              preloadType="auto"
-            />
+            <Flex
+              w="full"
+              as="footer"
+              flexDir={{ base: 'column', sm: 'row' }}
+              align="center"
+              justify="left"
+              px="6"
+              py="4"
+              bg="white"
+              _dark={{
+                bg: 'gray.800',
+              }}
+            >
+              <PlayerFooter
+                streamUrl={
+                  "http://conquest.imslp.info/files/imglnks/usimg/2/21/IMSLP805710-PMLP3848-Luis_Kolodin_plays_Chopin's_Nocturne_No._20_in_C_m_Op._posth..mp3"
+                }
+                trackTitle={'test'}
+                preloadType="auto"
+              />
+            </Flex>
           </Flex>
-        </Flex>
+        </Box>
       </Box>
-    </Box>
+    </>
   )
 }

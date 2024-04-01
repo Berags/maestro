@@ -21,7 +21,20 @@ const pieceData = {
   logo: 'https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/fa/f7/54/faf7540e-3346-b548-55d8-8617ce707554/dj.hbpmuqwc.jpg/632x632bb.webp',
 }
 
-const PieceCard: NextComponentType = () => {
+type PieceData = {
+  title: string
+  alt: string
+  composer: string
+  performers: string[]
+  duration: string
+  logo: string
+}
+
+type Props = {
+  pieceData?: PieceData
+}
+
+const PieceCard: NextComponentType = (props: Props) => {
   return (
     <Box
       px={4}
@@ -43,7 +56,7 @@ const PieceCard: NextComponentType = () => {
             alt={pieceData.alt}
           />
           <Stack spacing={2} pl={3} align="left">
-            <Heading fontSize="xl">{pieceData.title}</Heading>
+            <Heading fontSize="lg">{pieceData.title}</Heading>
             <Heading fontSize="sm">{pieceData.composer}</Heading>
             <Tags
               skills={pieceData.performers}

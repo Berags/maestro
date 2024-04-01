@@ -80,16 +80,14 @@ const Profile: any = () => {
             }}
           >
             <Box position="relative">
-              <MotionBox whileHover={{ translateY: -5 }} width="max-content">
-                <Header
-                  underlineColor={color}
-                  mt={0}
-                  cursor="pointer"
-                  width="max-content"
-                >
-                  {data.user.name}
-                </Header>
-              </MotionBox>
+              <Header
+                underlineColor={color}
+                mt={0}
+                cursor="pointer"
+                width="max-content"
+              >
+                {data.user.name}
+              </Header>
             </Box>
             <Box as="h2" fontSize="2xl" fontWeight="400" textAlign="left">
               your short description
@@ -117,7 +115,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!session) {
     return { redirect: { destination: '/' } }
   }
-  console.log(session.user)
 
   return {
     props: { session: session ?? [] },
