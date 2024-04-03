@@ -231,7 +231,7 @@ const Layout = (props: Props) => {
           >
             <Flex align={'center'} flexGrow={'1'}>
               <AudioPlayer
-                src="http://conquest.imslp.info/files/imglnks/usimg/2/21/IMSLP805710-PMLP3848-Luis_Kolodin_plays_Chopin's_Nocturne_No._20_in_C_m_Op._posth..mp3"
+                src="https://res.cloudinary.com/maestrofm/video/upload/v1712066369/chopin_op48no1.mp3"
                 onPlay={(e) => console.log('onPlay')}
                 preload="metadata"
                 showSkipControls

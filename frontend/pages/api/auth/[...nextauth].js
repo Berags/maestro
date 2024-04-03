@@ -24,12 +24,13 @@ export const authOptions = {
       if (account) {
         token.accountId = account.providerAccountId
         token.provider = account.provider
+        token.email = account.email
       }
       return token
     },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
-      session.user.email = ''
+      session.user.email = token.email
       session.accountId = token.accountId
       session.provider = token.provider
       return session
