@@ -18,6 +18,7 @@ import { authOptions } from '../api/auth/[...nextauth]'
 import { GetServerSidePropsContext } from 'next'
 import PlaylistCard from '../../components/PlaylistCard'
 import Separator from '../../components/Separator'
+import axios from "axios";
 
 const Profile: any = () => {
   const router = useRouter()
@@ -115,6 +116,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!session) {
     return { redirect: { destination: '/' } }
   }
+
+  console.log(session)
+
+  const res = await axios.get(process.env.BACKEND_API + `/auth/identity?id=${(session.provider == 'github' ? 'gh' : 'ds') + session.accountId}`)
 
   return {
     props: { session: session ?? [] },

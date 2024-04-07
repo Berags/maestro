@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import DiscordProvider from 'next-auth/providers/discord'
+import axios from "axios";
 const scopes = ['identify'].join(' ')
 
 export const authOptions = {
@@ -19,18 +20,32 @@ export const authOptions = {
     // ...add more providers here
   ],
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      const body = {
+        id: profile.id,
+        username: profile.login,
+        name: user.name,
+        email: user.email,
+        image: user.image,
+        provider: account.provider,
+      }
+      const res = await axios.post(process.env.BACKEND_API + '/auth/login', body)
+      return true
+    },
     async jwt({ token, account }) {
       // Persist the OAuth access_token to the token right after signin
       if (account) {
         token.accountId = account.providerAccountId
         token.provider = account.provider
-        token.email = account.email
+        if(account.email)
+          token.email = account.email
       }
       return token
     },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
-      session.user.email = token.email
+      if(token.email)
+        session.user.email = token.email
       session.accountId = token.accountId
       session.provider = token.provider
       return session

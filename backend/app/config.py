@@ -1,5 +1,7 @@
 import secrets
-import warnings
+
+from sqlalchemy import Engine
+from sqlmodel import create_engine
 from typing import Annotated, Any, Literal
 
 from pydantic import (
@@ -8,11 +10,10 @@ from pydantic import (
     HttpUrl,
     PostgresDsn,
     computed_field,
-    model_validator,
 )
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from typing_extensions import Self
+
 
 def parse_cors(v: Any) -> list[str] | str:
     if isinstance(v, str) and not v.startswith("["):
@@ -20,6 +21,7 @@ def parse_cors(v: Any) -> list[str] | str:
     elif isinstance(v, list | str):
         return v
     raise ValueError(v)
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -54,14 +56,15 @@ class Settings(BaseSettings):
 
     @computed_field  # type: ignore[misc]
     @property
-    def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn:
+    def DATABASE_URI(self) -> PostgresDsn:
         return MultiHostUrl.build(
-            scheme="postgresql+psycopg",
+            scheme="postgresql+psycopg2",
             username=self.POSTGRES_USER,
             password=self.POSTGRES_PASSWORD,
             host=self.POSTGRES_SERVER,
             port=self.POSTGRES_PORT,
             path=self.POSTGRES_DB,
         )
+
 
 settings = Settings()  # type: ignore
