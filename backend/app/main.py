@@ -42,7 +42,7 @@ routes_without_middleware = [settings.API_V1_STR + "/auth/login",
                              "/docs", settings.API_V1_STR + "/openapi.json"]
 
 
-@app.middleware("http")
+# @app.middleware("http")
 async def check_auth(request: Request, call_next):
     if request.url.path in routes_without_middleware:
         return await call_next(request)

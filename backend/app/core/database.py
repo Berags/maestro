@@ -12,7 +12,7 @@ engine = create_engine(str(settings.DATABASE_URI), echo=True)
 redis_cache = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, password=settings.REDIS_PASSWORD,
                           decode_responses=True)
 
-google_api_key = "AIzaSyCoIR9xGGb-gzbdGKUB9SepfOHReLpovQo"
+google_api_key = ""
 
 
 def get_info(type, name):

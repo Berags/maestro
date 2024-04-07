@@ -226,7 +226,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const id = context.params.id // Get ID from slug
 
-  const res = await axios.get(process.env.BACKEND_API + `/composer/${id}`, {
+  const res = await axios.get(process.env.BACKEND_API + `/composer/id/${id}`, {
     headers: {
       session: session.backend_session,
     },

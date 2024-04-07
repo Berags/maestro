@@ -1,66 +1,84 @@
-import { chakra, Flex, Icon } from '@chakra-ui/react'
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
+import { Flex, FlexProps, useColorModeValue } from '@chakra-ui/react'
+import { ReactNode } from 'react'
 
-const Pagination = () => {
-  const PagButton = (props: any) => {
-    const activeStyle = {
-      bg: 'brand.600',
-      border: "1px",
-      borderColor: "white",
-      _dark: { bg: 'brand.500' },
-    }
-    return (
-      <chakra.button
-        mx={1}
-        px={4}
-        py={2}
-        rounded="md"
-        bg="white"
-        _dark={{ bg: 'gray.800' }}
-        color="gray.700"
-        opacity={props.disabled && 0.6}
-        _hover={!props.disabled && activeStyle}
-        cursor={props.disabled && 'not-allowed'}
-        {...(props.active && activeStyle)}
-        display={props.p && !props.active && { base: 'none', sm: 'block' }}
-      >
-        {props.children}
-      </chakra.button>
-    )
-  }
+const Pagination = ({ index, nOfPages, setPage }: any) => {
+  console.log(nOfPages)
   return (
     <Flex
-      _dark={{ bg: '#3e3e3e' }}
-      p={50}
+      as="nav"
+      aria-label="Pagination"
       w="full"
-      alignItems="center"
       justifyContent="center"
+      alignItems="center"
+      mt={{ base: 3, md: 0 }}
     >
-      <Flex>
-        <PagButton>
-          <Icon
-            as={IoIosArrowBack}
-            color="gray.700"
-            _dark={{ color: 'gray.200' }}
-            boxSize={4}
-          />
-        </PagButton>
-        <PagButton p>1</PagButton>
-        <PagButton p active>
-          2
-        </PagButton>
-        <PagButton p>3</PagButton>
-        <PagButton p>4</PagButton>
-        <PagButton p>5</PagButton>
-        <PagButton>
-          <Icon
-            as={IoIosArrowForward}
-            color="gray.700"
-            _dark={{ color: 'gray.200' }}
-            boxSize={4}
-          />
-        </PagButton>
-      </Flex>
+      <PaginationButton
+        borderTopLeftRadius="md"
+        borderBottomLeftRadius="md"
+        onClick={() => {
+          if (index - 1 < 0) return
+          setPage(index - 1)
+        }}
+      >
+        Previous
+      </PaginationButton>
+      {[...Array(nOfPages)].map((x, i) => (
+        <PaginationButton
+          onClick={() => {
+            setPage(i)
+          }}
+          isActive={index == i}
+        >
+          {i + 1}
+        </PaginationButton>
+      ))}
+      <PaginationButton
+        onClick={() => {
+          if (index + 1 >= nOfPages) return
+          setPage(index + 1)
+        }}
+        borderTopRightRadius="md"
+        borderBottomRightRadius="md"
+      >
+        Next
+      </PaginationButton>
+    </Flex>
+  )
+}
+
+interface PaginationButtonProps extends FlexProps {
+  children: ReactNode
+  isActive?: boolean
+  isDisabled?: boolean
+}
+
+const PaginationButton = ({
+  children,
+  isDisabled,
+  isActive,
+  ...props
+}: PaginationButtonProps) => {
+  const activeStyle = {
+    bg: useColorModeValue('gray.300', 'gray.700'),
+  }
+
+  return (
+    <Flex
+      p={3}
+      px={4}
+      fontSize="md"
+      fontWeight="500"
+      lineHeight={0.8}
+      opacity={isDisabled && 0.7}
+      _hover={!isDisabled && activeStyle}
+      cursor={isDisabled ? 'not-allowed' : 'pointer'}
+      border="1px solid"
+      mr="-1px"
+      borderColor={useColorModeValue('gray.300', 'gray.700')}
+      {...(isActive && activeStyle)}
+      {...props}
+    >
+      {children}
     </Flex>
   )
 }
