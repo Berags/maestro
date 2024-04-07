@@ -10,7 +10,7 @@ import {
   SimpleGrid,
   color,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { use, useState } from 'react'
 import { MotionBox, MotionFlex } from '../../components/profile/Motion'
 import Header from '../../components/profile/Header'
 import { getServerSession } from 'next-auth'
@@ -20,7 +20,7 @@ import PlaylistCard from '../../components/PlaylistCard'
 import Separator from '../../components/Separator'
 import axios from "axios";
 
-const Profile: any = () => {
+const Profile: any = ({user} : any) => {
   const router = useRouter()
   const ANIMATION_DURATION = 0.2
   const color = 'blue.400'
@@ -56,7 +56,7 @@ const Profile: any = () => {
               size="2xl"
               showBorder={true}
               borderColor={color}
-              src={data.user.image}
+              src={user.image}
             />
           </MotionBox>
           <MotionFlex
@@ -87,11 +87,11 @@ const Profile: any = () => {
                 cursor="pointer"
                 width="max-content"
               >
-                {data.user.name}
+                {user.name}
               </Header>
             </Box>
             <Box as="h2" fontSize="2xl" fontWeight="400" textAlign="left">
-              your short description
+              {user.description}
             </Box>
           </MotionFlex>
         </Flex>
@@ -117,12 +117,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return { redirect: { destination: '/' } }
   }
 
-  console.log(session)
-
-  const res = await axios.get(process.env.BACKEND_API + `/auth/identity?id=${(session.provider == 'github' ? 'gh' : 'ds') + session.accountId}`)
+  const res = await axios.get(process.env.BACKEND_API + `/auth/identity?id=${(session.provider == 'github' ? 'gh' : 'ds') + session.accountId}`, {
+  headers: {
+    session: session.backend_session
+  }
+  })
 
   return {
-    props: { session: session ?? [] },
+    props: { session: session ?? [], user: res.data },
   }
 }
 

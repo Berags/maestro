@@ -20,23 +20,22 @@ export const authOptions = {
     // ...add more providers here
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      const body = {
-        id: profile.id,
-        username: profile.login,
-        name: user.name,
-        email: user.email,
-        image: user.image,
-        provider: account.provider,
-      }
-      const res = await axios.post(process.env.BACKEND_API + '/auth/login', body)
-      return true
-    },
-    async jwt({ token, account }) {
+    async jwt({ token, account, profile }) {
       // Persist the OAuth access_token to the token right after signin
       if (account) {
+        const body = {
+          id: account.providerAccountId,
+          username: profile.login,
+          name: profile.name,
+          email: profile.email,
+          image: profile.avatar_url,
+          provider: account.provider,
+        }
+        const res = await axios.post(process.env.BACKEND_API + '/auth/login', body)
+
         token.accountId = account.providerAccountId
         token.provider = account.provider
+        token.backend_session = res.data.token
         if(account.email)
           token.email = account.email
       }
@@ -48,6 +47,7 @@ export const authOptions = {
         session.user.email = token.email
       session.accountId = token.accountId
       session.provider = token.provider
+      session.backend_session = token.backend_session
       return session
     },
   },

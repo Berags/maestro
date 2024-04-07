@@ -24,34 +24,19 @@ import { getServerSession } from 'next-auth'
 import OpusCard from '../../components/composers/OpusCard'
 import { FaHeart } from 'react-icons/fa6'
 import Separator from '../../components/Separator'
+import axios from 'axios'
 
-const Composer = () => {
+const Composer = ({ composerData }: any) => {
   const router = useRouter()
   const composerId = router.query.id
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-  //TODO: query from backend
-  const composerData = {
-    name: 'Wolfgang A. Mozart',
-    period: 'Classical',
-    shortDescription:
-      'A musical prodigy who lived a brief life, this composer left a huge mark with hundreds of pieces.  Their work is celebrated even today.',
-    birthday: '27 January 1756',
-    death: '5 December 1791',
-    birthPlace: 'Saltzburg',
-    deathPlace: 'Wien',
-    img: 'https://is1-ssl.mzstatic.com/image/thumb/Features116/v4/64/1a/c9/641ac929-d0a2-d900-d14c-167af9015640/57d4e234-8f22-4a54-8e14-44f981d1c4f0.png/2400x933ea-60.jpg',
-    longDescription:
-      "Wolfgang Amadeus Mozart (1756-1791) was a musical prodigy who rose to become one of the most influential composers in history. Born in Salzburg, Austria, he displayed exceptional talent from a young age. By five, he was already composing music, and by six, he was performing for royalty across Europe. Mozart's genius manifested in his prolificacy. Throughout his short life, he composed over 800 works, spanning symphonies, concertos, operas, chamber music, and solo piano pieces. His music is celebrated for its beauty, emotional depth, technical mastery, and ability to bridge the gap between complexity and accessibility. Despite his achievements, Mozart's life was not without struggles. Financial difficulties were a constant companion, and his later years were marked by professional slights and personal hardships. He died in Vienna in 1791 at the young age of 35, the cause of his death still debated today. However, his musical legacy continues to inspire and enthrall audiences centuries later. His compositions remain central to the classical repertoire, performed by orchestras and musicians worldwide. Mozart's influence on Western music is undeniable, securing his place as a towering figure in the art form.",
-    isLiked: true,
-  }
 
   return (
     <>
       <Box>
         <Stack
           pos="relative"
-          bgImage={composerData.img}
+          bgImage={composerData.portrait}
           bgPosition={'center'}
           w="100%"
           h={500}
@@ -90,7 +75,7 @@ const Composer = () => {
                 {composerData.name}
               </chakra.h1>
               <chakra.h3 color={'grey.600'} alignSelf={'center'}>
-                {composerData.period}
+                {composerData.epoch}
               </chakra.h3>
               <chakra.h1
                 color="gray.400"
@@ -99,7 +84,7 @@ const Composer = () => {
                 lineHeight={1.2}
                 alignSelf={'center'}
               >
-                {composerData.shortDescription}
+                {composerData.short_description}
               </chakra.h1>
 
               <Stack
@@ -175,7 +160,7 @@ const Composer = () => {
               bgSize="cover"
               bgPosition={'center'}
               style={{
-                backgroundImage: `url('${composerData.img}')`,
+                backgroundImage: `url('${composerData.portrait}')`,
               }}
             ></Box>
           </Box>
@@ -195,17 +180,17 @@ const Composer = () => {
               {composerData.name}
             </chakra.h2>
             <chakra.h4 color={'grey.100'}>
-              {composerData.birthPlace}, {composerData.birthday} -{' '}
-              {composerData.deathPlace}, {composerData.death}
+              {composerData.birth_place},{' '}
+              {new Date(composerData.birth_date).getFullYear()} -{' '}
+              {composerData.death_place},{' '}
+              {new Date(composerData.death_date).getFullYear()}
             </chakra.h4>
             <Text
               noOfLines={[1, 2, 3]}
               mt={4}
               color="gray.600"
               _dark={{ color: 'gray.400' }}
-            >
-              {composerData.longDescription}
-            </Text>
+            >{composerData.long_description}</Text>
 
             <Box mt={8}>
               <Button onClick={onOpen} variant="link">
@@ -220,7 +205,11 @@ const Composer = () => {
         <ModalContent>
           <ModalHeader>{composerData.name}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>{composerData.longDescription}</ModalBody>
+          <ModalBody>
+            {composerData.long_description.map((p: string) => 
+              <Text mb={2}>{p}</Text>
+            )}
+          </ModalBody>
         </ModalContent>
       </Modal>
     </>
@@ -231,12 +220,22 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions)
 
   // If the user is already logged in, redirect.
-  if (!session) {
+  if (!session || !context.params) {
     return { redirect: { destination: '/' } }
   }
 
+  const id = context.params.id // Get ID from slug
+
+  const res = await axios.get(process.env.BACKEND_API + `/composer/${id}`, {
+    headers: {
+      session: session.backend_session,
+    },
+  })
+
+  res.data.long_description = res.data.long_description.split("\n")
+
   return {
-    props: { session: session ?? [] },
+    props: { session: session ?? [], composerData: res.data },
   }
 }
 
