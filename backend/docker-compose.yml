@@ -51,11 +51,11 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER?Variable not set}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
-      - REDIS_HOST=cache
-      - REDIS_PORT=6379
-      - REDIS_PASSWORD=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+      - REDIS_HOST=${REDIS_HOST?Variable not set}
+      - REDIS_PORT=${REDIS_PORT?Variable not set}
+      - REDIS_PASSWORD=${REDIS_PASSWORD?Variable not set}
 
     build:
       args:
         INSTALL_DEV: ${INSTALL_DEV-false}
-    platform: linux/amd64
+    # platform: linux/amd64

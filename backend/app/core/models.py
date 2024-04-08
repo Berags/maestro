@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlmodel import Field, SQLModel, create_engine
+from sqlmodel import Field, SQLModel, Relationship
 
 
 class User(SQLModel, table=True):
@@ -16,12 +16,32 @@ class User(SQLModel, table=True):
 class Composer(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     name: str
-    portrait: str | None
-    epoch: str | None
-    birth_date: datetime | None
-    birth_place: str | None
-    death_date: datetime | None
-    death_place: str | None
-    background_image: str | None
-    short_description: str | None
-    long_description: str | None
+    portrait: str | None = Field(default=None)
+    epoch: str | None = Field(default=None)
+    birth_date: datetime | None = Field(default=None)
+    birth_place: str | None = Field(default=None)
+    death_date: datetime | None = Field(default=None)
+    death_place: str | None = Field(default=None)
+    background_image: str | None = Field(default=None)
+    short_description: str | None = Field(default=None)
+    long_description: str | None = Field(default=None)
+
+    opuses: list["Opus"] = Relationship(back_populates="composer")
+
+
+class Opus(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    title: str | None = Field(default=None)
+    subtitle: str | None = Field(default=None)
+    popular: bool | None = Field(default=None)
+    recommended: bool | None = Field(default=None)
+    genre: str | None = Field(default=None)
+
+    composer_id: int | None = Field(default=None, foreign_key="composer.id")
+    composer: Composer = Relationship(back_populates="opuses")
+
+
+class Performer(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str
+    portrait: str | None = Field(default=None)

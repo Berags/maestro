@@ -35,7 +35,7 @@ const Composers: any = ({ nOfPages, backend_api }: any) => {
   return (
     <Box px={4}>
       <Separator text="Composers" />
-      <SimpleGrid minChildWidth="250px" spacing={5} mb={5}>
+      <SimpleGrid minChildWidth="250px" spacing={5} mb={5} justifyItems={"center"}>
         {composers.map((val, i) => (
           <ComposerCard composerData={val} />
         ))}
