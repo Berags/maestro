@@ -1,16 +1,12 @@
-from typing import Union
 from fastapi import FastAPI, Request
 from fastapi.routing import APIRoute
-from sqlmodel import SQLModel, create_engine
-from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.responses import RedirectResponse
-
-from app.core import models, database
+from sqlmodel import SQLModel
 from starlette.middleware.cors import CORSMiddleware
-from app.core.database import engine, redis_cache
 
 from app.api.main import api_router
 from app.config import settings
+from app.core import database
+from app.core.database import engine, redis_cache
 
 
 def custom_generate_unique_id(route: APIRoute) -> str:

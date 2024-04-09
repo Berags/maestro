@@ -1,12 +1,11 @@
-from datetime import datetime
+import pprint
 
 import redis
 from sqlmodel import create_engine, Session, select
 
 from app.config import settings
-from app.core import models
-from app.core.initial_data import composers
-from app.core.models import Composer
+from app.core.initial_data import composers, opuses, recordings
+from app.core.models import Composer, Opus
 
 engine = create_engine(str(settings.DATABASE_URI), echo=True)
 redis_cache = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, password=settings.REDIS_PASSWORD,
@@ -62,14 +61,23 @@ def populate_db():
     with Session(engine) as session:
         for composer in session.exec(select(Composer)).all():
             session.delete(composer)
+        for opus in session.exec(select(Opus)).all():
+            session.delete(opus)
         session.commit()
 
     with Session(engine) as session:
-        data = []
+        data: list = []
         for composer in composers:
-            data.append(Composer(**composer))
+            c = Composer(**composer)
+            pprint.pprint(c)
+            for op in opuses:
+                if op.composer_id == c.id:
+                    c.opuses.append(op)
+            data.append(c)
+
         session.add_all(data)
         session.commit()
+        session.close()
 
 
 providers_string = {

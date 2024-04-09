@@ -17,11 +17,9 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Center,
 } from '@chakra-ui/react'
-import { FaPlay } from 'react-icons/fa6'
 import { ReactNode } from 'react'
-import { IoMdPlay, IoMdSettings } from 'react-icons/io'
+import { IoMdSettings } from 'react-icons/io'
 import { RiNeteaseCloudMusicLine } from 'react-icons/ri'
 import { BsMusicNote } from 'react-icons/bs'
 import { FiMenu } from 'react-icons/fi'
@@ -29,12 +27,13 @@ import { MdHome } from 'react-icons/md'
 import { signOut, useSession } from 'next-auth/react'
 import { BsFilePerson } from 'react-icons/bs'
 import { BiAlbum } from 'react-icons/bi'
-import { IoAlbumsOutline, IoPlaySkipForward } from 'react-icons/io5'
+import { IoAlbumsOutline } from 'react-icons/io5'
 import { GiMusicalScore } from 'react-icons/gi'
 import NextLink from 'next/link'
-import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import 'react-h5-audio-player/lib/styles.css'
 import React from 'react'
+import MusicPlayer from './MusicPlayer'
+import { Toaster } from 'react-hot-toast'
 
 type Props = {
   children: ReactNode
@@ -130,8 +129,9 @@ const Layout = (props: Props) => {
             <NextLink href={'/home'}>
               <NavItem icon={MdHome}>Home</NavItem>
             </NextLink>
-            <NavItem icon={BsFilePerson}>Composers</NavItem>
-            <NavItem icon={BsMusicNote}>Performers</NavItem>
+            <NextLink href={'/composer'}>
+              <NavItem icon={BsFilePerson}>Composers</NavItem>
+            </NextLink>
             <NavItem icon={IoAlbumsOutline}>Albums</NavItem>
             <NavItem icon={GiMusicalScore}>Opus</NavItem>
             <NavItem icon={BiAlbum}>Recordings</NavItem>
@@ -174,6 +174,7 @@ const Layout = (props: Props) => {
         bg={useColorModeValue('gray.50', 'gray.700')}
         minH="100vh"
       >
+        <Toaster position="top-center" reverseOrder={true} />
         <SidebarContent display={{ base: 'none', md: 'unset' }} />
         <Drawer isOpen={isOpen} onClose={onClose} placement="left">
           <DrawerOverlay />
@@ -230,14 +231,7 @@ const Layout = (props: Props) => {
             boxShadow="lg"
           >
             <Flex align={'center'} flexGrow={'1'}>
-              <AudioPlayer
-                src="https://res.cloudinary.com/maestrofm/video/upload/v1712066369/chopin_op48no1.mp3"
-                onPlay={(e) => console.log('onPlay')}
-                preload="metadata"
-                showSkipControls
-                showJumpControls={false}
-                header={<Center>Chopin</Center>}
-              />
+              <MusicPlayer />
             </Flex>
           </Flex>
         </Box>

@@ -10,23 +10,10 @@ import { authOptions } from '../api/auth/[...nextauth]'
 import Pagination from '../../components/Pagination'
 import ComposerCard from '../../components/search/ComposerCard'
 import Separator from '../../components/Separator'
+import PieceCard from '../../components/search/PieceCard'
 
-const Composers: any = ({ nOfPages, backend_api }: any) => {
+const Opus: any = ({ recordings, backend_api }: any) => {
   const { data }: any = useSession()
-  const [page, setPage] = useState<number>(0)
-  const [composers, setComposers] = useState([])
-  useEffect(() => {
-    const getComposers = async () => {
-      const res = await axios.get(backend_api + '/composer/?page=' + page, {
-        headers: {
-          session: data.backend_session,
-        },
-      })
-      setComposers(res.data)
-    }
-
-    getComposers()
-  }, [page])
 
   if (!data) {
     return <>loading</>
@@ -36,16 +23,15 @@ const Composers: any = ({ nOfPages, backend_api }: any) => {
     <Box px={4}>
       <Separator text="Composers" />
       <SimpleGrid
-        columns={[1, 1, 2, 3, 4, 5]}
         spacing={5}
         mb={5}
         justifyItems={'center'}
-      >
-        {composers.map((val, i) => (
-          <ComposerCard composerData={val} />
+        columns={[1, 1, 2, 3, 4, 5]}
+        >
+        {recordings.map((rec: any) => (
+          <PieceCard pieceData={rec} />
         ))}
       </SimpleGrid>
-      <Pagination index={page} nOfPages={nOfPages} setPage={setPage} />
     </Box>
   )
 }
@@ -54,23 +40,30 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions)
 
   // If the user is already logged in, redirect.
-  if (!session) {
+  if (!session || !context.params) {
     return { redirect: { destination: '/' } }
   }
 
-  const res = await axios.get(process.env.BACKEND_API + `/composer/pages`, {
-    headers: {
-      session: session.backend_session,
-    },
-  })
+  const id = context.params.id // Get ID from slug
+
+  const res = await axios.get(
+    process.env.BACKEND_API + `/recording/by-opus/` + id,
+    {
+      headers: {
+        session: session.backend_session,
+      },
+    }
+  )
+
+  console.log(res.data)
 
   return {
     props: {
       session: session ?? [],
-      nOfPages: res.data.n_of_pages,
+      recordings: res.data,
       backend_api: process.env.BACKEND_API,
     },
   }
 }
 
-export default Composers
+export default Opus

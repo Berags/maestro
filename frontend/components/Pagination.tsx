@@ -28,6 +28,7 @@ const Pagination = ({ index, nOfPages, setPage }: any) => {
             setPage(i)
           }}
           isActive={index == i}
+          key={i}
         >
           {i + 1}
         </PaginationButton>
@@ -69,8 +70,6 @@ const PaginationButton = ({
       fontSize="md"
       fontWeight="500"
       lineHeight={0.8}
-      opacity={isDisabled && 0.7}
-      _hover={!isDisabled && activeStyle}
       cursor={isDisabled ? 'not-allowed' : 'pointer'}
       border="1px solid"
       mr="-1px"

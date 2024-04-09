@@ -5,54 +5,88 @@ import {
   VStack,
   Text,
   Tag,
-  Link,
   Image,
   useColorModeValue,
+  Box,
+  Menu,
+  MenuButton,
+  Button,
+  MenuList,
 } from '@chakra-ui/react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { GetServerSidePropsContext } from 'next'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../../pages/api/auth/[...nextauth]'
+import axios from 'axios'
+import { useEffect } from 'react'
+import getConfig from 'next/config'
+import { useSession } from 'next-auth/react'
+import PieceCard from '../search/PieceCard'
 
 type Props = {
   opusData: OpusData
 }
 
 type OpusData = {
-  name: string
-  type: string
-  shortDescription: string
+  id: number
+  title: string
+  genre: string
   duration: string
   image: string
+  recommended: boolean
+  popular: boolean
 }
 
 const OpusCard = (props: Props) => {
   const opusData = props.opusData
-  const textColor = useColorModeValue('gray.500', 'gray.200')
-  const [isOpen, setIsOpen] = React.useState(false)
-  const toggleOpen = () => setIsOpen(!isOpen)
+  const { publicRuntimeConfig } = getConfig()
+  const { data }: any = useSession()
+  const { BACKEND_API } = publicRuntimeConfig
+  const [recordings, setRecordings] = React.useState([])
+  const router = useRouter()
+
+  useEffect(() => {
+    const getRecordings = async () => {
+      const res = await axios.get(
+        BACKEND_API + `/recording/by-opus/` + opusData.id,
+        {
+          headers: {
+            session: data.backend_session,
+          },
+        }
+      )
+
+      setRecordings(res.data)
+      console.log(res.data)
+    }
+
+    getRecordings()
+  }, [opusData])
 
   return (
-    <>
-      <chakra.div onClick={toggleOpen}>
-        <HStack
-          p={4}
-          bg={useColorModeValue('white', 'gray.800')}
-          rounded="xl"
-          borderWidth="1px"
-          borderColor={useColorModeValue('gray.100', 'gray.700')}
-          w="100%"
-          h="100%"
-          textAlign="left"
-          align="start"
-          spacing={4}
-          cursor="pointer"
-          _hover={{ shadow: 'lg' }}
-        >
+    <Menu key={opusData.id}>
+      <MenuButton
+        as={Button}
+        p={4}
+        bg={useColorModeValue('white', 'gray.200')}
+        rounded="xl"
+        borderWidth="1px"
+        borderColor={useColorModeValue('gray.100', 'gray.700')}
+        w="100%"
+        h="100%"
+        cursor="pointer"
+        _hover={{ shadow: 'lg' }}
+      >
+        <HStack textAlign="left" align="start" spacing={4}>
           <Image
-            src={opusData.image}
+            src={'https://via.placeholder.com/150'}
             width={33}
             height={33}
             rounded="md"
             objectFit="cover"
             alt="cover image"
-            fallbackSrc="https://via.placeholder.com/150"
+            fallbackSrc="https://dummyimage.com/400x400/"
           />
           <VStack align="start" justifyContent="flex-start">
             <VStack spacing={0} align="start">
@@ -64,33 +98,33 @@ const OpusCard = (props: Props) => {
                   fontSize="md"
                   noOfLines={1}
                   onClick={(e) => e.stopPropagation()}
-                  isExternal
                 >
-                  {opusData.name}
+                  {opusData.title.length > 40
+                    ? opusData.title.slice(0, 40).concat('...')
+                    : opusData.title}
                 </Text>
                 <HStack spacing="1">
                   <Tag size="sm" colorScheme="gray">
-                    {opusData.type}
+                    {opusData.genre}
                   </Tag>
                 </HStack>
               </HStack>
-
-              {!isOpen && (
-                <Text fontSize="sm" color={textColor} noOfLines={{ base: 2 }}>
-                  {opusData.shortDescription}
-                </Text>
-              )}
-
-              {isOpen && (
-                <Text fontSize="sm" color={textColor}>
-                  {opusData.shortDescription}
-                </Text>
-              )}
             </VStack>
           </VStack>
         </HStack>
-      </chakra.div>
-    </>
+      </MenuButton>
+      <MenuList>
+        {recordings.length > 0 ? (
+          <VStack align="stretch">
+            {recordings.map((rec: any) => (
+              <PieceCard pieceData={rec} variant={'sm'} />
+            ))}
+          </VStack>
+        ) : (
+          <Text textAlign={'center'}>No recording found!</Text>
+        )}
+      </MenuList>
+    </Menu>
   )
 }
 

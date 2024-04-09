@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import DiscordProvider from 'next-auth/providers/discord'
-import axios from "axios";
+import axios from 'axios'
 const scopes = ['identify'].join(' ')
 
 export const authOptions = {
@@ -30,24 +30,48 @@ export const authOptions = {
           email: profile.email,
           image: profile.avatar_url,
           provider: account.provider,
+          previous_session: null,
         }
-        const res = await axios.post(process.env.BACKEND_API + '/auth/login', body)
-
+        const res = await axios.post(
+          process.env.BACKEND_API + '/auth/login',
+          body
+        )
+       
         token.accountId = account.providerAccountId
         token.provider = account.provider
         token.backend_session = res.data.token
-        if(account.email)
-          token.email = account.email
+        token.valid_until = new Date(Date.now() + 1000 * 60 * 5)
+        if (account.email) token.email = account.email
       }
       return token
     },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
-      if(token.email)
-        session.user.email = token.email
+      session.backend_session = token.backend_session
+
+      if (new Date(Date.now()).getTime() >= token.valid_until) {
+        // Token is expired
+        const body = {
+          id: token.accountId,
+          username: token.email,
+          name: token.name,
+          email: token.email,
+          image: token.picture,
+          provider: token.provider,
+          previous_session: token.backend_session,
+        }
+        const res = await axios.post(
+          process.env.BACKEND_API + '/auth/login',
+          body
+        )
+
+        session.backend_session = res.data.token
+      }
+ 
+      if (token.email) session.user.email = token.email
       session.accountId = token.accountId
       session.provider = token.provider
-      session.backend_session = token.backend_session
+      // session.backend_session = token.backend_session
       return session
     },
   },
