@@ -28,6 +28,7 @@ const Pagination = ({ index, nOfPages, setPage }: any) => {
             setPage(i)
           }}
           isActive={index == i}
+          key={i}
         >
           {i + 1}
         </PaginationButton>

@@ -1,7 +1,6 @@
 import {
   Box,
   Stack,
-  VStack,
   Heading,
   Flex,
   Text,
@@ -9,36 +8,41 @@ import {
   useColorModeValue,
   Tag,
   StackProps,
+  Skeleton,
+  Button,
+  IconButton,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
 } from '@chakra-ui/react'
-import { NextComponentType } from 'next'
-
-const pieceData = {
-  title: 'Nocturne in C# minor - op. posth',
-  alt: 'company image',
-  composer: 'Fryderyk Chopin',
-  performers: ['Arthur Rubenstein'],
-  duration: '2:57',
-  logo: 'https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/fa/f7/54/faf7540e-3346-b548-55d8-8617ce707554/dj.hbpmuqwc.jpg/632x632bb.webp',
-}
+import useAudioPlayer from '../../utils/useAudioPlayer'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+import toast from 'react-hot-toast'
 
 type PieceData = {
+  id: number
   title: string
-  alt: string
   composer: string
-  performers: string[]
   duration: string
-  logo: string
+  image_url: string
+  file_url: string
 }
 
 type Props = {
-  pieceData?: PieceData
+  pieceData: PieceData
 }
 
-const PieceCard: NextComponentType = (props: Props) => {
+const PieceCard: any = (props: Props) => {
+  const pieceData = props.pieceData
+  const audioPlayer = useAudioPlayer()
+  if (!pieceData) return <Skeleton />
+
   return (
     <Box
       px={4}
       py={5}
+      w={'auto'}
       borderWidth="1px"
       _hover={{ shadow: 'lg' }}
       bg={useColorModeValue('white', 'gray.800')}
@@ -52,14 +56,17 @@ const PieceCard: NextComponentType = (props: Props) => {
             h={16}
             objectFit="cover"
             fallbackSrc="https://via.placeholder.com/150"
-            src={pieceData.logo}
-            alt={pieceData.alt}
+            src={pieceData.image_url}
+            alt={pieceData.title}
+            onClick={() => {
+              audioPlayer.setCurrent(pieceData)
+            }}
           />
           <Stack spacing={2} pl={3} align="left">
             <Heading fontSize="lg">{pieceData.title}</Heading>
             <Heading fontSize="sm">{pieceData.composer}</Heading>
             <Tags
-              skills={pieceData.performers}
+              skills={['Performer']}
               display={['none', 'none', 'flex', 'flex']}
             />
           </Stack>
@@ -69,11 +76,35 @@ const PieceCard: NextComponentType = (props: Props) => {
             {pieceData.duration}
           </Text>
         </Stack>
+        <Stack ml={2}>
+          <Popover>
+            <PopoverTrigger>
+              <IconButton
+                aria-label={'Settings'}
+                icon={<BsThreeDotsVertical />}
+                variant={'ghost'}
+              >
+                sdas
+              </IconButton>
+            </PopoverTrigger>
+            <PopoverContent w={'10em'}>
+              <PopoverBody>
+                <Button
+                  variant={'ghost'}
+                  onClick={() => {
+                    audioPlayer.setQueue([...audioPlayer.queue, pieceData])
+                    toast.success('Added to queue!')
+                  }}
+                  w={'100%'}
+                >
+                  Add to queue
+                </Button>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
+        </Stack>
       </Flex>
-      <Tags
-        skills={pieceData.performers}
-        display={['flex', 'flex', 'none', 'none']}
-      />
+      <Tags skills={['Performer']} display={['flex', 'flex', 'none', 'none']} />
     </Box>
   )
 }

@@ -13,3 +13,4 @@ router = APIRouter()
 def get_opuses(composer_id: int) -> Sequence[Opus]:
     with Session(engine) as session:
         return session.exec(select(Opus).where(Opus.composer_id == composer_id)).all()
+

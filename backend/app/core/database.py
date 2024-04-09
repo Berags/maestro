@@ -1,8 +1,10 @@
+import pprint
+
 import redis
 from sqlmodel import create_engine, Session, select
 
 from app.config import settings
-from app.core.initial_data import composers, opuses
+from app.core.initial_data import composers, opuses, recordings
 from app.core.models import Composer, Opus
 
 engine = create_engine(str(settings.DATABASE_URI), echo=True)
@@ -67,6 +69,7 @@ def populate_db():
         data: list = []
         for composer in composers:
             c = Composer(**composer)
+            pprint.pprint(c)
             for op in opuses:
                 if op.composer_id == c.id:
                     c.opuses.append(op)
@@ -74,6 +77,7 @@ def populate_db():
 
         session.add_all(data)
         session.commit()
+        session.close()
 
 
 providers_string = {

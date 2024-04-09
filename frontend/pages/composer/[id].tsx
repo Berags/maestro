@@ -32,18 +32,22 @@ import { useSession } from 'next-auth/react'
 
 const Composer = ({ composerData, nOfPages, backend_api }: any) => {
   const router = useRouter()
-  const {data}: any = useSession()
+  const { data }: any = useSession()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [page, setPage] = useState<number>(0)
+  const [liked, setLiked] = useState<boolean>(composerData.is_liked)
   const [opuses, setOpuses] = useState(composerData.opuses)
 
   useEffect(() => {
     const getComposers = async () => {
-      const res = await axios.get(backend_api + '/composer/id/'+ router.query.id + '?page=' + page, {
-        headers: {
-          session: data.backend_session,
-        },
-      })
+      const res = await axios.get(
+        backend_api + '/composer/id/' + router.query.id + '?page=' + page,
+        {
+          headers: {
+            session: data.backend_session,
+          },
+        }
+      )
       setOpuses(res.data.opuses)
     }
 
@@ -116,7 +120,19 @@ const Composer = ({ composerData, nOfPages, backend_api }: any) => {
                   icon={<FaHeart />}
                   aria-label={'Like'}
                   variant={'link'}
-                  color={composerData.isLiked ? 'red.500' : 'grey.600'}
+                  color={liked ? 'red.500' : 'grey.100'}
+                  onClick={async () => {
+                    const res = await axios.post(
+                      backend_api + '/composer/like/' + composerData.id,
+                      {},
+                      {
+                        headers: {
+                          session: data.backend_session,
+                        },
+                      }
+                    )
+                    if (res.status === 200) setLiked(!liked)
+                  }}
                 />
               </Stack>
             </Stack>
@@ -125,13 +141,13 @@ const Composer = ({ composerData, nOfPages, backend_api }: any) => {
       </Box>
       <Box px={5}>
         <Separator text={'Opuses'} />
-        <SimpleGrid minChildWidth={'350px'} spacing={5}>
+        <SimpleGrid minChildWidth={'400px'} spacing={5}>
           {opuses.map((op: any) => (
             <OpusCard opusData={op} />
           ))}
         </SimpleGrid>
         <Center mt={2}>
-          <Pagination index={page} nOfPages={nOfPages} setPage={setPage}/>
+          <Pagination index={page} nOfPages={nOfPages} setPage={setPage} />
         </Center>
       </Box>
       <Flex
@@ -235,9 +251,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   )
 
   res.data.long_description = res.data.long_description.split('\n')
+  console.log(res.data)
 
   return {
-    props: { session: session ?? [], composerData: res.data, nOfPages: res.data.n_of_pages, backend_api: process.env.BACKEND_API },
+    props: {
+      session: session ?? [],
+      composerData: res.data,
+      nOfPages: res.data.n_of_pages,
+      backend_api: process.env.BACKEND_API,
+    },
   }
 }
 

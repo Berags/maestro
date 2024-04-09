@@ -5,10 +5,12 @@ import {
   VStack,
   Text,
   Tag,
-  Link,
   Image,
   useColorModeValue,
+  Box,
 } from '@chakra-ui/react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 type Props = {
   opusData: OpusData
@@ -27,11 +29,15 @@ type OpusData = {
 const OpusCard = (props: Props) => {
   const opusData = props.opusData
   const textColor = useColorModeValue('gray.500', 'gray.200')
-  const [isOpen, setIsOpen] = React.useState(false)
-  const toggleOpen = () => setIsOpen(!isOpen)
+  const router = useRouter()
 
   return (
-    <chakra.div onClick={toggleOpen} key={opusData.id}>
+    <Box
+      key={opusData.id}
+      onClick={() => {
+        router.push('/opus/' + opusData.id)
+      }}
+    >
       <HStack
         p={4}
         bg={useColorModeValue('white', 'gray.800')}
@@ -47,13 +53,13 @@ const OpusCard = (props: Props) => {
         _hover={{ shadow: 'lg' }}
       >
         <Image
-          src={"https://via.placeholder.com/150"}
+          src={'https://via.placeholder.com/150'}
           width={33}
           height={33}
           rounded="md"
           objectFit="cover"
           alt="cover image"
-          fallbackSrc="https://via.placeholder.com/150"
+          fallbackSrc="https://dummyimage.com/400x400/"
         />
         <VStack align="start" justifyContent="flex-start">
           <VStack spacing={0} align="start">
@@ -65,7 +71,6 @@ const OpusCard = (props: Props) => {
                 fontSize="md"
                 noOfLines={1}
                 onClick={(e) => e.stopPropagation()}
-                isExternal
               >
                 {opusData.title}
               </Text>
@@ -78,7 +83,7 @@ const OpusCard = (props: Props) => {
           </VStack>
         </VStack>
       </HStack>
-    </chakra.div>
+    </Box>
   )
 }
 
