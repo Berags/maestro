@@ -19,6 +19,7 @@ import {
 import useAudioPlayer from '../../utils/useAudioPlayer'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import toast from 'react-hot-toast'
+import { FaPlay } from 'react-icons/fa6'
 
 type PieceData = {
   id: number
@@ -31,12 +32,60 @@ type PieceData = {
 
 type Props = {
   pieceData: PieceData
+  variant: string
 }
 
 const PieceCard: any = (props: Props) => {
   const pieceData = props.pieceData
   const audioPlayer = useAudioPlayer()
   if (!pieceData) return <Skeleton />
+
+  if (props.variant && props.variant == 'sm') {
+    return (
+      <Flex justifyContent="space-between" px={2}>
+        <Flex>
+          <IconButton
+            aria-label={'Play'}
+            icon={<FaPlay />}
+            w={4}
+            h={8}
+            variant={'ghost'}
+            onClick={() => {
+              audioPlayer.setCurrent(pieceData)
+            }}
+          />
+          <Stack spacing={2} pl={3} align="left" textAlign={'center'}>
+            <Heading fontSize="lg">{pieceData.title}</Heading>
+          </Stack>
+        </Flex>
+        <Stack ml={2}>
+          <Popover>
+            <PopoverTrigger>
+              <IconButton
+                aria-label={'Settings'}
+                icon={<BsThreeDotsVertical />}
+                variant={'ghost'}
+              />
+            </PopoverTrigger>
+            <PopoverContent w={'10em'}>
+              <PopoverBody>
+                <Button
+                  variant={'ghost'}
+                  onClick={() => {
+                    audioPlayer.setQueue([...audioPlayer.queue, pieceData])
+                    toast.success('Added to queue!')
+                  }}
+                  w={'100%'}
+                >
+                  Add to queue
+                </Button>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
+        </Stack>
+      </Flex>
+    )
+  }
 
   return (
     <Box

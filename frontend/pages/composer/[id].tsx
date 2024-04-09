@@ -251,7 +251,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   )
 
   res.data.long_description = res.data.long_description.split('\n')
-  console.log(res.data)
 
   return {
     props: {

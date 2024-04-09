@@ -30,10 +30,12 @@ const ComposerCard = (props: Props) => {
         maxH="400px"
         minH="154px"
         w="250px"
+        height={"280px"}
         boxShadow="lg"
         rounded="md"
         p={6}
         overflow="hidden"
+        bg={"white"}
         cursor="pointer"
         _hover={{ boxShadow: 'lg' }}
         role="group"

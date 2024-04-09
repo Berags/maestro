@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Response
+from fastapi import APIRouter, Request, Response, HTTPException
 from pydantic import BaseModel
 from sqlmodel import Session
 from starlette import status
@@ -19,12 +19,27 @@ class Body(BaseModel):
     email: str
     image: str
     provider: str
+    previous_session: str | None
 
 
 @router.post("/login")
 def login(body: Body):
     request_user = None
     response_body = {}
+
+    session_token = security.make_token()
+    if body.previous_session is not None:
+        # user was already logged in
+        # just needs to refresh the session
+        if not redis_cache.exists(body.previous_session):
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+        redis_cache.delete(body.previous_session)
+        print("removed " + body.previous_session)
+        redis_cache.set(session_token, providers_string[body.provider] + str(body.id))
+        print("set " + session_token)
+        response_body["message"] = "session updated successfully"
+        response_body["token"] = session_token
+        return response_body
 
     with (Session(engine) as session):
         request_user = session.exec(
@@ -46,7 +61,6 @@ def login(body: Body):
         session.refresh(request_user)
         response_body["message"] = "User created successfully"
 
-    session_token = security.make_token()
     redis_cache.set(session_token, request_user.id)
     response_body["token"] = session_token
     return response_body
@@ -66,3 +80,5 @@ def get_identity(id: str, request: Request) -> User:
 async def unauthorized(response: Response):
     response.status_code = status.HTTP_401_UNAUTHORIZED
     return {"message": "Unauthorized"}
+
+# TODO: add logout
