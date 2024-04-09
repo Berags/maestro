@@ -17,11 +17,9 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Center,
 } from '@chakra-ui/react'
-import { FaPlay } from 'react-icons/fa6'
 import { ReactNode } from 'react'
-import { IoMdPlay, IoMdSettings } from 'react-icons/io'
+import { IoMdSettings } from 'react-icons/io'
 import { RiNeteaseCloudMusicLine } from 'react-icons/ri'
 import { BsMusicNote } from 'react-icons/bs'
 import { FiMenu } from 'react-icons/fi'
@@ -29,14 +27,12 @@ import { MdHome } from 'react-icons/md'
 import { signOut, useSession } from 'next-auth/react'
 import { BsFilePerson } from 'react-icons/bs'
 import { BiAlbum } from 'react-icons/bi'
-import { IoAlbumsOutline, IoPlaySkipForward } from 'react-icons/io5'
+import { IoAlbumsOutline } from 'react-icons/io5'
 import { GiMusicalScore } from 'react-icons/gi'
 import NextLink from 'next/link'
-import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import 'react-h5-audio-player/lib/styles.css'
 import React from 'react'
 import MusicPlayer from './MusicPlayer'
-import { ToastContainer } from 'react-toastify'
 import { Toaster } from 'react-hot-toast'
 
 type Props = {
@@ -136,7 +132,6 @@ const Layout = (props: Props) => {
             <NextLink href={'/composer'}>
               <NavItem icon={BsFilePerson}>Composers</NavItem>
             </NextLink>
-            <NavItem icon={BsMusicNote}>Performers</NavItem>
             <NavItem icon={IoAlbumsOutline}>Albums</NavItem>
             <NavItem icon={GiMusicalScore}>Opus</NavItem>
             <NavItem icon={BiAlbum}>Recordings</NavItem>
