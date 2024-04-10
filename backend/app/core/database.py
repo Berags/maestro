@@ -59,17 +59,9 @@ def get_info(type, name):
 
 def populate_db():
     with Session(engine) as session:
-        for composer in session.exec(select(Composer)).all():
-            session.delete(composer)
-        for opus in session.exec(select(Opus)).all():
-            session.delete(opus)
-        session.commit()
-
-    with Session(engine) as session:
         data: list = []
         for composer in composers:
             c = Composer(**composer)
-            pprint.pprint(c)
             for op in opuses:
                 if op.composer_id == c.id:
                     c.opuses.append(op)

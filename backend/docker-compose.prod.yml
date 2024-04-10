@@ -2,13 +2,13 @@ services:
   cache:
     image: redis:6.2-alpine
     restart: always
-    ports:
-      - 6379:6379
+    expose:
+      - 6379
     command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
   db:
     image: postgres:12
-    ports:
-      - 5432:5432
+    expose:
+      - 5432
     restart: always
     env_file:
       - .env
@@ -20,22 +20,17 @@ services:
 
   adminer:
     image: adminer
-    ports:
-      - 8080:8080
     restart: always
-    networks:
-      - default
     depends_on:
       - db
     environment:
       - ADMINER_DESIGN=pepa-linha-dark
+
   backend:
     image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
-    ports:
-      - 80:80
+    expose:
+      - 8000
     restart: always
-    networks:
-      - default
     depends_on:
       - db
       - cache
@@ -54,8 +49,34 @@ services:
       - REDIS_HOST=${REDIS_HOST?Variable not set}
       - REDIS_PORT=${REDIS_PORT?Variable not set}
       - REDIS_PASSWORD=${REDIS_PASSWORD?Variable not set}
+    labels:  # new
+      - "traefik.enable=true"
+      - "traefik.http.routers.fastapi.rule=Host(`api.maestrofm.tech`)"
+      - "traefik.http.services.backend.loadbalancer.server.port=8000"
+      - "traefik.http.routers.fastapi.tls=true"
+      - "traefik.http.routers.fastapi.tls.certresolver=letsencrypt"
 
     build:
       args:
         INSTALL_DEV: ${INSTALL_DEV-false}
     # platform: linux/amd64
+
+  traefik: # new
+    image: traefik:v2.9.6
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - "./traefik.prod.toml:/etc/traefik/traefik.toml"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik-public-certificates:/certificates"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`dashboard.maestrofm.tech`) && (PathPrefix(`/`)"
+      - "traefik.http.routers.dashboard.tls=true"
+      - "traefik.http.routers.dashboard.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      - "traefik.http.routers.dashboard.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=testuser:$$apr1$$jIKW.bdS$$eKXe4Lxjgy/rH65wP1iQe1"
+volumes:
+  traefik-public-certificates:

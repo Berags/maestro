@@ -1,3 +1,5 @@
+import threading
+
 from fastapi import FastAPI, Request
 from fastapi.routing import APIRoute
 from sqlmodel import SQLModel
@@ -55,8 +57,10 @@ async def check_auth(request: Request, call_next):
 
 @app.on_event("startup")
 def startup():
-    print("Starting the database...")
-    SQLModel.metadata.create_all(engine)
-    database.populate_db()
-    # SQLModel.metadata.drop_all(engine)
-    print("Database started!")
+    lock = threading.Lock()
+    with lock:
+        SQLModel.metadata.drop_all(engine)
+        print("Starting the database...")
+        SQLModel.metadata.create_all(engine)
+        database.populate_db()
+        print("Database started!")
