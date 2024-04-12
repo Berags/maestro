@@ -14,6 +14,12 @@ class UserRecordingLike(SQLModel, table=True):
     recording_id: int | None = Field(default=None, foreign_key="recording.id", primary_key=True)
 
 
+class ListeningHistory(SQLModel, table=True):
+    user_id: str | None = Field(default=None, foreign_key="user.id", primary_key=True)
+    recording_id: int | None = Field(default=None, foreign_key="recording.id", primary_key=True)
+    listened_at: datetime = Field(default=datetime.now(), primary_key=True)
+
+
 class User(SQLModel, table=True):
     id: str = Field(default=None, primary_key=True)
     name: str | None = Field(default=None)
@@ -24,6 +30,7 @@ class User(SQLModel, table=True):
     updated_at: datetime = Field(default=datetime.now())
 
     liked_composers: list["Composer"] = Relationship(back_populates="liked_by", link_model=UserComposerLike)
+    liked_recordings: list["Recording"] = Relationship(back_populates="liked_by", link_model=UserRecordingLike)
 
 
 class Composer(SQLModel, table=True):
@@ -62,6 +69,9 @@ class Recording(SQLModel, table=True):
     title: str | None = Field(default=None)
     image_url: str | None = Field(default=None)
     file_url: str | None = Field(default=None)
+    listens: int = Field(default=0)
 
     opus_id: int | None = Field(default=None, foreign_key="opus.id")
     opus: Opus = Relationship(back_populates="recordings")
+
+    liked_by: list["User"] = Relationship(back_populates="liked_recordings", link_model=UserRecordingLike)

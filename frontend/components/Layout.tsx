@@ -154,7 +154,9 @@ const Layout = (props: Props) => {
             </NextLink>
             <NavItem icon={IoAlbumsOutline}>Albums</NavItem>
             <NavItem icon={GiMusicalScore}>Opus</NavItem>
-            <NavItem icon={BiAlbum}>Recordings</NavItem>
+            <NextLink href={'/recording'}>
+              <NavItem icon={BiAlbum}>Recordings</NavItem>
+            </NextLink>
             <NavItem icon={IoMdSettings}>Settings</NavItem>
           </Flex>
         </Box>

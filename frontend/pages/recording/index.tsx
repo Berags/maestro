@@ -11,11 +11,13 @@ import Pagination from '../../components/Pagination'
 import ComposerCard from '../../components/search/ComposerCard'
 import Separator from '../../components/Separator'
 import backend from '../../axios.config'
+import PieceCard from '../../components/search/PieceCard'
 
-const Composers: any = ({ nOfPages, liked_composers }: any) => {
+const Recordings: any = ({ nOfPages, top_recordings }: any) => {
   const session: any = useSession()
   const [page, setPage] = useState<number>(0)
-  const [composers, setComposers] = useState([])
+  const [recordings, setRecordings] = useState([])
+  const [updated, setUpdated] = useState(false)
 
   if (!session) return <Skeleton />
 
@@ -24,44 +26,45 @@ const Composers: any = ({ nOfPages, liked_composers }: any) => {
       if (session.data) {
         const res_pages = await backend({
           method: 'get',
-          url: '/composer/?page=' + page,
+          url: '/recording/liked?page=' + page,
           headers: {
             Authorization: session.data.token,
           },
         })
-        setComposers(res_pages.data)
+        setRecordings(res_pages.data)
+        setUpdated(false)
       }
     }
 
     getComposers()
-  }, [page, session])
+  }, [page, updated])
 
   return (
     <Box px={4}>
-      {liked_composers.length > 0 && (
+      {recordings.length > 0 && (
         <>
-          <Separator text="Your liked composers" />
+          <Separator text="Your liked recordings" />
           <SimpleGrid
             columns={[1, 1, 2, 3, 4, 5]}
             spacing={5}
             mb={5}
             justifyItems={'center'}
           >
-            {liked_composers.map((val: any, i: number) => (
-              <ComposerCard composerData={val} />
+            {recordings.map((val: any, i: number) => (
+              <PieceCard request setUpdated={setUpdated} pieceData={val} />
             ))}
           </SimpleGrid>
         </>
       )}
-      <Separator text="Top Trending Composers" />
+      <Separator text="Top Recordings" />
       <SimpleGrid
         columns={[1, 1, 2, 3, 4, 5]}
         spacing={5}
         mb={5}
         justifyItems={'center'}
       >
-        {composers.map((val, i) => (
-          <ComposerCard composerData={val} />
+        {top_recordings.map((val: any, i: number) => (
+          <PieceCard request setUpdated={setUpdated} pieceData={val} />
         ))}
       </SimpleGrid>
       <Pagination index={page} nOfPages={nOfPages} setPage={setPage} />
@@ -77,13 +80,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return { redirect: { destination: '/' } }
   }
 
-  const res = await backend.get(`/composer/pages`, {
+  const res = await backend.get(`/recording/top`, {
     headers: {
       Authorization: session.token,
     },
   })
 
-  const res_liked = await backend.get('/composer/liked', {
+  const res_liked = await backend.get('/recording/liked/pages', {
     headers: {
       Authorization: session.token,
     },
@@ -92,10 +95,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       session: session ?? [],
-      nOfPages: res.data.n_of_pages,
-      liked_composers: res_liked.data,
+      nOfPages: res_liked.data.n_of_pages,
+      top_recordings: res.data,
     },
   }
 }
 
-export default Composers
+export default Recordings

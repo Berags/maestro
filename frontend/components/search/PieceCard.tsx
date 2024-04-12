@@ -15,15 +15,20 @@ import {
   PopoverTrigger,
   PopoverContent,
   PopoverBody,
+  HStack,
+  Grid,
+  GridItem,
 } from '@chakra-ui/react'
 import useAudioPlayer from '../../utils/useAudioPlayer'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import toast from 'react-hot-toast'
 import { FaPlay } from 'react-icons/fa6'
-import axios from 'axios'
 import getConfig from 'next/config'
 import { useSession } from 'next-auth/react'
 import backend from '../../axios.config'
+import { useRouter } from 'next/router'
+import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 type PieceData = {
   id: number
@@ -36,15 +41,17 @@ type PieceData = {
 
 type Props = {
   pieceData: PieceData
+  request?: boolean
+  setUpdated: Function
   variant: string
 }
 
 const PieceCard: any = (props: Props) => {
+  const router = useRouter()
   const pieceData = props.pieceData
-  const { publicRuntimeConfig } = getConfig()
-  const { BACKEND_API } = publicRuntimeConfig
   const { data }: any = useSession()
   const audioPlayer = useAudioPlayer()
+  const [hover, setHover] = useState(false)
   if (!pieceData) return <Skeleton />
 
   if (props.variant && props.variant == 'sm') {
@@ -90,6 +97,9 @@ const PieceCard: any = (props: Props) => {
                       }
                     )
                     toast.success(res.data.message)
+                    if (props.request) {
+                      props.setUpdated(true)
+                    }
                   }}
                 >
                   Like
@@ -124,27 +134,49 @@ const PieceCard: any = (props: Props) => {
       rounded="md"
     >
       <Flex justifyContent="space-between">
-        <Flex>
-          <Image
-            w={16}
-            h={16}
-            objectFit="cover"
-            fallbackSrc="https://via.placeholder.com/150"
-            src={pieceData.image_url}
-            alt={pieceData.title}
-            onClick={() => {
-              audioPlayer.setCurrent(pieceData)
-            }}
-          />
-          <Stack spacing={2} pl={3} align="left">
-            <Heading fontSize="lg">{pieceData.title}</Heading>
-            <Heading fontSize="sm">{pieceData.composer}</Heading>
-            <Tags
-              skills={['Performer']}
-              display={['none', 'none', 'flex', 'flex']}
-            />
-          </Stack>
-        </Flex>
+        <Grid templateColumns="repeat(5, 1fr)">
+          <GridItem>
+            {hover ? (
+              <IconButton
+                w={16}
+                h={16}
+                icon={<FaPlay />}
+                aria-label={'Play'}
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
+                onClick={() => {
+                  audioPlayer.setCurrent(pieceData)
+                }}
+              />
+            ) : (
+              <Image
+                fallbackSrc="https://via.placeholder.com/150"
+                src={pieceData.image_url}
+                alt={pieceData.title}
+                w={16}
+                h={16}
+                objectFit="cover"
+                minH={16}
+                minW={16}
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
+                onClick={() => {
+                  audioPlayer.setCurrent(pieceData)
+                }}
+              />
+            )}
+          </GridItem>
+          <GridItem colSpan={4}>
+            <Stack spacing={2} pl={3} align="left">
+              <Heading fontSize="lg">{pieceData.title}</Heading>
+              <Heading fontSize="sm">{pieceData.composer}</Heading>
+              <Tags
+                skills={['Performer']}
+                display={['none', 'none', 'flex', 'flex']}
+              />
+            </Stack>
+          </GridItem>
+        </Grid>
         <Stack display={['none', 'none', 'flex', 'flex']}>
           <Text fontSize={14} color="gray.400">
             {pieceData.duration}
@@ -176,6 +208,9 @@ const PieceCard: any = (props: Props) => {
                       }
                     )
                     toast.success(res.data.message)
+                    if (props.request) {
+                      props.setUpdated(true)
+                    }
                   }}
                 >
                   Like

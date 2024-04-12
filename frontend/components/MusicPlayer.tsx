@@ -3,9 +3,13 @@ import { createRef, useEffect, useRef, useState } from 'react'
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import useAudioPlayer from '../utils/useAudioPlayer'
 import { Image } from '@chakra-ui/react'
+import backend from '../axios.config'
+import { useSession } from 'next-auth/react'
+import toast from 'react-hot-toast'
 const MusicPlayer = () => {
   const audioPlayer = useAudioPlayer()
   const player = createRef<any>()
+  const { data }: any = useSession()
 
   useEffect(() => {
     if (!audioPlayer.current && audioPlayer.queue.length > 0) {
@@ -30,11 +34,27 @@ const MusicPlayer = () => {
 
   return (
     <HStack w={'100%'}>
-      <Image src={audioPlayer.current?.image_url} w={"7em"} alt="Dan Abramov" mr={-2} />
+      <Image
+        src={audioPlayer.current?.image_url}
+        w={'7em'}
+        alt="Dan Abramov"
+        mr={-2}
+      />
       <AudioPlayer
         style={{}}
         src={audioPlayer.current ? audioPlayer.current?.file_url : ''}
-        onPlay={(e) => console.log('onPlay')}
+        onPlay={async () => {
+          if (!audioPlayer.current) return
+          const res = await backend.post(
+            '/recording/listen/' + audioPlayer.current?.id,
+            {},
+            {
+              headers: {
+                Authorization: data.token,
+              },
+            }
+          )
+        }}
         onClickNext={handleEndOrSkip}
         onClickPrevious={handlePrevious}
         onEnded={handleEndOrSkip}
