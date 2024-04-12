@@ -51,7 +51,7 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD?Variable not set}
     labels: # new
       - "traefik.enable=true"
-      - "traefik.http.routers.fastapi.rule=Host(`api.localhost`)"
+      - "traefik.http.routers.fastapi.rule=Host(`api.localhost.com`)"
       - "traefik.http.services.backend.loadbalancer.server.port=8000"
 
     build:

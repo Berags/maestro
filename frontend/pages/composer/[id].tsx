@@ -29,6 +29,8 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Pagination from '../../components/Pagination'
 import { useSession } from 'next-auth/react'
+import backend from '../../axios.config'
+import toast from 'react-hot-toast'
 
 const Composer = ({ composerData, nOfPages, backend_api }: any) => {
   const router = useRouter()
@@ -40,11 +42,11 @@ const Composer = ({ composerData, nOfPages, backend_api }: any) => {
 
   useEffect(() => {
     const getComposers = async () => {
-      const res = await axios.get(
-        backend_api + '/composer/id/' + router.query.id + '?page=' + page,
+      const res = await backend.get(
+        '/composer/id/' + router.query.id + '?page=' + page,
         {
           headers: {
-            session: data.backend_session,
+            Authorization: data.token,
           },
         }
       )
@@ -122,16 +124,21 @@ const Composer = ({ composerData, nOfPages, backend_api }: any) => {
                   variant={'link'}
                   color={liked ? 'red.500' : 'grey.100'}
                   onClick={async () => {
-                    const res = await axios.post(
-                      backend_api + '/composer/like/' + composerData.id,
+                    const res = await backend.post(
+                      '/composer/like/' + composerData.id,
                       {},
                       {
                         headers: {
-                          session: data.backend_session,
+                          Authorization: data.token,
                         },
                       }
                     )
-                    if (res.status === 200) setLiked(!liked)
+                    if (res.status === 200) {
+                      setLiked(!liked)
+                      toast.success('Added to liked composers!')
+                    } else {
+                      toast.error('Unable to add!')
+                    }
                   }}
                 />
               </Stack>
@@ -241,14 +248,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const id = context.params.id // Get ID from slug
 
-  const res = await axios.get(
-    process.env.BACKEND_API + `/composer/id/${id}?page=0`,
-    {
-      headers: {
-        session: session.backend_session,
-      },
-    }
-  )
+  const res = await backend.get(`/composer/id/${id}?page=0`, {
+    headers: {
+      Authorization: session.token,
+    },
+  })
 
   res.data.long_description = res.data.long_description.split('\n')
 

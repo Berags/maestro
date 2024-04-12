@@ -8,6 +8,12 @@ class UserComposerLike(SQLModel, table=True):
     composer_id: int | None = Field(default=None, foreign_key="composer.id", primary_key=True)
 
 
+class UserRecordingLike(SQLModel, table=True):
+    user_id: str | None = Field(default=None, foreign_key="user.id", primary_key=True)
+
+    recording_id: int | None = Field(default=None, foreign_key="recording.id", primary_key=True)
+
+
 class User(SQLModel, table=True):
     id: str = Field(default=None, primary_key=True)
     name: str | None = Field(default=None)

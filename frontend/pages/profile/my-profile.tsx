@@ -18,9 +18,10 @@ import { authOptions } from '../api/auth/[...nextauth]'
 import { GetServerSidePropsContext } from 'next'
 import PlaylistCard from '../../components/PlaylistCard'
 import Separator from '../../components/Separator'
-import axios from "axios";
+import axios from 'axios'
+import backend from '../../axios.config'
 
-const Profile: any = ({user} : any) => {
+const Profile: any = ({ user }: any) => {
   const router = useRouter()
   const ANIMATION_DURATION = 0.2
   const color = 'blue.400'
@@ -117,11 +118,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return { redirect: { destination: '/' } }
   }
 
-  const res = await axios.get(process.env.BACKEND_API + `/auth/identity?id=${(session.provider == 'github' ? 'gh' : 'ds') + session.accountId}`, {
-  headers: {
-    session: session.backend_session
-  }
-  })
+  const res = await backend.get(
+    `/auth/identity?id=${
+      (session.provider == 'github' ? 'gh' : 'ds') + session.accountId
+    }`,
+    {
+      headers: {
+        Authorization: session.token,
+      },
+    }
+  )
 
   return {
     props: { session: session ?? [], user: res.data },

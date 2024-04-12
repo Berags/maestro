@@ -1,6 +1,10 @@
+import datetime
+import pprint
 import threading
 
-from fastapi import FastAPI, Request
+import jwt
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.openapi.models import Response
 from fastapi.routing import APIRoute
 from sqlmodel import SQLModel
 from starlette.middleware.cors import CORSMiddleware
@@ -40,19 +44,20 @@ routes_without_middleware = [settings.API_V1_STR + "/auth/login",
                              "/docs", settings.API_V1_STR + "/openapi.json"]
 
 
-# @app.middleware("http")
+@app.middleware("http")
 async def check_auth(request: Request, call_next):
+    response = {}
+    if request.method not in ["GET", "POST"]:
+        return await call_next(request)
     if request.url.path in routes_without_middleware:
         return await call_next(request)
-    try:
-        session = request.headers["session"]
-        if not redis_cache.exists(session):
-            request.scope['path'] = settings.API_V1_STR + '/auth/unauthorized'
-    except:
-        request.scope['path'] = settings.API_V1_STR + '/auth/unauthorized'
 
-    response = await call_next(request)
-    return response
+    try:
+        jwt.decode(request.headers["authorization"], settings.SECRET_KEY, algorithms=["HS256"])
+        response = await call_next(request)
+        return response
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 @app.on_event("startup")

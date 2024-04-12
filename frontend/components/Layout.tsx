@@ -18,10 +18,9 @@ import {
   MenuItem,
   MenuList,
 } from '@chakra-ui/react'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { IoMdSettings } from 'react-icons/io'
 import { RiNeteaseCloudMusicLine } from 'react-icons/ri'
-import { BsMusicNote } from 'react-icons/bs'
 import { FiMenu } from 'react-icons/fi'
 import { MdHome } from 'react-icons/md'
 import { signOut, useSession } from 'next-auth/react'
@@ -34,6 +33,8 @@ import 'react-h5-audio-player/lib/styles.css'
 import React from 'react'
 import MusicPlayer from './MusicPlayer'
 import { Toaster } from 'react-hot-toast'
+import { useRouter } from 'next/router'
+import backend from '../axios.config'
 
 type Props = {
   children: ReactNode
@@ -41,7 +42,26 @@ type Props = {
 
 const Layout = (props: Props) => {
   const { isOpen, onClose, onOpen } = useDisclosure()
-  const session = useSession()
+  const router = useRouter()
+  const { data }: any = useSession()
+
+  useEffect(() => {
+    // Configuring axios default headers
+    // Add a response interceptor
+    backend.interceptors.response.use(
+      function (response) {
+        // Any status code that lie within the range of 2xx cause this function to trigger
+        // Do something with response data
+        return response
+      },
+      function (error) {
+        // Any status codes that falls outside the range of 2xx cause this function to trigger
+        // Do something with response error
+        signOut()
+        return Promise.reject(error)
+      }
+    )
+  }, [props.children])
 
   const NavItem = (props: any) => {
     const color = useColorModeValue('gray.600', 'gray.300')
@@ -152,7 +172,7 @@ const Layout = (props: Props) => {
               <Avatar
                 size={'sm'}
                 name="Ahmad"
-                src={session.data ? (session.data!.user!.image as string) : ''}
+                src={data ? (data.user!.image as string) : ''}
               />
             </MenuButton>
             <MenuList fontSize={17} zIndex={5555}>

@@ -20,6 +20,10 @@ import useAudioPlayer from '../../utils/useAudioPlayer'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import toast from 'react-hot-toast'
 import { FaPlay } from 'react-icons/fa6'
+import axios from 'axios'
+import getConfig from 'next/config'
+import { useSession } from 'next-auth/react'
+import backend from '../../axios.config'
 
 type PieceData = {
   id: number
@@ -37,6 +41,9 @@ type Props = {
 
 const PieceCard: any = (props: Props) => {
   const pieceData = props.pieceData
+  const { publicRuntimeConfig } = getConfig()
+  const { BACKEND_API } = publicRuntimeConfig
+  const { data }: any = useSession()
   const audioPlayer = useAudioPlayer()
   if (!pieceData) return <Skeleton />
 
@@ -69,6 +76,24 @@ const PieceCard: any = (props: Props) => {
             </PopoverTrigger>
             <PopoverContent w={'10em'}>
               <PopoverBody>
+                <Button
+                  variant={'ghost'}
+                  onClick={async () => {
+                    console.log(data.backend_session)
+                    const res = await backend.post(
+                      '/recording/like/' + pieceData.id,
+                      {},
+                      {
+                        headers: {
+                          Authorization: data.token,
+                        },
+                      }
+                    )
+                    toast.success(res.data.message)
+                  }}
+                >
+                  Like
+                </Button>
                 <Button
                   variant={'ghost'}
                   onClick={() => {
@@ -132,12 +157,29 @@ const PieceCard: any = (props: Props) => {
                 aria-label={'Settings'}
                 icon={<BsThreeDotsVertical />}
                 variant={'ghost'}
-              >
-                sdas
-              </IconButton>
+              ></IconButton>
             </PopoverTrigger>
             <PopoverContent w={'10em'}>
               <PopoverBody>
+                <Button
+                  variant={'ghost'}
+                  onClick={async () => {
+                    console.log(data.backend_session)
+
+                    const res = await backend.post(
+                      '/recording/like/' + pieceData.id,
+                      {},
+                      {
+                        headers: {
+                          Authorization: data.token,
+                        },
+                      }
+                    )
+                    toast.success(res.data.message)
+                  }}
+                >
+                  Like
+                </Button>
                 <Button
                   variant={'ghost'}
                   onClick={() => {

@@ -23,6 +23,8 @@ exposedByDefault = false
 
 [certificatesResolvers.letsencrypt.acme]
 email = "jacopo.beragnoli@edu.unifi.it"
-storage = "/certificates/acme.json"
 [certificatesResolvers.letsencrypt.acme.httpChallenge]
 entryPoint = "web"
+[[tls.certificates]]
+certFile = "/traefik-public-certificates/fullchain.pem"
+keyFile = "/traefik-public-certificates/privkey.pem"

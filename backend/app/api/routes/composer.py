@@ -11,6 +11,7 @@ from sqlmodel import Session, select
 
 from app.core.database import engine, redis_cache
 from app.core.models import Composer, Opus, User
+from app.utils import security
 
 router = APIRouter()
 
@@ -22,7 +23,7 @@ def get_composer(composer_id: int, page: int | None, request: Request):
     with Session(engine) as session:
         composer = session.exec(select(Composer).where(Composer.id == composer_id)).one_or_none()
         current_user = session.exec(
-            select(User).where(User.id == redis_cache.get(request.headers["session"]))).one_or_none()
+            select(User).where(User.id == security.get_id(request.headers["authorization"]))).one_or_none()
 
         if page is not None:
             return {**composer.__dict__,
@@ -50,17 +51,24 @@ def get_n_of_pages():
         return {"n_of_pages": math.ceil(n_of_rows / limit)}
 
 
+@router.get("/liked")
+def get_liked_composers(request: Request):
+    user_id = security.get_id(request.headers["authorization"])
+    print(user_id)
+    with Session(engine) as session:
+        current_user = session.exec(
+            select(User).where(User.id == user_id)).one_or_none()
+        return current_user.liked_composers
+
+
 @router.post("/like/{composer_id}")
 def like_composer(composer_id: int, request: Request):
-    if not redis_cache.exists(request.headers["session"]):
-        raise HTTPException(status_code=401, detail="Unauthorized")
-
     with Session(engine) as session:
         composer: Composer = session.exec(
             select(Composer).where(Composer.id == composer_id)
         ).one_or_none()
         user: User = session.exec(
-            select(User).where(User.id == redis_cache.get(request.headers["session"]))
+            select(User).where(User.id == security.get_id(request.headers["authorization"]))
         ).one_or_none()
 
         if composer is None or user is None:

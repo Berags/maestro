@@ -1,13 +1,11 @@
 import * as React from 'react'
 import {
-  chakra,
   HStack,
   VStack,
   Text,
   Tag,
   Image,
   useColorModeValue,
-  Box,
   Menu,
   MenuButton,
   Button,
@@ -15,14 +13,12 @@ import {
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { GetServerSidePropsContext } from 'next'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '../../pages/api/auth/[...nextauth]'
 import axios from 'axios'
 import { useEffect } from 'react'
 import getConfig from 'next/config'
 import { useSession } from 'next-auth/react'
 import PieceCard from '../search/PieceCard'
+import backend from '../../axios.config'
 
 type Props = {
   opusData: OpusData
@@ -48,14 +44,11 @@ const OpusCard = (props: Props) => {
 
   useEffect(() => {
     const getRecordings = async () => {
-      const res = await axios.get(
-        BACKEND_API + `/recording/by-opus/` + opusData.id,
-        {
-          headers: {
-            session: data.backend_session,
-          },
-        }
-      )
+      const res = await backend.get(`/recording/by-opus/` + opusData.id, {
+        headers: {
+          Authorization: data.token,
+        },
+      })
 
       setRecordings(res.data)
       console.log(res.data)
@@ -100,7 +93,7 @@ const OpusCard = (props: Props) => {
                   onClick={(e) => e.stopPropagation()}
                 >
                   {opusData.title.length > 40
-                    ? opusData.title.slice(0, 40).concat('...')
+                    ? opusData.title.slice(0, 30).concat('...')
                     : opusData.title}
                 </Text>
                 <HStack spacing="1">
