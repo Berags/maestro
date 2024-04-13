@@ -1,7 +1,8 @@
 import { Flex, FlexProps, useColorModeValue } from '@chakra-ui/react'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 const Pagination = ({ index, nOfPages, setPage }: any) => {
+  
   return (
     <Flex
       as="nav"

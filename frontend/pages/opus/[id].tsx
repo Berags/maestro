@@ -1,28 +1,48 @@
 import { useSession } from 'next-auth/react'
-import { Box, SimpleGrid } from '@chakra-ui/react'
+import { Box, Flex, IconButton, SimpleGrid, Text } from '@chakra-ui/react'
 import axios from 'axios'
 import { getServerSession } from 'next-auth'
 import { GetServerSidePropsContext } from 'next'
 import { authOptions } from '../api/auth/[...nextauth]'
 import Separator from '../../components/Separator'
 import PieceCard from '../../components/search/PieceCard'
+import backend from '../../axios.config'
+import { FaPlay } from 'react-icons/fa6'
+import useAudioPlayer from '../../utils/useAudioPlayer'
 
-const Opus: any = ({ recordings, backend_api }: any) => {
+const Opus: any = ({ recordings, opus }: any) => {
   const { data }: any = useSession()
+  const audioPlayer = useAudioPlayer()
 
   if (!data) {
     return <>loading</>
   }
 
   return (
-    <Box px={4}>
-      <Separator text="Composers" />
+    <Box px={4} pt={4}>
+      <Flex px={6} verticalAlign={'center'}>
+        <IconButton
+          isRound={true}
+          variant="ghost"
+          icon={<FaPlay />}
+          fontSize="2em"
+          colorScheme="grey"
+          aria-label={'Play all'}
+          onClick={() => {
+            audioPlayer.setQueue(recordings)
+          }}
+        />
+        <Text as="b" fontSize={'3xl'} ml={4}>
+          {opus.title}
+        </Text>
+      </Flex>
+      <Separator text="Recordings" />
       <SimpleGrid
         spacing={5}
         mb={5}
         justifyItems={'center'}
         columns={[1, 1, 2, 3, 4, 5]}
-        >
+      >
         {recordings.map((rec: any) => (
           <PieceCard pieceData={rec} />
         ))}
@@ -41,14 +61,17 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const id = context.params.id // Get ID from slug
 
-  const res = await axios.get(
-    process.env.BACKEND_API + `/recording/by-opus/` + id,
-    {
-      headers: {
-        session: session.backend_session,
-      },
-    }
-  )
+  const res_opus = await backend.get(`/opus/` + id, {
+    headers: {
+      Authorization: session.token,
+    },
+  })
+
+  const res = await backend.get(`/recording/by-opus/` + id, {
+    headers: {
+      Authorization: session.token,
+    },
+  })
 
   console.log(res.data)
 
@@ -56,7 +79,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     props: {
       session: session ?? [],
       recordings: res.data,
-      backend_api: process.env.BACKEND_API,
+      opus: res_opus.data,
     },
   }
 }

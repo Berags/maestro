@@ -68,7 +68,7 @@ const PieceCard: any = (props: Props) => {
               audioPlayer.setCurrent(pieceData)
             }}
           />
-          <Stack spacing={2} pl={3} align="left" textAlign={'center'}>
+          <Stack spacing={2} pl={3} align="left" textAlign={'left'}>
             <Heading fontSize="lg">{pieceData.title}</Heading>
           </Stack>
         </Flex>

@@ -35,6 +35,7 @@ import MusicPlayer from './MusicPlayer'
 import { Toaster } from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import backend from '../axios.config'
+import AutocompleteSearchBox from './search/AutocompleteSearchBox'
 
 type Props = {
   children: ReactNode
@@ -213,7 +214,7 @@ const Layout = (props: Props) => {
             borderBottomWidth="1px"
             borderColor={useColorModeValue('inherit', 'gray.700')}
             bg={useColorModeValue('white', 'gray.800')}
-            justifyContent={{ base: 'space-between', md: 'flex-end' }}
+            justifyContent={{ base: 'space-between' }}
             boxShadow="lg"
             h="14"
             top={'0'}
@@ -227,8 +228,11 @@ const Layout = (props: Props) => {
               icon={<FiMenu />}
               size="md"
             />
+            <Flex align="center" w={'80%'} pr={6} pl={2}>
+              <AutocompleteSearchBox />
+            </Flex>
 
-            <Flex align="center">
+            <Flex align="center" justify={'flex-end'}>
               <Icon as={RiNeteaseCloudMusicLine} h={8} w={8} />
             </Flex>
           </Flex>

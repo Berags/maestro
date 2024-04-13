@@ -304,3421 +304,1901 @@ opuses = [
     {
         "id": 10164,
         "title": "Art of the Fugue, BWV.1080",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 87
     },
     {
         "id": 9231,
         "title": "Cello Suite no. 1 in G major, BWV.1007",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 87
     },
     {
         "id": 9835,
         "title": "Cello Suite no. 4 in E flat major, BWV.1010",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 87
     },
     {
         "id": 9964,
         "title": "Cello Suite no. 6 in D major, BWV.1012",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 87
     },
     {
         "id": 9379,
         "title": "Partita no. 2 for Solo Violin in D minor, BWV.1004",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 87
     },
     {
         "id": 9971,
         "title": "The Musical Offering, BWV.1079",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 87
     },
     {
         "id": 10172,
         "title": "Italian Concerto, BWV.971",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 87
     },
     {
         "id": 9172,
         "title": "Passacaglia and Fugue in C minor, BWV.582",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 87
     },
     {
         "id": 10242,
         "title": "Toccata, Adagio and Fugue in C major, BWV.564",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 87
     },
     {
         "id": 28101,
         "title": "Toccata and fugue in D minor, BWV.565",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 87
     },
     {
         "id": 9781,
         "title": "Well-tempered Clavier, Book 1, BWV.846-869",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 87
     },
     {
         "id": 9318,
         "title": "Well-tempered Clavier, Book 2, BWV.870-893",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 87
     },
     {
         "id": 9411,
         "title": "Brandenburg Concerto no. 1 in F major, BWV.1046",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 87
     },
     {
         "id": 9664,
         "title": "Brandenburg Concerto no. 2 in F major, BWV.1047",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 87
     },
     {
         "id": 9688,
         "title": "Brandenburg Concerto no. 3 in G major, BWV.1048",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 87
     },
     {
         "id": 9373,
         "title": "Brandenburg Concerto no. 4 in G major, BWV.1049",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 87
     },
     {
         "id": 10116,
         "title": "Brandenburg Concerto no. 5 in D major, BWV.1050",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 87
     },
     {
         "id": 9867,
         "title": "Brandenburg Concerto no. 6 in B flat major, BWV.1051",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 87
     },
     {
         "id": 10133,
         "title": "Concerto in D minor for 3 Harpsichords, BWV.1063",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 87
     },
     {
         "id": 9573,
         "title": "Orchestral Suite no. 1 in C major, BWV.1066",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 87
     },
     {
         "id": 9327,
         "title": "Orchestral Suite no. 2 in B minor, BWV.1067",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 87
     },
     {
         "id": 9796,
         "title": "Orchestral Suite no. 3 in D major, BWV.1068",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 87
     },
     {
         "id": 9845,
         "title": "Violin Concerto in A minor, BWV.1041",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 87
     },
     {
         "id": 9357,
         "title": "Violin Concerto in E major, BWV.1042",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 87
     },
     {
         "id": 9334,
         "title": "Cantata no. 140, \"Wachet auf, ruft uns die Stimme\", BWV.140",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 87
     },
     {
         "id": 9148,
         "title": "Cantata no. 147: Herz und Mund und Tat und Leben",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 87
     },
     {
         "id": 10160,
         "title": "Christmas Oratorio, BWV.248",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 87
     },
     {
         "id": 9895,
         "title": "Mass in B minor, BWV.232",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 87
     },
     {
         "id": 9651,
         "title": "Passion According to St. John, BWV.245",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 87
     },
     {
         "id": 9848,
         "title": "Passion According to St. Matthew, BWV.244",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 87
     },
     {
         "id": 16300,
         "title": "Cello Sonata no. 4 in C major, op. 102, no. 1",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 145
     },
     {
         "id": 16260,
         "title": "Grosse Fuge, op. 133",
-        "subtitle": "For string quartet",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 145
     },
     {
         "id": 16316,
         "title": "Piano Trio no. 5 in D major, op. 70 no. 1, \"Ghost",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 145
     },
     {
         "id": 16231,
         "title": "Piano Trio no. 7 in B flat major, op. 97, \"Archduke",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 145
     },
     {
         "id": 16245,
         "title": "String Quartet no. 7 in F major, op. 59 no. 1, \"Razumovsky",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 145
     },
     {
         "id": 16199,
         "title": "String Quartet no. 10 in E flat major, op. 74, \"Harp",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 145
     },
     {
         "id": 16442,
         "title": "String Quartet no. 11 in F minor, op. 95, \"Serioso",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 145
     },
     {
         "id": 16259,
         "title": "String Quartet no. 14 in C sharp minor, op. 131",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 145
     },
     {
         "id": 16198,
         "title": "String Quartet no. 15 in A minor, op. 132",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 145
     },
     {
         "id": 16274,
         "title": "String Quartet no. 16 in F major, op. 135",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 145
     },
     {
         "id": 16336,
         "title": "Violin Sonata no. 7 in C minor, op. 30 no. 2",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 145
     },
     {
         "id": 16331,
         "title": "Violin Sonata no. 9 in A major, op. 47, \"Kreutzer",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 145
     },
     {
         "id": 16222,
         "title": "Piano Sonata no. 8 in C minor, op. 13, \"Pathétique",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 145
     },
     {
         "id": 16482,
         "title": "Piano Sonata no. 17 in D minor, op. 31 no. 2, \"Tempest",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 145
     },
     {
         "id": 16184,
         "title": "Piano Sonata no. 21 in C major, op. 53, \"Waldstein",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 145
     },
     {
         "id": 16419,
         "title": "Piano Sonata no. 23 in F minor, op. 57, \"Appassionata",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 145
     },
     {
         "id": 16459,
         "title": "Piano Sonata no. 26 in E flat major, op. 81a, \"Les Adieux",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 145
     },
     {
         "id": 16264,
         "title": "Piano Sonata no. 29 in B flat major, op. 106, \"Hammerklavier",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 145
     },
     {
         "id": 16421,
         "title": "Piano Sonata no. 32 in C minor, op. 111",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 145
     },
     {
         "id": 16324,
         "title": "Variations on a Waltz by Diabelli, op. 120",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 145
     },
     {
         "id": 16322,
         "title": "Leonore Overture no. 3, op. 72b",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 145
     },
     {
         "id": 16170,
         "title": "Piano Concerto no. 3 in C minor, op. 37",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 145
     },
     {
         "id": 16286,
         "title": "Piano Concerto no. 4 in G major, op. 58",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 145
     },
     {
         "id": 16218,
         "title": "Piano Concerto no. 5 in E flat major, op. 73, \"Emperor",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 145
     },
     {
         "id": 16143,
         "title": "Symphony no. 3 in E flat major, op. 55, \"Eroica",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 145
     },
     {
         "id": 16406,
         "title": "Symphony no. 5 in C minor, op. 67",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 145
     },
     {
         "id": 16124,
         "title": "Symphony no. 7 in A major, op. 92",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 145
     },
     {
         "id": 16238,
         "title": "Symphony no. 9 in D minor, op. 125, \"Choral",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 145
     },
     {
         "id": 16458,
         "title": "Violin Concerto in D major, op. 61",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 145
     },
     {
         "id": 16382,
         "title": "Missa Solemnis, op. 123",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 145
     },
     {
         "id": 7757,
         "title": "Clarinet Quintet in B minor, op. 115",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 80
     },
     {
         "id": 7726,
         "title": "Clarinet Sonata no. 1 in F minor, op. 120 no. 1",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 80
     },
     {
         "id": 7716,
         "title": "Piano Quartet no. 1 in G minor, op. 25",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 80
     },
     {
         "id": 7836,
         "title": "Piano Quartet no. 3 in C minor, op. 60",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 80
     },
     {
         "id": 7663,
         "title": "Piano Quintet in F minor, op. 34",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 80
     },
     {
         "id": 7745,
         "title": "String Quartet no. 3 in B flat major, op. 67",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 80
     },
     {
         "id": 7832,
         "title": "String Quintet no. 2 in G major, op. 111",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 80
     },
     {
         "id": 7715,
         "title": "String Sextet no. 1 in B flat major, op. 18",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 80
     },
     {
         "id": 7791,
         "title": "Violin Sonata no. 1 in G major, op. 78",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 80
     },
     {
         "id": 7659,
         "title": "Ballades, op. 10",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 80
     },
     {
         "id": 7713,
         "title": "Intermezzos, op. 117",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 80
     },
     {
         "id": 7778,
         "title": "Piano Sonata no. 3 in F minor, op. 5",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 80
     },
     {
         "id": 7788,
         "title": "Rhapsodies, op. 79",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 80
     },
     {
         "id": 7642,
         "title": "Variations and Fugue on a Theme by Handel, op. 24",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 80
     },
     {
         "id": 7766,
         "title": "Double Concerto in A minor, op. 102",
-        "subtitle": "For violin, cello and orchestra",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 80
     },
     {
         "id": 7774,
         "title": "Piano Concerto no. 2 in B flat major, op. 83",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 80
     },
     {
         "id": 7765,
         "title": "Symphony no. 3 in F major, op. 90",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 80
     },
     {
         "id": 7706,
         "title": "Symphony no. 4 in E minor, op. 98",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 80
     },
     {
         "id": 7764,
         "title": "Violin Concerto in D major, op. 77",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 80
     },
     {
         "id": 7755,
         "title": "Alto Rhapsody, op. 53",
-        "subtitle": "For alto, male chorus and orchestra",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 80
     },
     {
         "id": 7645,
         "title": "Ein deutsches Requiem, op. 45",
-        "subtitle": "For soprano, baritone, chorus and orchestra",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 80
     },
     {
         "id": 7657,
         "title": "Liebeslieder Walzes, op. 52",
-        "subtitle": "Songs",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 80
     },
     {
         "id": 7691,
         "title": "Songs, op. 17",
-        "subtitle": "For female chorus, two horns and harp",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 80
     },
     {
         "id": 17124,
         "title": "Cello Sonata in G minor, op. 65",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 152
     },
     {
         "id": 17180,
         "title": "Ballade no. 1 in G minor, op. 23",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17147,
         "title": "Ballade no. 2 in F major, op. 38",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17239,
         "title": "Ballade no. 3 in A flat major, op. 47",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17128,
         "title": "Ballade no. 4 in F minor, op. 52",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17159,
         "title": "Etudes, op. 10",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17223,
         "title": "Etudes, op. 25",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17109,
         "title": "Nocturnes, op. 9",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17119,
         "title": "Polonaise no. 6 in A flat major, op. 53, \"Heroic",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17276,
         "title": "Preludes, op. 28",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17114,
         "title": "Scherzo no. 1 in B minor, op. 20",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17186,
         "title": "Scherzo no. 2 in B flat minor, op. 31",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17170,
         "title": "Scherzo no. 3 in C sharp minor, op. 39",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17254,
         "title": "Scherzo no. 4 in E major, op. 54",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17167,
         "title": "Sonata no. 2 in B flat minor, op. 35",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17131,
         "title": "Sonata no. 3 in B minor, op. 58",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 152
     },
     {
         "id": 17236,
         "title": "Piano Concerto no. 1 in E minor, op. 11",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 152
     },
     {
         "id": 17249,
         "title": "Variations on La ci darem la mano, op. 2",
-        "subtitle": "For piano and orchestra",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 152
     },
     {
         "id": 13246,
         "title": "Cello Sonata in D minor, L.135",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 105
     },
     {
         "id": 13190,
         "title": "Sonata for Flute, Viola and Harp, L.137",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 105
     },
     {
         "id": 13260,
         "title": "String Quartet in G minor, L.85, op. 10",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 105
     },
     {
         "id": 13203,
         "title": "Violin Sonata in G minor, L.140",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 105
     },
     {
         "id": 13251,
         "title": "Children's Corner, L.113",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 105
     },
     {
         "id": 13235,
         "title": "En blanc et noir, for 2 pianos, L.134",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 105
     },
     {
         "id": 13308,
         "title": "L'isle joyeuse, L.106",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 105
     },
     {
         "id": 13204,
         "title": "Préludes, Book 1, L.117",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 105
     },
     {
         "id": 13240,
         "title": "Préludes, Book 2, L.123",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 105
     },
     {
         "id": 13297,
         "title": "Suite Bergamasque, L.75",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 105
     },
     {
         "id": 13303,
         "title": "Images, L.122",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 105
     },
     {
         "id": 13331,
         "title": "La Mer, L.109",
-        "subtitle": "Three symphonic sketches",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 105
     },
     {
         "id": 13258,
         "title": "Nocturnes, L.91",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 105
     },
     {
         "id": 13215,
         "title": "Prélude à l'après-midi d'un faune, L.86",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 105
     },
     {
         "id": 13301,
         "title": "Jeux, L.126",
-        "subtitle": "Ballet",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 105
     },
     {
         "id": 13332,
         "title": "Pelléas et Mélisande, L.88",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 105
     },
     {
         "id": 22237,
         "title": "Piano Quintet in A major, B.155, op. 81",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 189
     },
     {
         "id": 22331,
         "title": "Piano Trio in E minor, op. 90, \"Dumky",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 189
     },
     {
         "id": 22377,
         "title": "String Quartet no. 12 in F, op. 96, \"American",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 189
     },
     {
         "id": 22228,
         "title": "String Quartet no. 13 in G major, op. 106",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 189
     },
     {
         "id": 22227,
         "title": "10 Legends, op. 59",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 189
     },
     {
         "id": 22310,
         "title": "Carnival, op. 92",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22248,
         "title": "Cello Concerto in B minor, op. 104",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22360,
         "title": "Czech Suite, op. 39",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22274,
         "title": "In Nature's Realm, B.168, op. 91",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22221,
         "title": "Serenade for Strings in E major, op. 22",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22373,
         "title": "Symphonic Variations on 'I am a Fiddler', B.70, op. 78",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22330,
         "title": "Symphony no. 5 in F major, B.54, op. 76",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22382,
         "title": "Symphony no. 6 in D major, B.112, op. 60",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22259,
         "title": "Symphony no. 7 in D minor, B.141, op. 70",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22354,
         "title": "Symphony no. 8 in G major, B.163, op. 88",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22368,
         "title": "Symphony no. 9 in E minor, op. 95, \"From the New World",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22380,
         "title": "The Golden Spinning Wheel, B.197. Op.109",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22343,
         "title": "The Noon Witch, B.196, op. 108",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22327,
         "title": "The Water Goblin, B.195, op. 107",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22216,
         "title": "The Wild Dove, B.198, op. 110",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 189
     },
     {
         "id": 22217,
         "title": "Rusalka, B.203, op. 114",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 189
     },
     {
         "id": 22349,
         "title": "Requiem, for vocal soloists, chorus and orchestra, B.165, op. 89",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 189
     },
     {
         "id": 22290,
         "title": "Stabat Mater, for vocal soloists, chorus, and orchestra, B.71, op. 58",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 189
     },
     {
         "id": 15599,
         "title": "3 Preludes",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 136
     },
     {
         "id": 15544,
         "title": "An American in Paris",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 136
     },
     {
         "id": 15566,
         "title": "Cuban Overture",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 136
     },
     {
         "id": 15574,
         "title": "Piano Concerto in F",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 136
     },
     {
         "id": 15562,
         "title": "Rhapsody in Blue",
-        "subtitle": "For piano and orchestra",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 136
     },
     {
         "id": 15585,
         "title": "Second Rhapsody, \"Rhapsody in Rivets",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 136
     },
     {
         "id": 15564,
         "title": "Porgy and Bess",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 136
     },
     {
         "id": 6422,
         "title": "Harpsichord Suite in E, HWV.430, \"The Harmonious Blacksmith",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 67
     },
     {
         "id": 6233,
         "title": "Concerto Grosso in A major, op. 6, no. 11, HWV.329",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 67
     },
     {
         "id": 6393,
         "title": "Concerto Grosso in A minor, op. 6, no. 4, HWV.322",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 67
     },
     {
         "id": 6431,
         "title": "Music for the Royal Fireworks in D major, HWV.351",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 67
     },
     {
         "id": 6480,
         "title": "Organ Concerto in B flat major, op. 4, no. 6, HWV.294",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 67
     },
     {
         "id": 6209,
         "title": "Organ Concerto in F major, HWV.295, \"The Cuckoo and the Nightingale",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 67
     },
     {
         "id": 6205,
         "title": "Organ Concerto in G minor, op. 4, no. 1, HWV.289",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 67
     },
     {
         "id": 6485,
         "title": "Organ Concerto in G minor, op. 7, no. 5, HWV.310",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 67
     },
     {
         "id": 6216,
         "title": "Water Music Suite no. 1 in F major, HWV.348",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 67
     },
     {
         "id": 6500,
         "title": "Water Music Suite no. 2 in D major, HWV.349",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 67
     },
     {
         "id": 6494,
         "title": "Water Music Suite no. 3 in G major, HWV.350",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 67
     },
     {
         "id": 6367,
         "title": "Giulio Cesare in Egitto, HWV.17",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 67
     },
     {
         "id": 6446,
         "title": "Alexander's Feast, ode for St. Cecilia's Day, HWV.75",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 67
     },
     {
         "id": 28083,
         "title": "Messiah, HWV.56",
-        "subtitle": "Oratorio",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 67
     },
     {
         "id": 26013,
         "title": "String Quartet in C major, Hob.III:77, op. 76, no. 3, \"Emperor",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 208
     },
     {
         "id": 25548,
         "title": "String Quartet in D major, Hob.III:34, op. 20, no. 4, \"The Sun",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 208
     },
     {
         "id": 26025,
         "title": "String Quartet in D major, Hob.III:63, op. 64, no. 5, \"Lark",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 208
     },
     {
         "id": 25574,
         "title": "String Quartet in D minor, Hob.III:76, op. 76, no. 2, \"Fifths",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 208
     },
     {
         "id": 26038,
         "title": "Cello Concerto no. 1 in C major, Hob.VIIb:1",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 25786,
         "title": "Keyboard Concerto in D major, Hob.XVIII:11",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 26027,
         "title": "Symphony no. 6 in D, Hob.I:6, \"Le Matin",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 25892,
         "title": "Symphony no. 7 in C, Hob.I:7, \"Le Midi",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 25615,
         "title": "Symphony no. 8 in G, Hob.I:8, \"Le Soir",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 25472,
         "title": "Symphony no. 45 in F sharp minor, Hob.I:45, \"Farewell",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 25978,
         "title": "Symphony no. 48 in C, Hob.I:48, \"Maria Theresia",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 25618,
         "title": "Symphony no. 49 in F minor, Hob.I:49, \"La passione",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 25919,
         "title": "Symphony no. 94 in G, Hob.I:94, \"Surprise",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 26126,
         "title": "Symphony no. 96 in D, Hob.I:96, \"Miracle",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 25505,
         "title": "Symphony no. 100 in G, Hob.I:100, \"Military",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 25869,
         "title": "Symphony no. 101 in D, Hob.I:101, \"Clock",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 25814,
         "title": "Symphony no. 103 in E flat major, Hob.I:103, \"Drum Roll",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 26120,
         "title": "Symphony no. 104 in D, Hob.I:104, \"London",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 25541,
         "title": "Trumpet Concerto in E flat major, Hob.VIIe:1",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 208
     },
     {
         "id": 25464,
         "title": "Die Jahreszeiten, Hob.XXI:3, \"The Seasons",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 208
     },
     {
         "id": 26137,
         "title": "Die Schöpfung, Hob.XXI:2, \"The Creation",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 208
     },
     {
         "id": 24218,
         "title": "19 Hungarian Rhapsodies, S.244, R.106",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 197
     },
     {
         "id": 23917,
         "title": "Années de pèlerinage, S.160-163, R.10a-e",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 197
     },
     {
         "id": 24197,
         "title": "Aprés une lecture du Dante I, fantasia quasi sonata, S.158c",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 197
     },
     {
         "id": 23987,
         "title": "Piano Sonata in B minor, S.178",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 197
     },
     {
         "id": 24356,
         "title": "Transcendental Etudes, S.139, R.2b",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 197
     },
     {
         "id": 24065,
         "title": "2 Episodes from Lenau's Faust, S.110",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 197
     },
     {
         "id": 24103,
         "title": "Faust Symphony, S.108, R.425",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 197
     },
     {
         "id": 24319,
         "title": "Les Préludes, S.97",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 197
     },
     {
         "id": 24135,
         "title": "Mazeppa, S.100",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 197
     },
     {
         "id": 24219,
         "title": "Piano Concerto no. 1 in E flat major, S.124",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 197
     },
     {
         "id": 24315,
         "title": "Piano Concerto no. 2 in A major, S.125",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 197
     },
     {
         "id": 24099,
         "title": "Tasso: Lamento e Trionfo, S.96",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 197
     },
     {
         "id": 24157,
         "title": "Totentanz, S.126, R.457",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 197
     },
     {
         "id": 7278,
         "title": "Symphony no. 2 in C minor, \"Resurrection",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 77
     },
     {
         "id": 7277,
         "title": "Symphony no. 5 in C sharp minor",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 77
     },
     {
         "id": 7290,
         "title": "Symphony no. 6 in A minor",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 77
     },
     {
         "id": 7273,
         "title": "Symphony no. 8 in E flat major",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 77
     },
     {
         "id": 7283,
         "title": "Symphony no. 9 in D major",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 77
     },
     {
         "id": 7280,
         "title": "Das Lied von der Erde",
-        "subtitle": "Symphony for alto, tenor and orchestra",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 77
     },
     {
         "id": 7297,
         "title": "Des Knaben Wunderhorn",
-        "subtitle": "Song cycle",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 77
     },
     {
         "id": 7301,
         "title": "Kindertotenlieder",
-        "subtitle": "Song cycle",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 77
     },
     {
         "id": 7288,
         "title": "Rückert-Lieder",
-        "subtitle": "Song cycle",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 77
     },
     {
         "id": 16707,
         "title": "Piano Trio no. 1 in D minor, op. 49",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 147
     },
     {
         "id": 16642,
         "title": "String Octet in E flat major, op. 20",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 147
     },
     {
         "id": 16768,
         "title": "String Quartet no. 2 in A minor, op. 13",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 147
     },
     {
         "id": 16578,
         "title": "String Quartet no. 6 in F minor, op. 80",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 147
     },
     {
         "id": 16626,
         "title": "String Quintet no. 2 in B flat major, op. 87",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 147
     },
     {
         "id": 16657,
         "title": "Andante and Rondo capriccioso",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 147
     },
     {
         "id": 16673,
         "title": "Songs without Words, Book 5, op. 62",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 147
     },
     {
         "id": 16741,
         "title": "A Midsummer Night's Dream, op. 61",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 147
     },
     {
         "id": 16591,
         "title": "Piano Concerto no. 1 in G minor, op. 25",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 147
     },
     {
         "id": 16674,
         "title": "Symphony no. 3 in A minor, op. 56, \"Scottish",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 147
     },
     {
         "id": 16718,
         "title": "Symphony no. 4 in A, op. 90, \"Italian",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 147
     },
     {
         "id": 16595,
         "title": "Symphony no. 5 in D minor, op. 107, \"Reformation",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 147
     },
     {
         "id": 16550,
         "title": "The Hebrides: Overture in B minor, op. 26, \"Fingal's Cave",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 147
     },
     {
         "id": 16609,
         "title": "Violin Concerto in E minor, op. 64",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 147
     },
     {
         "id": 28100,
         "title": "Elijah, op. 70",
-        "subtitle": "Oratorio",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 147
     },
     {
         "id": 23723,
         "title": "Clarinet Quintet in A major, K.581",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 196
     },
     {
         "id": 23155,
         "title": "Piano Quartet no. 1 in G minor, K.478",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 196
     },
     {
         "id": 23816,
         "title": "String Quartet no. 14 in G major, K.387, \"Spring",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 196
     },
     {
         "id": 23362,
         "title": "String Quartet no. 17 in B flat major, K.458, \"The Hunt",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 196
     },
     {
         "id": 23503,
         "title": "String Quartet no. 19 in C major, K.465, \"Dissonance",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 196
     },
     {
         "id": 23561,
         "title": "String Quartet no. 23 in F major, K.590, \"Prussian",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 196
     },
     {
         "id": 23519,
         "title": "String Quintet no. 3 in C major, K.515",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 196
     },
     {
         "id": 23652,
         "title": "String Quintet no. 4 in G minor, K. 516",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 196
     },
     {
         "id": 23563,
         "title": "Violin Sonata no. 21 in E minor, K.304",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 196
     },
     {
         "id": 23327,
         "title": "Violin Sonata no. 35 in A major, K.526",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 196
     },
     {
         "id": 23752,
         "title": "Fantasia in D minor, K.397",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 196
     },
     {
         "id": 23512,
         "title": "Piano Sonata no. 11 in A major, K.331, \"Alla turca",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 196
     },
     {
         "id": 23201,
         "title": "Variations on Ah vous dirais-je, Maman, K.265",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 196
     },
     {
         "id": 23629,
         "title": "Clarinet Concerto in A major, K.622",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23200,
         "title": "Concerto for Flute and Harp in C major, K.299",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23475,
         "title": "Masonic Funeral Music, K.477",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23767,
         "title": "Piano Concerto no. 9 in E flat major, K.271, \"Jeunehomme",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23310,
         "title": "Piano Concerto no. 20 in D minor, K.466",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23315,
         "title": "Piano Concerto no. 21 in C major, K.467",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23302,
         "title": "Piano Concerto no. 23 in A major, K.488",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23141,
         "title": "Piano Concerto no. 24 in C minor, K.491",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23131,
         "title": "Serenade in D major, K.320, \"Posthorn",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23838,
         "title": "Sinfonia concertante in E flat major, K.364",
-        "subtitle": "For violin, viola and orchestra",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23637,
         "title": "Symphony no. 25 in G minor, K.183",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23448,
         "title": "Symphony no. 31 in D major, K.297, \"Paris",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23177,
         "title": "Symphony no. 38 in D major, K.504, \"Prague",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23611,
         "title": "Symphony no. 40 in G minor, K.550",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23353,
         "title": "Symphony no. 41 in C major, K.551, \"Jupiter",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23779,
         "title": "Violin Concerto no. 3 in G major, K.216",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23574,
         "title": "Violin Concerto no. 5 in A major, K.219, \"Turkish",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 196
     },
     {
         "id": 23497,
         "title": "Così fan tutte, K.588",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 196
     },
     {
         "id": 23669,
         "title": "Don Giovanni, K.527",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 196
     },
     {
         "id": 23812,
         "title": "Le nozze di Figaro, K.492",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 196
     },
     {
         "id": 23566,
         "title": "The Magic Flute, K.620",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 196
     },
     {
         "id": 23313,
         "title": "Ave verum corpus, K.618",
-        "subtitle": "Motet for choir, organ and strings",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 196
     },
     {
         "id": 23595,
         "title": "Coronation Mass in C major, K.317",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 196
     },
     {
         "id": 23468,
         "title": "Great Mass in C minor, K.427",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 196
     },
     {
         "id": 23646,
         "title": "Requiem in D minor, K.626",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 196
     },
     {
         "id": 23425,
         "title": "Vesperae solennes de confessore, K.339",
-        "subtitle": "For soloists, choir and orchestra",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 196
     },
     {
         "id": 16525,
         "title": "La bohème",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 146
     },
     {
         "id": 16529,
         "title": "Madama Butterfly",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 146
     },
     {
         "id": 16503,
         "title": "Manon Lescaut",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 146
     },
     {
         "id": 16519,
         "title": "Tosca",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 146
     },
     {
         "id": 16490,
         "title": "Turandot",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 146
     },
     {
         "id": 5075,
         "title": "String Quartet in F",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 57
     },
     {
         "id": 5045,
         "title": "Violin Sonata no. 2 in G",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 57
     },
     {
         "id": 5072,
         "title": "Gaspard de la nuit",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 57
     },
     {
         "id": 5103,
         "title": "Le tombeau de Couperin",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 57
     },
     {
         "id": 5031,
         "title": "Miroirs",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 57
     },
     {
         "id": 5112,
         "title": "La valse",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 57
     },
     {
         "id": 5114,
         "title": "Piano Concerto for the Left Hand",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 57
     },
     {
         "id": 5095,
         "title": "Piano Concerto in G",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 57
     },
     {
         "id": 5044,
         "title": "Boléro",
-        "subtitle": "Ballet",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 57
     },
     {
         "id": 5054,
         "title": "Daphnis et Chloé",
-        "subtitle": "Ballet",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 57
     },
     {
         "id": 5110,
         "title": "L'enfant et les sortilèges",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 57
     },
     {
         "id": 5107,
         "title": "Shéhérazade",
-        "subtitle": "Songs for soprano and orchestra",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 57
     },
     {
         "id": 20900,
         "title": "Octet in F major, D.803, op. posth.166",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 183
     },
     {
         "id": 21352,
         "title": "Piano Quintet in A major, D.667, op. posth.114, \"The Trout",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 183
     },
     {
         "id": 20665,
         "title": "Piano Trio no. 1 in B flat major, D.898, op. 99",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 183
     },
     {
         "id": 20542,
         "title": "Piano Trio no. 2 in E flat major, D.929, op. 100",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 183
     },
     {
         "id": 20607,
         "title": "String Quartet no. 13 in A minor, D. 804, op. 29, \"Rosamunde",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 183
     },
     {
         "id": 20959,
         "title": "String Quartet no. 14 in D minor, D.810, \"Death and the Maiden",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 183
     },
     {
         "id": 20623,
         "title": "String Quartet no. 15 in G major, D. 887, op. posth.161",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 183
     },
     {
         "id": 21429,
         "title": "String Quintet in C major, D.956, op. posth.163",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 183
     },
     {
         "id": 21133,
         "title": "Fantasia in F minor, D.940, op. posth.103",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 183
     },
     {
         "id": 21375,
         "title": "Fantasy in C major, D.760, op. 15, \"Wanderer",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 183
     },
     {
         "id": 21048,
         "title": "Piano Sonata no. 19 in C minor, D.958",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 183
     },
     {
         "id": 21360,
         "title": "Piano Sonata no. 20 in A major, D.959",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 183
     },
     {
         "id": 21380,
         "title": "Piano Sonata no. 21 in B flat major, D.960",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 183
     },
     {
         "id": 20610,
         "title": "Symphony no. 4 in C minor, D.417, \"Tragic",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 183
     },
     {
         "id": 21005,
         "title": "Symphony no. 5 in B flat major, D.485",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 183
     },
     {
         "id": 20766,
         "title": "Symphony no. 8 in B minor, D.759, \"Unfinished",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 183
     },
     {
         "id": 20545,
         "title": "Symphony no. 9 in C major, D.944, \"Great",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 183
     },
     {
         "id": 20739,
         "title": "Die schöne Müllerin, D.795, op. 25",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 183
     },
     {
         "id": 21086,
         "title": "Erlkönig, D.328, op. 1",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 183
     },
     {
         "id": 21138,
         "title": "Gretchen am Spinnrade, D.118, op. 2",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 183
     },
     {
         "id": 21006,
         "title": "Schwanengesang, D.957",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 183
     },
     {
         "id": 21341,
         "title": "Winterreise, D.911, op. 89",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 183
     },
     {
         "id": 15062,
         "title": "Piano Quartet in E flat major, op. 47",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 129
     },
     {
         "id": 15111,
         "title": "Piano Quintet in E flat major, op. 44",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 129
     },
     {
         "id": 15091,
         "title": "Carnaval, op. 9",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 129
     },
     {
         "id": 15018,
         "title": "Davidsbündlertänze, op. 6",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 129
     },
     {
         "id": 15076,
         "title": "Fantasy in C major, op. 17",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 129
     },
     {
         "id": 15049,
         "title": "Fantasy Pieces, op. 12",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 129
     },
     {
         "id": 15158,
         "title": "Kreisleriana, op. 16",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 129
     },
     {
         "id": 15061,
         "title": "Papillons, op. 2",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 129
     },
     {
         "id": 15108,
         "title": "Études symphoniques, op. 13",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 129
     },
     {
         "id": 15105,
         "title": "Cello Concerto in A minor, op. 129",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 129
     },
     {
         "id": 15144,
         "title": "Piano Concerto in A minor, op. 54",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 129
     },
     {
         "id": 15086,
         "title": "Symphony no. 2 in C major, op. 61",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 129
     },
     {
         "id": 14972,
         "title": "Symphony no. 3 in E flat major, op. 97, \"Rhenish",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 129
     },
     {
         "id": 15021,
         "title": "Dichterliebe, op. 48",
-        "subtitle": "Song cycle",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 129
     },
     {
         "id": 15001,
         "title": "Frauenliebe und-leben, op. 42",
-        "subtitle": "Song cycle",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 129
     },
     {
         "id": 15129,
         "title": "Liederkreis, op. 39",
-        "subtitle": "Song cycle",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 129
     },
     {
         "id": 15156,
         "title": "Scenes from Goethe's Faust, WoO 3",
-        "subtitle": "Oratorio",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 129
     },
     {
         "id": 18889,
         "title": "An der schönen, blauen Donau, op. 314",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 165
     },
     {
         "id": 18887,
         "title": "Geschichten aus dem Wienerwald, op. 325",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 165
     },
     {
         "id": 18412,
         "title": "Kaiser-Walzer, op. 437",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 165
     },
     {
         "id": 18562,
         "title": "Pizzicato Polka, op. 234",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 165
     },
     {
         "id": 18509,
         "title": "Tritsch-Tratsch-Polka, op. 214",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 165
     },
     {
         "id": 18858,
         "title": "Die Fledermaus, RV.503",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 165
     },
     {
         "id": 22484,
         "title": "Octet for Wind Instruments",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 190
     },
     {
         "id": 22432,
         "title": "Three Pieces for Clarinet",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 190
     },
     {
         "id": 22518,
         "title": "Concerto in E flat major, \"Dumbarton Oaks",
-        "subtitle": "For chamber orchestra",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 190
     },
     {
         "id": 22414,
         "title": "Danses concertantes",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 190
     },
     {
         "id": 22478,
         "title": "Ebony Concerto",
-        "subtitle": "For clarinet and jazz band",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 190
     },
     {
         "id": 22464,
         "title": "Symphonies of Wind Instruments",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 190
     },
     {
         "id": 22430,
         "title": "Symphony in Three Movements",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 190
     },
     {
         "id": 22509,
         "title": "Violin Concerto",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 190
     },
     {
         "id": 22456,
         "title": "Agon",
-        "subtitle": "Ballet",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 190
     },
     {
         "id": 22387,
         "title": "L'Histoire du soldat",
-        "subtitle": "Theatre piece",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 190
     },
     {
         "id": 22466,
         "title": "Les Noces",
-        "subtitle": "Ballet",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 190
     },
     {
         "id": 22391,
         "title": "Petrushka",
-        "subtitle": "Ballet",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 190
     },
     {
         "id": 22389,
         "title": "Pulcinella",
-        "subtitle": "Ballet",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 190
     },
     {
         "id": 22427,
         "title": "The Firebird",
-        "subtitle": "Ballet",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 190
     },
     {
         "id": 22505,
         "title": "The Rite of Spring",
-        "subtitle": "Ballet",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 190
     },
     {
         "id": 22440,
         "title": "Symphony of Psalms",
-        "subtitle": "For chorus and orchestra",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 190
     },
     {
         "id": 7575,
         "title": "Piano Trio in A minor, op. 50, \"In Memory of a Great Artist",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 79
     },
     {
         "id": 7514,
         "title": "Souvenir de Florence, for string sextet or string orchestra in D major, op. 70",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 79
     },
     {
         "id": 7629,
         "title": "The Seasons, op. 37b",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Keyboard",
-        "composer_id": 79
     },
     {
         "id": 7571,
         "title": "Francesca da Rimini in E minor, op. 32",
-        "subtitle": "Symphonic fantasy",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7529,
         "title": "Manfred Symphony in B minor, op. 58",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7486,
         "title": "Nutcracker, op. 71a",
-        "subtitle": "Suite from the ballet",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7640,
         "title": "Piano Concerto no. 1 in B flat minor, op. 23",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7516,
         "title": "Piano Concerto no. 3 in E flat major, op.  post.75",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7545,
         "title": "Romeo and Juliet",
-        "subtitle": "Fantasy overture",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7498,
         "title": "Serenade for Strings  in C major, op. 48",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7515,
         "title": "Symphony no. 2 in C minor, op. 17, \"Little Russian",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7484,
         "title": "Symphony no. 4 in F minor, op. 36",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7638,
         "title": "Symphony no. 5 in E minor, op. 64",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7566,
         "title": "Symphony no. 6 in B minor, op. 74, \"Pathétique",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7525,
         "title": "The Swan Lake, op. 20a",
-        "subtitle": "Suite from the ballet",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7562,
         "title": "Variations on a Rococo Theme, for cello and orchestra  in A major, op. 33",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7616,
         "title": "Violin Concerto in D major, op. 35",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 79
     },
     {
         "id": 7504,
         "title": "Eugene Onegin, op. 24",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 79
     },
     {
         "id": 7604,
         "title": "Pique Dame, op. 68",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 79
     },
     {
         "id": 2698,
         "title": "String Quartet in E minor",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Chamber",
-        "composer_id": 35
     },
     {
         "id": 2687,
         "title": "Aida",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 35
     },
     {
         "id": 2650,
         "title": "Don Carlo",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 35
     },
     {
         "id": 2720,
         "title": "Falstaff",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 35
     },
     {
         "id": 2703,
         "title": "Il trovatore",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 35
     },
     {
         "id": 2673,
         "title": "La forza del destino",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 35
     },
     {
         "id": 2678,
         "title": "La traviata",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 35
     },
     {
         "id": 2708,
         "title": "Otello",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 35
     },
     {
         "id": 2660,
         "title": "Rigoletto",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 35
     },
     {
         "id": 2712,
         "title": "Quattro pezzi sacri",
-        "subtitle": "For soloists, choir and orchestra",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 35
     },
     {
         "id": 2715,
         "title": "Requiem",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 35
     },
     {
         "id": 11933,
         "title": "Bassoon Concerto in E minor, RV.484",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 98
     },
     {
         "id": 12027,
         "title": "Concerto for Strings in G major, RV.151, \"alla rustica",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 98
     },
     {
         "id": 11709,
         "title": "Flute Concerto in G minor, RV.439, \"La Notte",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 98
     },
     {
         "id": 28102,
         "title": "The Four Seasons",
-        "subtitle": "Four violin concertos, op. 8",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 98
     },
     {
         "id": 11806,
         "title": "Gloria in D major, RV.589",
-        "subtitle": "",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 98
     },
     {
         "id": 15743,
         "title": "Siegfried Idyll, WWV 103",
-        "subtitle": "Symphonic poem",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Orchestral",
-        "composer_id": 138
     },
     {
         "id": 15755,
         "title": "Das Rheingold, WWV 86a",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 138
     },
     {
         "id": 15764,
         "title": "Die Meistersinger von Nürnberg, WWV 96",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 138
     },
     {
         "id": 15735,
         "title": "Die Walküre, WWV 86b",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 138
     },
     {
         "id": 15772,
         "title": "Götterdämmerung, WWV 86d",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 138
     },
     {
         "id": 15765,
         "title": "Parsifal, WWV 111",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 138
     },
     {
         "id": 15726,
         "title": "Siegfried, WWV 86c",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 138
     },
     {
         "id": 15728,
         "title": "Tristan und Isolde, WWV 90",
-        "subtitle": "Opera",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Stage",
-        "composer_id": 138
     },
     {
         "id": 15752,
         "title": "Wesendonck Lieder, WWV 91",
-        "subtitle": "Songs",
-        "popular": "t",
-        "recommended": "t",
         "genre": "Vocal",
-        "composer_id": 138
     }
 ]

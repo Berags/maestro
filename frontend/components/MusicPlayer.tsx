@@ -34,12 +34,14 @@ const MusicPlayer = () => {
 
   return (
     <HStack w={'100%'}>
-      <Image
-        src={audioPlayer.current?.image_url}
-        w={'7em'}
-        alt="Dan Abramov"
-        mr={-2}
-      />
+      {audioPlayer.current ? (
+        <Image
+          src={audioPlayer.current?.image_url}
+          w={'7em'}
+          alt="Dan Abramov"
+          mr={-2}
+        />
+      ) : null}
       <AudioPlayer
         style={{}}
         src={audioPlayer.current ? audioPlayer.current?.file_url : ''}

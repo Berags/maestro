@@ -148,7 +148,7 @@ const Composer = ({ composerData, nOfPages, backend_api }: any) => {
       </Box>
       <Box px={5}>
         <Separator text={'Opuses'} />
-        <SimpleGrid minChildWidth={'400px'} spacing={5}>
+        <SimpleGrid minChildWidth={'15em'} spacing={5}>
           {opuses.map((op: any) => (
             <OpusCard opusData={op} />
           ))}

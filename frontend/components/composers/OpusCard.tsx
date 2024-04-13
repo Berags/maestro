@@ -19,6 +19,7 @@ import getConfig from 'next/config'
 import { useSession } from 'next-auth/react'
 import PieceCard from '../search/PieceCard'
 import backend from '../../axios.config'
+import { useWindowSize } from '../../utils/useWindowSize'
 
 type Props = {
   opusData: OpusData
@@ -36,6 +37,7 @@ type OpusData = {
 
 const OpusCard = (props: Props) => {
   const opusData = props.opusData
+  const size = useWindowSize()
   const { publicRuntimeConfig } = getConfig()
   const { data }: any = useSession()
   const { BACKEND_API } = publicRuntimeConfig
@@ -72,18 +74,20 @@ const OpusCard = (props: Props) => {
         _hover={{ shadow: 'lg' }}
       >
         <HStack textAlign="left" align="start" spacing={4}>
-          <Image
-            src={'https://via.placeholder.com/150'}
-            width={33}
-            height={33}
-            rounded="md"
-            objectFit="cover"
-            alt="cover image"
-            fallbackSrc="https://dummyimage.com/400x400/"
-          />
+          {size.width > 400 ? (
+            <Image
+              src={'https://via.placeholder.com/150'}
+              width={33}
+              height={33}
+              rounded="md"
+              objectFit="cover"
+              alt="cover image"
+              fallbackSrc="https://dummyimage.com/400x400/"
+            />
+          ) : null}
           <VStack align="start" justifyContent="flex-start">
             <VStack spacing={0} align="start">
-              <HStack>
+              <VStack>
                 <Text
                   as={Link}
                   href={''}
@@ -92,21 +96,19 @@ const OpusCard = (props: Props) => {
                   noOfLines={1}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {opusData.title.length > 40
-                    ? opusData.title.slice(0, 30).concat('...')
+                  {opusData.title.length > 22
+                    ? opusData.title.slice(0, 22).concat('...')
                     : opusData.title}
                 </Text>
-                <HStack spacing="1">
-                  <Tag size="sm" colorScheme="gray">
-                    {opusData.genre}
-                  </Tag>
-                </HStack>
-              </HStack>
+                <Tag size="sm" colorScheme="gray">
+                  {opusData.genre}
+                </Tag>
+              </VStack>
             </VStack>
           </VStack>
         </HStack>
       </MenuButton>
-      <MenuList>
+      <MenuList w={'80%'}>
         {recordings.length > 0 ? (
           <VStack align="stretch">
             {recordings.map((rec: any) => (

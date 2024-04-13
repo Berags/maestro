@@ -2,6 +2,8 @@ import pprint
 
 import meilisearch
 import redis
+from redis.commands.search.field import TextField, NumericField
+from redis.commands.search.indexDefinition import IndexDefinition, IndexType
 from sqlmodel import create_engine, Session, select
 
 from app.config import settings
@@ -80,8 +82,9 @@ def populate_db():
 
 def add_data_to_search():
     search.create_index("composers")
+    search.create_index("opuses")
     search.wait_for_task(search.index("composers").add_documents(composers_search).task_uid)
-
+    search.index("opuses").add_documents(opuses_search)
 
 providers_string = {
     "github": "gh",
