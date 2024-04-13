@@ -43,18 +43,7 @@ const MusicPlayer = () => {
       <AudioPlayer
         style={{}}
         src={audioPlayer.current ? audioPlayer.current?.file_url : ''}
-        onPlay={async () => {
-          if (!audioPlayer.current) return
-          const res = await backend.post(
-            '/recording/listen/' + audioPlayer.current?.id,
-            {},
-            {
-              headers: {
-                Authorization: data.token,
-              },
-            }
-          )
-        }}
+        onPlay={async () => {}}
         onClickNext={handleEndOrSkip}
         onClickPrevious={handlePrevious}
         onEnded={handleEndOrSkip}

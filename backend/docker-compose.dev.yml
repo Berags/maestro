@@ -21,10 +21,16 @@ services:
   adminer:
     image: adminer
     restart: always
+    expose:
+      - 8080:8080
     depends_on:
       - db
     environment:
       - ADMINER_DESIGN=pepa-linha-dark
+    labels: # new
+      - "traefik.enable=true"
+      - "traefik.http.routers.adminer.rule=Host(`adminer.localhost.com`)"
+      - "traefik.http.services.adminer.loadbalancer.server.port=8080"
 
   backend:
     image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
@@ -67,3 +73,21 @@ services:
     volumes:
       - "./traefik.dev.toml:/etc/traefik/traefik.toml"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.1.1
+    volumes:
+      - ./data.ms:/data.ms
+    ports:
+      - "7700:7700"
+    environment:
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY:-ms}
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7700" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.meilisearch.rule=Host(`meili.localhost.com`)"
+      - "traefik.http.services.meilisearch.loadbalancer.server.port=7700"
