@@ -1,5 +1,13 @@
 import { useSession } from 'next-auth/react'
-import { Box, Flex, IconButton, SimpleGrid, Text } from '@chakra-ui/react'
+import {
+  Avatar,
+  Box,
+  Flex,
+  HStack,
+  IconButton,
+  SimpleGrid,
+  Text,
+} from '@chakra-ui/react'
 import axios from 'axios'
 import { getServerSession } from 'next-auth'
 import { GetServerSidePropsContext } from 'next'
@@ -10,7 +18,7 @@ import backend from '../../axios.config'
 import { FaPlay } from 'react-icons/fa6'
 import useAudioPlayer from '../../utils/useAudioPlayer'
 
-const Opus: any = ({ recordings, opus }: any) => {
+const Opus: any = ({ recordings, opus, composer }: any) => {
   const { data }: any = useSession()
   const audioPlayer = useAudioPlayer()
 
@@ -36,6 +44,10 @@ const Opus: any = ({ recordings, opus }: any) => {
           {opus.title}
         </Text>
       </Flex>
+      <HStack pt={4} ml={4}>
+        <Avatar name={composer.name} src={composer.portrait} />
+        <Text fontSize={'xl'}>{composer.name}</Text>
+      </HStack>
       <Separator text="Recordings" />
       <SimpleGrid
         spacing={5}
@@ -61,6 +73,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const id = context.params.id // Get ID from slug
 
+  const res_composer = await backend.get('/composer/by-opus-id/' + id, {
+    headers: {
+      Authorization: session.token,
+    },
+  })
+
   const res_opus = await backend.get(`/opus/` + id, {
     headers: {
       Authorization: session.token,
@@ -73,13 +91,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
   })
 
-  console.log(res.data)
-
   return {
     props: {
       session: session ?? [],
       recordings: res.data,
       opus: res_opus.data,
+      composer: res_composer.data,
     },
   }
 }

@@ -34,6 +34,13 @@ def get_composer(composer_id: int, page: int | None, request: Request):
             return composer.__dict__
 
 
+@router.get("/by-opus-id/{opus_id}")
+def get_composer_by_opus(opus_id: int):
+    with Session(engine) as session:
+        opus = session.exec(select(Opus).where(Opus.id == opus_id)).one_or_none()
+        return session.exec(select(Composer).where(Composer.id == opus.composer_id)).one_or_none()
+
+
 @router.get("/")
 def get_composers(page: int) -> Sequence[Composer]:
     # 10 composers per page

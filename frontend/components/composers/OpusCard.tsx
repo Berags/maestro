@@ -10,6 +10,7 @@ import {
   MenuButton,
   Button,
   MenuList,
+  Flex,
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -20,6 +21,8 @@ import { useSession } from 'next-auth/react'
 import PieceCard from '../search/PieceCard'
 import backend from '../../axios.config'
 import { useWindowSize } from '../../utils/useWindowSize'
+import NextLink from 'next/link'
+import { MdOutlineOpenInNew } from 'react-icons/md'
 
 type Props = {
   opusData: OpusData
@@ -114,6 +117,12 @@ const OpusCard = (props: Props) => {
             {recordings.map((rec: any) => (
               <PieceCard pieceData={rec} variant={'sm'} />
             ))}
+            <NextLink href={'/opus/' + opusData.id}>
+              <HStack textAlign={"center"} justify={"center"}>
+                <Text>View</Text>
+                <MdOutlineOpenInNew />
+              </HStack>
+            </NextLink>
           </VStack>
         ) : (
           <Text textAlign={'center'}>No recording found!</Text>

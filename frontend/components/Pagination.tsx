@@ -1,8 +1,9 @@
 import { Flex, FlexProps, useColorModeValue } from '@chakra-ui/react'
 import { ReactNode, useEffect, useState } from 'react'
+import { useWindowSize } from '../utils/useWindowSize'
 
 const Pagination = ({ index, nOfPages, setPage }: any) => {
-  
+  const size = useWindowSize()
   return (
     <Flex
       as="nav"
@@ -20,7 +21,7 @@ const Pagination = ({ index, nOfPages, setPage }: any) => {
           setPage(index - 1)
         }}
       >
-        Previous
+        {size.width > 400 ? "Next" : "<"}
       </PaginationButton>
       {[...Array(nOfPages)].map((x, i) => (
         <PaginationButton
@@ -41,7 +42,7 @@ const Pagination = ({ index, nOfPages, setPage }: any) => {
         borderTopRightRadius="md"
         borderBottomRightRadius="md"
       >
-        Next
+        {size.width > 400 ? "Next" : ">"}
       </PaginationButton>
     </Flex>
   )

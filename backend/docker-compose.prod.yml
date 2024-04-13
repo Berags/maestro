@@ -34,6 +34,7 @@ services:
     depends_on:
       - db
       - cache
+      - meilisearch
     env_file:
       - .env
     environment:
@@ -78,5 +79,18 @@ services:
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.middlewares=auth"
       - "traefik.http.middlewares.auth.basicauth.users=testuser:$$apr1$$jIKW.bdS$$eKXe4Lxjgy/rH65wP1iQe1"
+  meilisearch:
+    image: getmeili/meilisearch:v1.1.1
+    volumes:
+      - ./data.ms:/data.ms
+    expose:
+      - "7700:7700"
+    environment:
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY:-ms}
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7700" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 volumes:
   traefik-public-certificates:

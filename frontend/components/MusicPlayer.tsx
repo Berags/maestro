@@ -6,8 +6,10 @@ import { Image } from '@chakra-ui/react'
 import backend from '../axios.config'
 import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
+import { useWindowSize } from '../utils/useWindowSize'
 const MusicPlayer = () => {
   const audioPlayer = useAudioPlayer()
+  const size = useWindowSize()
   const player = createRef<any>()
   const { data }: any = useSession()
 
@@ -37,7 +39,7 @@ const MusicPlayer = () => {
       {audioPlayer.current ? (
         <Image
           src={audioPlayer.current?.image_url}
-          w={'7em'}
+          w={size.width > 400 ? '7em' : '0em'}
           alt="Dan Abramov"
           mr={-2}
         />

@@ -42,7 +42,7 @@ const AutocompleteSearchBox = () => {
       <AutoCompleteInput
         onChange={(event) => setSearchValue(event.target.value)}
         variant="filled"
-        placeholder="Search..."
+        placeholder="Search"
         autoFocus
       />
       <AutoCompleteList>
