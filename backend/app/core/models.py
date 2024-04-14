@@ -32,6 +32,7 @@ class User(SQLModel, table=True):
 
     liked_composers: list["Composer"] = Relationship(back_populates="liked_by", link_model=UserComposerLike)
     liked_recordings: list["Recording"] = Relationship(back_populates="liked_by", link_model=UserRecordingLike)
+    playlists: list["Playlist"] = Relationship(back_populates="user")
 
 
 class Composer(SQLModel, table=True):
@@ -77,3 +78,18 @@ class Recording(SQLModel, table=True):
     opus: Opus = Relationship(back_populates="recordings")
 
     liked_by: list["User"] = Relationship(back_populates="liked_recordings", link_model=UserRecordingLike)
+
+
+class PlaylistRecording(SQLModel, table=True):
+    playlist_id: int | None = Field(default=None, foreign_key="playlist.id", primary_key=True)
+    recording_id: int | None = Field(default=None, foreign_key="recording.id", primary_key=True)
+
+
+class Playlist(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str | None = Field(default=None)
+    description: str | None = Field(default=None)
+    image_url: str | None = Field(default=None)
+    user_id: str | None = Field(default=None, foreign_key="user.id")
+
+    user: User = Relationship(back_populates="playlists")

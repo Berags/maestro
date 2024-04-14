@@ -17,12 +17,14 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Collapse,
+  Skeleton,
 } from '@chakra-ui/react'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { IoMdSettings } from 'react-icons/io'
 import { RiNeteaseCloudMusicLine } from 'react-icons/ri'
 import { FiMenu } from 'react-icons/fi'
-import { MdHome } from 'react-icons/md'
+import { MdHome, MdKeyboardArrowRight } from 'react-icons/md'
 import { signOut, useSession } from 'next-auth/react'
 import { BsFilePerson } from 'react-icons/bs'
 import { BiAlbum } from 'react-icons/bi'
@@ -36,6 +38,7 @@ import { Toaster } from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import backend from '../axios.config'
 import AutocompleteSearchBox from './search/AutocompleteSearchBox'
+import CreatePlaylistModal from './CreatePlaylistModal'
 
 type Props = {
   children: ReactNode
@@ -45,6 +48,8 @@ const Layout = (props: Props) => {
   const { isOpen, onClose, onOpen } = useDisclosure()
   const router = useRouter()
   const { data }: any = useSession()
+  const playlist = useDisclosure()
+  const createPlaylist = useDisclosure()
 
   useEffect(() => {
     // Configuring axios default headers
@@ -67,7 +72,7 @@ const Layout = (props: Props) => {
   const NavItem = (props: any) => {
     const color = useColorModeValue('gray.600', 'gray.300')
 
-    const { icon, children } = props
+    const { icon, children, ...rest } = props
     return (
       <Flex
         align="center"
@@ -82,6 +87,7 @@ const Layout = (props: Props) => {
           bg: useColorModeValue('gray.100', 'gray.900'),
           color: useColorModeValue('gray.900', 'gray.200'),
         }}
+        {...rest}
       >
         {icon && (
           <Icon
@@ -153,7 +159,18 @@ const Layout = (props: Props) => {
             <NextLink href={'/composer'}>
               <NavItem icon={BsFilePerson}>Composers</NavItem>
             </NextLink>
-            <NavItem icon={IoAlbumsOutline}>Albums</NavItem>
+            <NavItem icon={IoAlbumsOutline} onClick={playlist.onToggle}>
+              Playlist
+              <Icon as={MdKeyboardArrowRight} ml="auto" />
+            </NavItem>
+            <Collapse in={playlist.isOpen}>
+              <NavItem pl="12" py="2" onClick={createPlaylist.onToggle}>
+                Create
+              </NavItem>
+              <NavItem pl="12" py="2">
+                My Playlist
+              </NavItem>
+            </Collapse>
             <NavItem icon={GiMusicalScore}>Opus</NavItem>
             <NextLink href={'/recording'}>
               <NavItem icon={BiAlbum}>Recordings</NavItem>
@@ -243,6 +260,7 @@ const Layout = (props: Props) => {
             bg={useColorModeValue('auto', 'gray.800')}
             pb={50}
           >
+            <CreatePlaylistModal disclosure={createPlaylist} />
             {props.children}
           </Box>
           <Flex
