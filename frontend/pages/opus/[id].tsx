@@ -2,9 +2,16 @@ import { useSession } from 'next-auth/react'
 import {
   Avatar,
   Box,
+  Button,
   Flex,
   HStack,
   IconButton,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
   SimpleGrid,
   Text,
 } from '@chakra-ui/react'
@@ -17,9 +24,16 @@ import PieceCard from '../../components/search/PieceCard'
 import backend from '../../axios.config'
 import { FaPlay } from 'react-icons/fa6'
 import useAudioPlayer from '../../utils/useAudioPlayer'
+import Markdown from 'react-markdown'
+import { useEffect, useState } from 'react'
+import NextLink from 'next/link'
+import { MdKeyboardArrowRight } from 'react-icons/md'
+import { useRouter } from 'next/router'
 
 const Opus: any = ({ recordings, opus, composer }: any) => {
   const { data }: any = useSession()
+  const [expand, setExpand] = useState(true)
+  const router = useRouter()
   const audioPlayer = useAudioPlayer()
 
   if (!data) {
@@ -28,7 +42,23 @@ const Opus: any = ({ recordings, opus, composer }: any) => {
 
   return (
     <Box px={4} pt={4}>
-      <Flex px={6} verticalAlign={'center'}>
+      <HStack pb={4} ml={4}>
+        <Avatar name={composer.name} src={composer.portrait} />
+        <Text fontSize={'xl'} ml={4} height={"100%"} verticalAlign={"middle"}>
+          {composer.name}
+        </Text>
+        <IconButton
+            aria-label={'Visit composer'}
+            variant={'link'}
+            icon={<MdKeyboardArrowRight />}
+            fontSize={"1.5em"}
+            onClick={() => {
+              router.push('/composer/' + composer.id)
+            }}
+            ml={-4}
+          />
+      </HStack>
+      <Flex px={6} verticalAlign={'center'} pb={4}>
         <IconButton
           isRound={true}
           variant="ghost"
@@ -44,10 +74,20 @@ const Opus: any = ({ recordings, opus, composer }: any) => {
           {opus.title}
         </Text>
       </Flex>
-      <HStack pt={4} ml={4}>
-        <Avatar name={composer.name} src={composer.portrait} />
-        <Text fontSize={'xl'}>{composer.name}</Text>
-      </HStack>
+      <Markdown>{opus.description.slice(0, 150) + '...'}</Markdown>
+      <Modal isOpen={!expand} onClose={() => setExpand(true)} size={'2xl'}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>{opus.title}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody textAlign={'justify'}>
+            <Markdown>{opus.description}</Markdown>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+      <Button variant={'link'} onClick={() => setExpand(!expand)}>
+        {expand ? 'Read more' : 'close'}
+      </Button>
       <Separator text="Recordings" />
       <SimpleGrid
         spacing={5}

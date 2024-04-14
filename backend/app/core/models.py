@@ -53,6 +53,7 @@ class Composer(SQLModel, table=True):
 class Opus(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     title: str | None = Field(default=None, index=True)
+    description: str | None = Field(default=None)
     subtitle: str | None = Field(default=None)
     popular: bool | None = Field(default=None)
     recommended: bool | None = Field(default=None)

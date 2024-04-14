@@ -112,21 +112,21 @@ const OpusCard = (props: Props) => {
         </HStack>
       </MenuButton>
       <MenuList w={'80%'}>
-        {recordings.length > 0 ? (
-          <VStack align="stretch">
-            {recordings.map((rec: any) => (
+        <VStack align="stretch">
+          {recordings.length > 0 ? (
+            recordings.map((rec: any) => (
               <PieceCard pieceData={rec} variant={'sm'} />
-            ))}
-            <NextLink href={'/opus/' + opusData.id}>
-              <HStack textAlign={"center"} justify={"center"}>
-                <Text>View</Text>
-                <MdOutlineOpenInNew />
-              </HStack>
-            </NextLink>
-          </VStack>
-        ) : (
-          <Text textAlign={'center'}>No recording found!</Text>
-        )}
+            ))
+          ) : (
+            <Text textAlign={'center'}>No recording found!</Text>
+          )}
+          <NextLink href={'/opus/' + opusData.id}>
+            <HStack textAlign={'center'} justify={'center'}>
+              <Text>View</Text>
+              <MdOutlineOpenInNew />
+            </HStack>
+          </NextLink>
+        </VStack>
       </MenuList>
     </Menu>
   )

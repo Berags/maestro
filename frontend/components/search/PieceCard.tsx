@@ -170,10 +170,6 @@ const PieceCard: any = (props: Props) => {
             <Stack spacing={2} pl={3} align="left">
               <Heading fontSize="lg">{pieceData.title}</Heading>
               <Heading fontSize="sm">{pieceData.composer}</Heading>
-              <Tags
-                skills={['Performer']}
-                display={['none', 'none', 'flex', 'flex']}
-              />
             </Stack>
           </GridItem>
         </Grid>
@@ -230,7 +226,7 @@ const PieceCard: any = (props: Props) => {
           </Popover>
         </Stack>
       </Flex>
-      <Tags skills={['Performer']} display={['flex', 'flex', 'none', 'none']} />
+      <Tags skills={[pieceData.composer]} display={['flex', 'flex', 'none', 'none']} />
     </Box>
   )
 }
