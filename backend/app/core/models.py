@@ -15,9 +15,10 @@ class UserRecordingLike(SQLModel, table=True):
 
 
 class ListeningHistory(SQLModel, table=True):
-    user_id: str | None = Field(default=None, foreign_key="user.id", primary_key=True)
-    recording_id: int | None = Field(default=None, foreign_key="recording.id", primary_key=True)
-    listened_at: datetime = Field(default=datetime.now(), primary_key=True)
+    id: int | None = Field(default=None, primary_key=True)
+    user_id: str | None = Field(default=None, foreign_key="user.id")
+    recording_id: int | None = Field(default=None, foreign_key="recording.id")
+    listened_at: datetime = Field(default=datetime.now(), nullable=False)
 
 
 class User(SQLModel, table=True):

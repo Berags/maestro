@@ -14,6 +14,24 @@ const MusicPlayer = () => {
   const { data }: any = useSession()
 
   useEffect(() => {
+    if (audioPlayer.current) {
+      const listen = async () => {
+        const res = await backend.post(
+          '/recording/listen/' + audioPlayer.current?.id,
+          {},
+          {
+            headers: {
+              Authorization: data.token,
+            },
+          }
+        )
+      }
+
+      listen()
+    }
+  }, [audioPlayer.current])
+
+  useEffect(() => {
     if (!audioPlayer.current && audioPlayer.queue.length > 0) {
       audioPlayer.setCurrent(audioPlayer.queue[0])
       audioPlayer.setQueue(audioPlayer.queue.slice(1))

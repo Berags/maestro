@@ -67,6 +67,7 @@ const Opus: any = ({ recordings, opus, composer }: any) => {
           colorScheme="grey"
           aria-label={'Play all'}
           onClick={() => {
+            console.log(recordings)
             audioPlayer.setQueue(recordings)
           }}
         />

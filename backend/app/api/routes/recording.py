@@ -1,3 +1,4 @@
+import datetime
 import math
 import pprint
 from typing import Sequence
@@ -8,7 +9,7 @@ from sqlmodel import Session, select
 from starlette import status
 
 from app.core.database import engine, redis_cache
-from app.core.models import Recording, User, UserRecordingLike, ListeningHistory
+from app.core.models import Recording, User, UserRecordingLike, ListeningHistory, Opus
 from app.utils import security
 
 router = APIRouter()
@@ -94,26 +95,18 @@ def get_top_recordings():
 @router.get("/last-listened")
 def get_last_listened(request: Request):
     user_id = security.get_id(request.headers["authorization"])
-    with (Session(engine) as session):
-        listen = session.exec(
-            select(ListeningHistory)
-            .where(User.id == user_id)
-            .order_by(ListeningHistory.listened_at.desc())
-        ).first()
-        if listen is None:
-            return None
-        return session.exec(select(Recording).where(Recording.id == listen.recording_id)).one_or_none()
+    with Session(engine) as session:
+        recording = session.exec(
+            select(Recording).where(Recording.id == redis_cache.get(f"user:{user_id}:listens")).limit(1)
+        ).one_or_none()
+        opus = session.exec(
+            select(Opus).where(Opus.id == recording.opus_id).limit(1)
+        ).one_or_none()
+        return {"recording": recording, "opus": opus, "composer": opus.composer}
 
 
 @router.post("/listen/{recording_id}")
 def listen_recording(recording_id: int, request: Request):
     user_id = security.get_id(request.headers["authorization"])
-    with Session(engine) as session:
-        try:
-            session.add(UserRecordingLike(user_id=user_id, recording_id=recording_id))
-        except Exception as e:
-            print(e)
-            return {"message": "There was an error listening to the recording"}
-
-        session.commit()
-        return {"message": "Recording listened successfully"}
+    redis_cache.set(f"user:{user_id}:listens", recording_id)
+    return {"message": "Recording listened successfully"}
