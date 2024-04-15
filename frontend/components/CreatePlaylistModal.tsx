@@ -15,17 +15,52 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import ImageUploading from 'react-images-uploading'
+import { useSession } from 'next-auth/react'
+import backend from '../axios.config'
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/router'
 
 type Props = {
   disclosure: UseDisclosureReturn
 }
 
 const CreatePlaylistModal = ({ disclosure }: Props) => {
-  const [image, setImage] = useState([])
+  const { data }: any = useSession()
+  const router = useRouter()
+  const [image, setImage]: any = useState([])
+  const [title, setTitle] = useState('')
+
   const onChange = (imageList: any, addUpdateIndex: any) => {
     // data for submit
-    console.log(imageList, addUpdateIndex)
     setImage(imageList)
+  }
+
+  const create = async () => {
+    const formData = new FormData()
+    formData.append('image', image[0].file, title + data.accountId)
+    const res_image = await backend.post('/playlist/upload', formData, {
+      headers: {
+        Authorization: data.token,
+        'Content-Type': 'multipart/form-data;',
+      },
+    })
+    const image_url = res_image.data.url
+    const res = await backend.post(
+      '/playlist/create',
+      {
+        title,
+        image_url,
+      },
+      {
+        headers: {
+          Authorization: data.token,
+        },
+      }
+    )
+
+    toast.success(res.data.message)
+    disclosure.onClose()
+    router.push('/playlist/' + res.data.id)
   }
 
   return (
@@ -37,7 +72,12 @@ const CreatePlaylistModal = ({ disclosure }: Props) => {
         <ModalBody>
           <FormControl isRequired>
             <FormLabel>Name</FormLabel>
-            <Input placeholder="Playlist name" />
+            <Input
+              placeholder="Playlist name"
+              onChange={(e) => {
+                setTitle(e.target.value)
+              }}
+            />
           </FormControl>
           <FormControl mt={2}>
             <FormLabel>Image</FormLabel>
@@ -139,7 +179,7 @@ const CreatePlaylistModal = ({ disclosure }: Props) => {
           <Button variant="ghost" onClick={disclosure.onClose}>
             Close
           </Button>
-          <Button colorScheme="blue" ml={3}>
+          <Button colorScheme="blue" ml={3} onClick={create}>
             Create
           </Button>
         </ModalFooter>

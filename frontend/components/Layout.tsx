@@ -167,9 +167,11 @@ const Layout = (props: Props) => {
               <NavItem pl="12" py="2" onClick={createPlaylist.onToggle}>
                 Create
               </NavItem>
-              <NavItem pl="12" py="2">
-                My Playlist
-              </NavItem>
+              <NextLink href={'/playlist'}>
+                <NavItem pl="12" py="2">
+                  My Playlist
+                </NavItem>
+              </NextLink>
             </Collapse>
             <NavItem icon={GiMusicalScore}>Opus</NavItem>
             <NextLink href={'/recording'}>

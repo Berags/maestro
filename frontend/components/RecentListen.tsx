@@ -43,16 +43,17 @@ const RecentListen = ({ listen }: Props) => {
           rounded="lg"
           justifyContent="flex-start"
         >
-          <Box width={size.width > 500 ? '12rem' : '0em'} pos="relative">
-            <Image
-              pos="absolute"
-              rounded="lg"
-              src={listen.recording.image_url}
-              top="-3.8rem"
-              boxShadow="lg"
-            />
-          </Box>
-
+          <VStack>
+            <Box width={size.width > 500 ? '12rem' : '0em'} pos="relative">
+              <Image
+                pos="absolute"
+                rounded="lg"
+                src={listen.recording.image_url}
+                top="-3.8rem"
+                boxShadow="lg"
+              />
+            </Box>
+          </VStack>
           <Stack direction="column" spacing={4} textAlign="left" maxW="4xl">
             <Heading as="h2" fontSize={'xl'}>
               {listen.opus.title}

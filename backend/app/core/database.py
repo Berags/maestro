@@ -1,3 +1,4 @@
+import cloudinary
 import meilisearch
 import redis
 from sqlmodel import create_engine, Session
@@ -6,6 +7,12 @@ from app.config import settings
 from app.core.initial_data import composers, opuses
 from app.core.models import Composer
 from app.core.search_data import opuses as opuses_search, composers as composers_search
+
+cloudinary_config = cloudinary.config(
+    cloud_name=settings.CLOUDINARY_CLOUD_NAME,
+    api_key=settings.CLOUDINARY_API_KEY,
+    api_secret=settings.CLOUDINARY_API_SECRET,
+)
 
 engine = create_engine(str(settings.DATABASE_URI), echo=True)
 redis_cache = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, password=settings.REDIS_PASSWORD,

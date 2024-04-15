@@ -18,17 +18,18 @@ import {
   HStack,
   Grid,
   GridItem,
+  VStack,
 } from '@chakra-ui/react'
 import useAudioPlayer from '../../utils/useAudioPlayer'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import toast from 'react-hot-toast'
-import { FaPlay } from 'react-icons/fa6'
+import { FaAngleRight, FaPlay } from 'react-icons/fa6'
 import getConfig from 'next/config'
 import { useSession } from 'next-auth/react'
 import backend from '../../axios.config'
 import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type PieceData = {
   id: number
@@ -52,7 +53,23 @@ const PieceCard: any = (props: Props) => {
   const { data }: any = useSession()
   const audioPlayer = useAudioPlayer()
   const [hover, setHover] = useState(false)
+  const [playlists, setPlaylists] = useState([])
+
   if (!pieceData) return <Skeleton />
+
+  useEffect(() => {
+    const fetchPlaylist = async () => {
+      const res = await backend.get('/playlist/my-playlists', {
+        headers: {
+          Authorization: data.token,
+        },
+      })
+
+      setPlaylists(res.data)
+    }
+
+    fetchPlaylist()
+  }, [])
 
   if (props.variant && props.variant == 'sm') {
     return (
@@ -81,10 +98,11 @@ const PieceCard: any = (props: Props) => {
                 variant={'ghost'}
               />
             </PopoverTrigger>
-            <PopoverContent w={'10em'}>
+            <PopoverContent w={"11em"}>
               <PopoverBody>
                 <Button
                   variant={'ghost'}
+                  w={'100%'}
                   onClick={async () => {
                     console.log(data.backend_session)
                     const res = await backend.post(
@@ -104,6 +122,46 @@ const PieceCard: any = (props: Props) => {
                 >
                   Like
                 </Button>
+                <Popover placement="right">
+                  <PopoverTrigger>
+                    <Button variant={'ghost'} w={'100%'}>
+                      Add/Remove to playlist
+                      <FaAngleRight />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent w={'11em'}>
+                    <PopoverBody>
+                      <VStack>
+                        {playlists.map((value: any, key: number) => (
+                          <Button
+                            variant={'link'}
+                            onClick={async () => {
+                              const res = await backend.post(
+                                '/playlist/add-recording/' +
+                                  value.id +
+                                  '/' +
+                                  pieceData.id,
+                                {},
+                                {
+                                  headers: {
+                                    Authorization: data.token,
+                                  },
+                                }
+                              )
+                              if (res.data.message == 'Unauthorized') {
+                                toast.error('An error has occurred!')
+                                return
+                              }
+                              toast.success(res.data.message)
+                            }}
+                          >
+                            {value.name}
+                          </Button>
+                        ))}
+                      </VStack>
+                    </PopoverBody>
+                  </PopoverContent>
+                </Popover>
                 <Button
                   variant={'ghost'}
                   onClick={() => {
@@ -187,10 +245,11 @@ const PieceCard: any = (props: Props) => {
                 variant={'ghost'}
               ></IconButton>
             </PopoverTrigger>
-            <PopoverContent w={'10em'}>
+            <PopoverContent w={'11em'}>
               <PopoverBody>
                 <Button
                   variant={'ghost'}
+                  w={'100%'}
                   onClick={async () => {
                     console.log(data.backend_session)
 
@@ -211,6 +270,46 @@ const PieceCard: any = (props: Props) => {
                 >
                   Like
                 </Button>
+                <Popover placement="right">
+                  <PopoverTrigger>
+                    <Button variant={'ghost'} w={'100%'}>
+                      Add/Remove to playlist
+                      <FaAngleRight />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <PopoverBody>
+                      <VStack>
+                        {playlists.map((value: any, key: number) => (
+                          <Button
+                            variant={'link'}
+                            onClick={async () => {
+                              const res = await backend.post(
+                                '/playlist/add-recording/' +
+                                  value.id +
+                                  '/' +
+                                  pieceData.id,
+                                {},
+                                {
+                                  headers: {
+                                    Authorization: data.token,
+                                  },
+                                }
+                              )
+                              if (res.data.message == 'Unauthorized') {
+                                toast.error('An error has occurred!')
+                                return
+                              }
+                              toast.success(res.data.message)
+                            }}
+                          >
+                            {value.name}
+                          </Button>
+                        ))}
+                      </VStack>
+                    </PopoverBody>
+                  </PopoverContent>
+                </Popover>
                 <Button
                   variant={'ghost'}
                   onClick={() => {
@@ -226,7 +325,10 @@ const PieceCard: any = (props: Props) => {
           </Popover>
         </Stack>
       </Flex>
-      <Tags skills={[pieceData.composer]} display={['flex', 'flex', 'none', 'none']} />
+      <Tags
+        skills={[pieceData.composer]}
+        display={['flex', 'flex', 'none', 'none']}
+      />
     </Box>
   )
 }
