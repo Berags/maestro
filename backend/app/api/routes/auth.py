@@ -1,16 +1,12 @@
-import datetime
-
 import jwt
-from fastapi import APIRouter, Request, Response, HTTPException
+from fastapi import APIRouter, Request, Response
 from pydantic import BaseModel
-from sqlmodel import Session
+from sqlmodel import Session, select
 from starlette import status
 
 from app.config import settings
 from app.core.database import engine, providers_string, redis_cache
 from app.core.models import User
-from sqlmodel import Session, select
-
 from app.utils import security
 
 router = APIRouter()
@@ -27,7 +23,7 @@ class Body(BaseModel):
 
 
 @router.post("/login")
-def login(body: Body):
+async def login(body: Body):
     request_user = None
     response_body = {}
 
@@ -62,7 +58,7 @@ def login(body: Body):
 
 
 @router.get("/identity")
-def get_identity(id: str, request: Request) -> User:
+async def get_identity(id: str, request: Request) -> User:
     print(id)
     user = None
     with (Session(engine) as session):

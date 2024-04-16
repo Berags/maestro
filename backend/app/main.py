@@ -1,18 +1,14 @@
-import datetime
-import pprint
 import threading
 
 import jwt
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.openapi.models import Response
+from fastapi.responses import ORJSONResponse
 from fastapi.routing import APIRoute
-from sqlmodel import SQLModel
 from starlette.middleware.cors import CORSMiddleware
 
 from app.api.main import api_router
 from app.config import settings
 from app.core import database
-from app.core.database import engine, redis_cache
 
 
 def custom_generate_unique_id(route: APIRoute) -> str:
@@ -23,6 +19,7 @@ app = FastAPI(
     title=settings.PROJECT_NAME,
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
     generate_unique_id_function=custom_generate_unique_id,
+    default_response_class=ORJSONResponse,
 )
 
 if settings.BACKEND_CORS_ORIGINS:

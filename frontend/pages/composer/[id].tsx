@@ -1,36 +1,34 @@
 import {
-  chakra,
-  Stack,
-  useColorModeValue,
   Box,
-  SimpleGrid,
-  Flex,
   Button,
+  Center,
+  chakra,
+  Flex,
+  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
+  SimpleGrid,
+  Stack,
   Text,
-  IconButton,
-  Divider,
-  Center,
+  useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
 import { GetServerSidePropsContext } from 'next'
-import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
-import OpusCard from '../../components/composers/OpusCard'
-import { FaHeart } from 'react-icons/fa6'
-import Separator from '../../components/Separator'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import Pagination from '../../components/Pagination'
 import { useSession } from 'next-auth/react'
-import backend from '../../axios.config'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import { FaHeart } from 'react-icons/fa6'
+import backend from '../../axios.config'
+import OpusCard from '../../components/composers/OpusCard'
+import Pagination from '../../components/Pagination'
+import Separator from '../../components/Separator'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 const Composer = ({ composerData, nOfPages, backend_api }: any) => {
   const router = useRouter()

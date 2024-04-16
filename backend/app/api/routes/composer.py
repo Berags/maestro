@@ -17,7 +17,7 @@ router = APIRouter()
 
 
 @router.get("/id/{composer_id}")
-def get_composer(composer_id: int, page: int | None, request: Request):
+async def get_composer(composer_id: int, page: int | None, request: Request):
     limit = 6
     offset = page * limit
     with Session(engine) as session:
@@ -35,14 +35,14 @@ def get_composer(composer_id: int, page: int | None, request: Request):
 
 
 @router.get("/by-opus-id/{opus_id}")
-def get_composer_by_opus(opus_id: int):
+async def get_composer_by_opus(opus_id: int):
     with Session(engine) as session:
         opus = session.exec(select(Opus).where(Opus.id == opus_id)).one_or_none()
         return session.exec(select(Composer).where(Composer.id == opus.composer_id)).one_or_none()
 
 
 @router.get("/")
-def get_composers(page: int) -> Sequence[Composer]:
+async def get_composers(page: int) -> Sequence[Composer]:
     # 10 composers per page
     limit = 10
     offset = page * limit
@@ -51,7 +51,7 @@ def get_composers(page: int) -> Sequence[Composer]:
 
 
 @router.get("/pages")
-def get_n_of_pages():
+async def get_n_of_pages():
     limit = 10
     with Session(engine) as session:
         n_of_rows = session.exec(select(func.count()).select_from(Composer)).one()
@@ -59,7 +59,7 @@ def get_n_of_pages():
 
 
 @router.get("/liked")
-def get_liked_composers(request: Request):
+async def get_liked_composers(request: Request):
     user_id = security.get_id(request.headers["authorization"])
     print(user_id)
     with Session(engine) as session:
@@ -69,7 +69,7 @@ def get_liked_composers(request: Request):
 
 
 @router.post("/like/{composer_id}")
-def like_composer(composer_id: int, request: Request):
+async def like_composer(composer_id: int, request: Request):
     with Session(engine) as session:
         composer: Composer = session.exec(
             select(Composer).where(Composer.id == composer_id)

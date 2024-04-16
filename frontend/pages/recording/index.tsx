@@ -1,19 +1,21 @@
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
-import Layout from '../../components/Layout'
-import { Box, Center, Flex, SimpleGrid, Skeleton } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { getServerSession } from 'next-auth'
+import { Box, SimpleGrid, Skeleton } from '@chakra-ui/react'
 import { GetServerSidePropsContext } from 'next'
-import { authOptions } from '../api/auth/[...nextauth]'
-import Pagination from '../../components/Pagination'
-import ComposerCard from '../../components/search/ComposerCard'
-import Separator from '../../components/Separator'
+import { getServerSession } from 'next-auth'
+import { useSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
 import backend from '../../axios.config'
+import Pagination from '../../components/Pagination'
+import RecentListen from '../../components/RecentListen'
 import PieceCard from '../../components/search/PieceCard'
+import Separator from '../../components/Separator'
+import { authOptions } from '../api/auth/[...nextauth]'
 
-const Recordings: any = ({ nOfPages, top_recordings }: any) => {
+const Recordings: any = ({
+  nOfPages,
+  top_recordings,
+  last_listened,
+  random_recording,
+}: any) => {
   const session: any = useSession()
   const [page, setPage] = useState<number>(0)
   const [recordings, setRecordings] = useState([])
@@ -41,6 +43,8 @@ const Recordings: any = ({ nOfPages, top_recordings }: any) => {
 
   return (
     <Box px={4}>
+      <Separator text="You last listened recording" />
+      <RecentListen listen={last_listened} />
       {recordings.length > 0 && (
         <>
           <Separator text="Your liked recordings" />
@@ -56,6 +60,8 @@ const Recordings: any = ({ nOfPages, top_recordings }: any) => {
           </SimpleGrid>
         </>
       )}
+      <Separator text="Random selected recording you may like" />
+      <RecentListen listen={random_recording} />
       <Separator text="Top Recordings" />
       <SimpleGrid
         columns={[1, 1, 2, 3, 4, 5]}
@@ -80,6 +86,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return { redirect: { destination: '/' } }
   }
 
+  const last_listened = await backend.get('/recording/last-listened', {
+    headers: {
+      Authorization: session.token,
+    },
+  })
+
   const res = await backend.get(`/recording/top`, {
     headers: {
       Authorization: session.token,
@@ -92,11 +104,19 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
   })
 
+  const res_random = await backend.get('/recording/random', {
+    headers: {
+      Authorization: session.token,
+    },
+  })
+
   return {
     props: {
       session: session ?? [],
       nOfPages: res_liked.data.n_of_pages,
       top_recordings: res.data,
+      last_listened: last_listened.data,
+      random_recording: res_random.data,
     },
   }
 }

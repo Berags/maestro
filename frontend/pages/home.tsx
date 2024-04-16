@@ -42,8 +42,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
   })
 
-  console.log(last_listened.data)
-
   return {
     props: { session: session ?? [], last_listened: last_listened.data },
   }

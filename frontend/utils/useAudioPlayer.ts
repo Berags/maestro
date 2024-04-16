@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { create } from 'zustand'
 
 interface Piece {

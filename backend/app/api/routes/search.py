@@ -1,39 +1,13 @@
-import json
-import pprint
-
 from fastapi import APIRouter
-import threading
-
-from redis.commands.search.query import Query
-from sqlmodel import Session, select
 
 from app.core import database
-from app.core.database import redis_cache, engine
-from app.core.models import Opus, Composer
-
-
-class ThreadWithReturnValue(threading.Thread):
-    def __init__(self, group=None, target=None, name=None,
-                 args=(), kwargs={}, Verbose=None):
-        threading.Thread.__init__(self, group, target, name, args, kwargs)
-
-        self._return = None
-
-    def run(self):
-        if self._target is not None:
-            self._return = self._target(*self._args,
-                                        **self._kwargs)
-
-    def join(self, *args) -> any:
-        threading.Thread.join(self, *args)
-        return self._return
-
+from app.utils.thread_with_return_value import ThreadWithReturnValue
 
 router = APIRouter()
 
 
 @router.get("/")
-def search(query: str | None):
+async def search(query: str | None):
     if query is None:
         return []
 

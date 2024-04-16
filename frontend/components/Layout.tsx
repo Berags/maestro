@@ -1,44 +1,42 @@
 'use client'
 import {
-  Box,
-  Text,
-  Flex,
-  useColorModeValue,
-  Icon,
-  useDisclosure,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  IconButton,
   Avatar,
+  Box,
   Button,
-  VStack,
+  Collapse,
+  Drawer,
+  DrawerContent,
+  DrawerOverlay,
+  Flex,
+  Icon,
+  IconButton,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Collapse,
-  Skeleton,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+  VStack,
 } from '@chakra-ui/react'
-import { ReactNode, useEffect, useState } from 'react'
-import { IoMdSettings } from 'react-icons/io'
-import { RiNeteaseCloudMusicLine } from 'react-icons/ri'
-import { FiMenu } from 'react-icons/fi'
-import { MdHome, MdKeyboardArrowRight } from 'react-icons/md'
 import { signOut, useSession } from 'next-auth/react'
-import { BsFilePerson } from 'react-icons/bs'
-import { BiAlbum } from 'react-icons/bi'
-import { IoAlbumsOutline } from 'react-icons/io5'
-import { GiMusicalScore } from 'react-icons/gi'
 import NextLink from 'next/link'
-import 'react-h5-audio-player/lib/styles.css'
-import React from 'react'
-import MusicPlayer from './MusicPlayer'
-import { Toaster } from 'react-hot-toast'
 import { useRouter } from 'next/router'
+import React, { ReactNode, useEffect } from 'react'
+import 'react-h5-audio-player/lib/styles.css'
+import { Toaster } from 'react-hot-toast'
+import { BiAlbum } from 'react-icons/bi'
+import { BsFilePerson } from 'react-icons/bs'
+import { FiMenu } from 'react-icons/fi'
+import { GiMusicalScore } from 'react-icons/gi'
+import { IoMdSettings } from 'react-icons/io'
+import { IoAlbumsOutline } from 'react-icons/io5'
+import { MdHome, MdKeyboardArrowRight } from 'react-icons/md'
+import { RiNeteaseCloudMusicLine } from 'react-icons/ri'
 import backend from '../axios.config'
-import AutocompleteSearchBox from './search/AutocompleteSearchBox'
 import CreatePlaylistModal from './CreatePlaylistModal'
+import MusicPlayer from './MusicPlayer'
+import AutocompleteSearchBox from './search/AutocompleteSearchBox'
 
 type Props = {
   children: ReactNode

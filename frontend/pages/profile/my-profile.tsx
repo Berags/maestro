@@ -21,7 +21,7 @@ import Separator from '../../components/Separator'
 import axios from 'axios'
 import backend from '../../axios.config'
 
-const Profile: any = ({ user }: any) => {
+const Profile: any = ({ user, my_playlists }: any) => {
   const router = useRouter()
   const ANIMATION_DURATION = 0.2
   const color = 'blue.400'
@@ -100,10 +100,9 @@ const Profile: any = ({ user }: any) => {
       <Separator text="My playlists" />
       <Container maxW={'8xl'}>
         <SimpleGrid minChildWidth="350px">
-          <PlaylistCard />
-          <PlaylistCard />
-          <PlaylistCard />
-          <PlaylistCard />
+          {my_playlists.map((playlist: any) => (
+            <PlaylistCard key={playlist.id} playlist={playlist} />
+          ))}
         </SimpleGrid>
       </Container>
     </>
@@ -129,8 +128,18 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     }
   )
 
+  const my_playlists = await backend.get('/playlist/my-playlists', {
+    headers: {
+      Authorization: session.token,
+    },
+  })
+
   return {
-    props: { session: session ?? [], user: res.data },
+    props: {
+      session: session ?? [],
+      user: res.data,
+      my_playlists: my_playlists.data,
+    },
   }
 }
 

@@ -1,12 +1,10 @@
+import { Center } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import Layout from '../../components/Layout'
-import { Center } from '@chakra-ui/react'
-import { useState } from 'react'
 
 const Profile: any = () => {
   const router = useRouter()
-  const {data}: any = useSession()
+  const { data }: any = useSession()
 
   if (!data) {
     return <>loading</>
@@ -27,7 +25,7 @@ const Profile: any = () => {
       return { redirect: { destination: '/' } }
     }
     console.log(session.user)
-  
+
     return {
       props: { session: session ?? [] },
     }

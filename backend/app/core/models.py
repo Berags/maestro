@@ -91,5 +91,6 @@ class Playlist(SQLModel, table=True):
     description: str | None = Field(default=None)
     image_url: str | None = Field(default=None)
     user_id: str | None = Field(default=None, foreign_key="user.id")
+    pinned: bool = Field(default=False)
 
     user: User = Relationship(back_populates="playlists")

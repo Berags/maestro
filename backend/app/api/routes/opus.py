@@ -10,12 +10,12 @@ router = APIRouter()
 
 
 @router.get("/id/{composer_id}")
-def get_opuses(composer_id: int) -> Sequence[Opus]:
+async def get_opuses(composer_id: int) -> Sequence[Opus]:
     with Session(engine) as session:
         return session.exec(select(Opus).where(Opus.composer_id == composer_id)).all()
 
 
 @router.get("/{opus_id}")
-def get_opus(opus_id: int) -> Opus:
+async def get_opus(opus_id: int) -> Opus:
     with Session(engine) as session:
         return session.exec((select(Opus).where(Opus.id == opus_id))).first()

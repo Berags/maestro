@@ -39,7 +39,10 @@ async def create_playlist(body: dict, request: Request):
 async def get_my_playlists(request: Request):
     user_id = security.get_id(request.headers["authorization"])
     with Session(engine) as session:
-        playlists = session.exec(select(Playlist).where(Playlist.user_id == user_id)).all()
+        playlists = session.exec(
+            select(Playlist)
+            .where(Playlist.user_id == user_id)
+            .order_by(Playlist.pinned)).all()
         return playlists
 
 

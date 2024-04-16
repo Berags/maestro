@@ -1,6 +1,6 @@
-import datetime
 import math
 import pprint
+import threading
 from typing import Sequence
 
 from fastapi import APIRouter, Request, HTTPException
@@ -9,22 +9,22 @@ from sqlmodel import Session, select
 from starlette import status
 
 from app.core.database import engine, redis_cache
-from app.core.models import Recording, User, UserRecordingLike, ListeningHistory, Opus
+from app.core.models import Recording, User, UserRecordingLike, Opus
 from app.utils import security
 
 router = APIRouter()
 
 
 @router.get("/by-opus/{opus_id}")
-def get_opuses(opus_id: int) -> Sequence[Recording]:
+async def get_opuses(opus_id: int) -> Sequence[Recording]:
     with Session(engine) as session:
-        recs = session.exec(select(Recording).where(Recording.opus_id == opus_id)).all()
+        recs = session.exec(select(Recording).where(Recording.opus_id == opus_id).order_by(Recording.title)).all()
         pprint.pprint(recs)
         return recs
 
 
 @router.post("/like/{recording_id}")
-def like_recording(recording_id: int, request: Request):
+async def like_recording(recording_id: int, request: Request):
     user_id = security.get_id(request.headers["authorization"])
     response = {}
 
@@ -58,7 +58,7 @@ def like_recording(recording_id: int, request: Request):
 
 
 @router.get("/liked")
-def get_liked_recordings(request: Request, page: int = 0):
+async def get_liked_recordings(request: Request, page: int = 0):
     user_id = security.get_id(request.headers["authorization"])
     # 10 composers per page
     limit = 6
@@ -70,7 +70,7 @@ def get_liked_recordings(request: Request, page: int = 0):
 
 
 @router.get("/liked/pages")
-def get_n_of_pages(request: Request):
+async def get_n_of_pages(request: Request):
     user_id = security.get_id(request.headers["authorization"])
 
     limit = 6
@@ -84,7 +84,7 @@ def get_n_of_pages(request: Request):
 
 
 @router.get("/top")
-def get_top_recordings():
+async def get_top_recordings():
     with Session(engine) as session:
         recs = session.exec(
             select(Recording).order_by(Recording.listens).limit(5)
@@ -92,8 +92,20 @@ def get_top_recordings():
         return recs
 
 
+@router.get("/random")
+async def get_random_recordings():
+    with Session(engine) as session:
+        rec = session.exec(
+            select(Recording).order_by(func.random()).limit(1)
+        ).one_or_none()
+        opus = session.exec(
+            select(Opus).where(Opus.id == rec.opus_id).limit(1)
+        ).one_or_none()
+        return {"recording": rec, "opus": opus, "composer": opus.composer}
+
+
 @router.get("/last-listened")
-def get_last_listened(request: Request):
+async def get_last_listened(request: Request):
     user_id = security.get_id(request.headers["authorization"])
     with Session(engine) as session:
         recording = session.exec(
@@ -106,7 +118,17 @@ def get_last_listened(request: Request):
 
 
 @router.post("/listen/{recording_id}")
-def listen_recording(recording_id: int, request: Request):
+async def listen_recording(recording_id: int, request: Request):
     user_id = security.get_id(request.headers["authorization"])
+    threading.Thread(target=increment_listens, args=(recording_id,)).start()
     redis_cache.set(f"user:{user_id}:listens", recording_id)
+    redis_cache.expire(f"user:{user_id}:listens", 60 * 60 * 24 * 7)
     return {"message": "Recording listened successfully"}
+
+
+def increment_listens(recording_id: int):
+    with Session(engine) as session:
+        rec = session.exec(select(Recording).where(Recording.id == recording_id)).first()
+        rec.listens += 1
+        session.add(rec)
+        session.commit()

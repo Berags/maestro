@@ -1,17 +1,14 @@
 import {
   Box,
-  Flex,
-  Text,
-  Image,
   Button,
   Grid,
   GridItem,
   Heading,
+  Image,
   Link,
 } from '@chakra-ui/react'
-import { NextComponentType } from 'next'
 import { IconContext } from 'react-icons'
-import { TbPlayerPauseFilled, TbPlayerPlayFilled } from 'react-icons/tb'
+import { TbPlayerPlayFilled } from 'react-icons/tb'
 import { MotionBox } from './profile/Motion'
 
 type Props = {
