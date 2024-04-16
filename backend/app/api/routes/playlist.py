@@ -5,7 +5,7 @@ from fastapi import APIRouter, UploadFile, Request
 from sqlmodel import Session, select
 
 from app.core.database import engine
-from app.core.models import Playlist, Recording, PlaylistRecording
+from app.core.models import Playlist, Recording, PlaylistRecording, UserRecordingLike
 from app.utils import security
 
 router = APIRouter()
@@ -47,14 +47,20 @@ async def get_my_playlists(request: Request):
 
 
 @router.get("/by-id/{playlist_id}")
-async def get_playlist_by_id(playlist_id: int):
+async def get_playlist_by_id(playlist_id: int, request: Request):
+    user_id = security.get_id(request.headers["authorization"])
     with Session(engine) as session:
         playlist = session.exec(select(Playlist).where(Playlist.id == playlist_id)).first()
         recordings = session.exec(
             select(Recording).join(PlaylistRecording).where(PlaylistRecording.playlist_id == playlist.id)).all()
+        liked_recordings = session.exec(
+            select(Recording).join(UserRecordingLike).where(UserRecordingLike.user_id == user_id)).all()
         return {"id": playlist.id, "name": playlist.name, "description": playlist.description,
-                "image_url": playlist.image_url,
-                "recordings": recordings}
+                "image_url": playlist.image_url, "pinned": playlist.pinned,
+                "recordings": [{
+                    **recording.__dict__,
+                    "liked": recording in liked_recordings
+                } for recording in recordings]}
 
 
 @router.post("/add-recording/{playlist_id}/{recording_id}")
@@ -76,3 +82,72 @@ async def add_recording_to_playlist(playlist_id: int, recording_id: int, request
         session.add(playlist_recording)
         session.commit()
     return {"message": "Recording added to playlist successfully"}
+
+
+@router.delete("/remove-recording/{playlist_id}/{recording_id}")
+async def remove_recording_from_playlist(playlist_id: int, recording_id: int, request: Request):
+    user_id = security.get_id(request.headers["authorization"])
+    with Session(engine) as session:
+        playlist = session.exec(select(Playlist).where(Playlist.id == playlist_id)).first()
+        if playlist.user_id != user_id:
+            return {"message": "Unauthorized"}
+
+        playlist_recording = session.exec(select(PlaylistRecording).where(PlaylistRecording.playlist_id == playlist_id)
+                                          .where(PlaylistRecording.recording_id == recording_id)).one_or_none()
+        if playlist_recording is None:
+            return {"message": "Recording not in playlist"}
+
+        session.delete(playlist_recording)
+        session.commit()
+    return {"message": "Recording removed from playlist successfully"}
+
+
+@router.post("/pin/{playlist_id}")
+async def pin_playlist(playlist_id: int, request: Request):
+    user_id = security.get_id(request.headers["authorization"])
+    with Session(engine) as session:
+        playlist = session.exec(select(Playlist).where(Playlist.id == playlist_id)).first()
+        if playlist.user_id != user_id:
+            return {"message": "Unauthorized"}
+
+        playlist.pinned = not playlist.pinned
+        session.add(playlist)
+        session.commit()
+        session.refresh(playlist)
+    return {"message": "Playlist " + "pinned" if playlist.pinned else "unpinned" + " successfully"}
+
+
+@router.delete("/delete/{playlist_id}")
+async def delete_playlist(playlist_id: int, request: Request):
+    user_id = security.get_id(request.headers["authorization"])
+    with Session(engine) as session:
+        playlist_recordings = session.exec(
+            select(PlaylistRecording).where(PlaylistRecording.playlist_id == playlist_id)).all()
+        for playlist_recording in playlist_recordings:
+            session.delete(playlist_recording)
+        session.commit()
+
+        playlist = session.exec(select(Playlist).where(Playlist.id == playlist_id)).first()
+        if playlist.user_id != user_id:
+            return {"message": "Unauthorized"}
+
+        session.delete(playlist)
+        session.commit()
+    return {"message": "Playlist deleted successfully"}
+
+
+@router.put("/update/{playlist_id}")
+async def update_playlist(playlist_id: int, body: dict, request: Request):
+    user_id = security.get_id(request.headers["authorization"])
+    with Session(engine) as session:
+        playlist = session.exec(select(Playlist).where(Playlist.id == playlist_id)).first()
+        if playlist.user_id != user_id:
+            return {"message": "Unauthorized"}
+
+        playlist.name = body["title"]
+        playlist.image_url = body["image_url"]
+        playlist.description = body["description"]
+        session.add(playlist)
+        session.commit()
+        session.refresh(playlist)
+    return {"message": "Playlist updated successfully"}

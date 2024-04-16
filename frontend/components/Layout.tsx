@@ -158,7 +158,7 @@ const Layout = (props: Props) => {
               <NavItem icon={BsFilePerson}>Composers</NavItem>
             </NextLink>
             <NavItem icon={IoAlbumsOutline} onClick={playlist.onToggle}>
-              Playlist
+              Playlists
               <Icon as={MdKeyboardArrowRight} ml="auto" />
             </NavItem>
             <Collapse in={playlist.isOpen}>
@@ -167,7 +167,7 @@ const Layout = (props: Props) => {
               </NavItem>
               <NextLink href={'/playlist'}>
                 <NavItem pl="12" py="2">
-                  My Playlist
+                  My Playlists
                 </NavItem>
               </NextLink>
             </Collapse>

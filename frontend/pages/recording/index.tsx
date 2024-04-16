@@ -60,7 +60,7 @@ const Recordings: any = ({
           </SimpleGrid>
         </>
       )}
-      <Separator text="Random selected recording you may like" />
+      <Separator text="Randomly selected recording you may like" />
       <RecentListen listen={random_recording} />
       <Separator text="Top Recordings" />
       <SimpleGrid

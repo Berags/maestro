@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { prominent } from 'color.js'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { Fragment, useState } from 'react'
 import { FaPlay } from 'react-icons/fa6'
 import { MdOutlineOpenInNew } from 'react-icons/md'
@@ -29,12 +30,7 @@ const RecentListen = ({ listen }: Props) => {
   const size = useWindowSize()
   const audioPlayer = useAudioPlayer()
   const [colors, setColors] = useState<any>(['#000000', '#000000'])
-  console.log(
-    ('000000' + (0xffffff ^ colors[0].replace('#', '0x')).toString(16)).slice(
-      -6
-    )
-  )
-  useState(() => {
+  useEffect(() => {
     const fetchColor = async () => {
       const color = await prominent(listen.recording.image_url, {
         amount: 5,
@@ -44,7 +40,7 @@ const RecentListen = ({ listen }: Props) => {
       setColors([color[1], color[2]])
     }
     fetchColor()
-  })
+  }, [listen.recording.image_url])
 
   return (
     <Container
