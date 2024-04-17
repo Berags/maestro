@@ -45,8 +45,8 @@ import { FiEdit3 } from 'react-icons/fi'
 import { LuPin, LuPinOff } from 'react-icons/lu'
 import { IoShuffleOutline } from 'react-icons/io5'
 import toast from 'react-hot-toast'
-import React from 'react'
 import UpdatePlaylistModal from '../../components/UpdatePlaylistModal'
+import React from 'react'
 
 const PlaylistView = ({ playlist, top_recordings }: any) => {
   const { data }: any = useSession()
@@ -57,9 +57,7 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
   const [playlistData, setPlaylistData] = useState(playlist)
   const updatePlaylistDisclose = useDisclosure()
   const confirm = useDisclosure()
-  const cancelRef = React.useRef()
-
-  console.log(playlistData)
+  const cancelRef = React.useRef(null)
 
   useEffect(() => {
     const getComposers = async () => {
@@ -247,7 +245,9 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
             </AlertDialogBody>
 
             <AlertDialogFooter>
-              <Button onClick={confirm.onClose}>Cancel</Button>
+              <Button ref={cancelRef} onClick={confirm.onClose}>
+                Cancel
+              </Button>
               <Button
                 colorScheme="red"
                 ml={3}
