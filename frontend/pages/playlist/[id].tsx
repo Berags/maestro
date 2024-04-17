@@ -18,6 +18,14 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter,
+  useDisclosure,
+  Stack,
 } from '@chakra-ui/react'
 import Separator from '../../components/Separator'
 import backend from '../../axios.config'
@@ -34,8 +42,11 @@ import useAudioPlayer from '../../utils/useAudioPlayer'
 import { BsThreeDots } from 'react-icons/bs'
 import { MdDelete } from 'react-icons/md'
 import { FiEdit3 } from 'react-icons/fi'
-import { LuPin } from 'react-icons/lu'
+import { LuPin, LuPinOff } from 'react-icons/lu'
 import { IoShuffleOutline } from 'react-icons/io5'
+import toast from 'react-hot-toast'
+import React from 'react'
+import UpdatePlaylistModal from '../../components/UpdatePlaylistModal'
 
 const PlaylistView = ({ playlist, top_recordings }: any) => {
   const { data }: any = useSession()
@@ -44,6 +55,11 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
   const router = useRouter()
   const audioPlayer = useAudioPlayer()
   const [playlistData, setPlaylistData] = useState(playlist)
+  const updatePlaylistDisclose = useDisclosure()
+  const confirm = useDisclosure()
+  const cancelRef = React.useRef()
+
+  console.log(playlistData)
 
   useEffect(() => {
     const getComposers = async () => {
@@ -69,7 +85,7 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
 
   return (
     <Box px={4} pt={4}>
-      <HStack>
+      <Stack direction={['column', 'row']} alignItems="center">
         <Image
           w={64}
           rounded={6}
@@ -82,11 +98,13 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
               {playlistData.name}
             </Text>
           </Flex>
-          <Markdown>
-            {playlistData.description
-              ? playlistData.description.slice(0, 150) + '...'
-              : ''}
-          </Markdown>
+          <Box ml={8}>
+            <Markdown>
+              {playlistData.description
+                ? playlistData.description.slice(0, 150) + '...'
+                : ''}
+            </Markdown>
+          </Box>
           <Modal isOpen={!expand} onClose={() => setExpand(true)} size={'2xl'}>
             <ModalOverlay />
             <ModalContent>
@@ -98,10 +116,10 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
             </ModalContent>
           </Modal>
           <Button variant={'link'} ml={8} onClick={() => setExpand(!expand)}>
-            {expand ? 'Read more' : 'close'}
+            {expand ? 'Read more' : 'Close'}
           </Button>
         </Box>
-      </HStack>
+      </Stack>
       <HStack py={4}>
         <IconButton
           isRound={true}
@@ -120,6 +138,10 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
           size={'lg'}
           colorScheme="facebook"
           variant={'ghost'}
+          onClick={() => {
+            audioPlayer.setShuffle(true)
+            audioPlayer.setQueue(playlistData.recordings)
+          }}
         />
         <Menu>
           <MenuButton
@@ -133,21 +155,42 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
             icon={<BsThreeDots />}
           />
           <MenuList>
-            <MenuItem>
-              <LuPin />
-              <Text ml={2}>Pin</Text>
+            <MenuItem
+              onClick={async () => {
+                const res = await backend.post(
+                  '/playlist/pin/' + playlistData.id,
+                  {},
+                  {
+                    headers: {
+                      Authorization: data.token,
+                    },
+                  }
+                )
+
+                if (res.status === 200) {
+                  toast.success('Playlist pinned')
+                  setPlaylistData({ ...playlistData, pinned: true })
+                }
+              }}
+            >
+              {playlistData.pinned ? <LuPinOff /> : <LuPin />}
+              <Text ml={2}>{playlistData.pinned ? 'Unpin' : 'Pin'}</Text>
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={updatePlaylistDisclose.onToggle}>
               <FiEdit3 />
               <Text ml={2}>Edit</Text>
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={confirm.onOpen}>
               <MdDelete />
               <Text ml={2}>Delete</Text>
             </MenuItem>
           </MenuList>
         </Menu>
       </HStack>
+      <UpdatePlaylistModal
+        disclosure={updatePlaylistDisclose}
+        update={playlistData}
+      />
       <Separator text="Recordings" />
       <SimpleGrid
         spacingX={1}
@@ -173,9 +216,64 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
         justifyItems={'center'}
       >
         {top_recordings.map((val: any, i: number) => (
-          <PieceCard request setUpdated={setUpdated} pieceData={val} />
+          <PieceCard
+            request
+            setUpdated={setUpdated}
+            pieceData={val}
+            variant="sg"
+            defaultPlaylist={{
+              ...playlistData,
+              is_in_playlist: playlistData.recordings.some(
+                (rec: any) => rec.id === val.id
+              ),
+            }}
+          />
         ))}
       </SimpleGrid>
+
+      <AlertDialog
+        isOpen={confirm.isOpen}
+        onClose={confirm.onClose}
+        leastDestructiveRef={cancelRef}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Delete Playlist
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Are you sure? You can't undo this action afterwards.
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button onClick={confirm.onClose}>Cancel</Button>
+              <Button
+                colorScheme="red"
+                ml={3}
+                onClick={async () => {
+                  const res = await backend.delete(
+                    '/playlist/delete/' + playlistData.id,
+                    {
+                      headers: {
+                        Authorization: data.token,
+                      },
+                    }
+                  )
+
+                  if (res.status === 200) {
+                    confirm.onClose()
+                    toast.success('Playlist deleted')
+                    router.push('/playlist')
+                  }
+                }}
+              >
+                Delete
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </Box>
   )
 }

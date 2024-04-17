@@ -1,4 +1,4 @@
-import { Flex, Avatar, Text } from '@chakra-ui/react'
+import { Flex, Avatar, Text, Skeleton } from '@chakra-ui/react'
 import {
   AutoComplete,
   AutoCompleteInput,

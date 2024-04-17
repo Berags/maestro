@@ -1,9 +1,9 @@
-import { Container, SimpleGrid } from '@chakra-ui/react'
-import PlaylistCard from '../../components/PlaylistCard'
-import Separator from '../../components/Separator'
-import backend from '../../axios.config'
+import { Container, SimpleGrid, chakra } from '@chakra-ui/react'
 import { GetServerSidePropsContext } from 'next'
 import { getServerSession } from 'next-auth'
+import backend from '../../axios.config'
+import PlaylistCard from '../../components/PlaylistCard'
+import Separator from '../../components/Separator'
 import { authOptions } from '../api/auth/[...nextauth]'
 
 const Playlist = ({ playlists }: any) => {
@@ -12,9 +12,15 @@ const Playlist = ({ playlists }: any) => {
       <Separator text="My playlists" />
       <Container maxW={'8xl'}>
         <SimpleGrid minChildWidth="18em" spacingY={4}>
-          {playlists.map((value: any, id: any) => (
-            <PlaylistCard key={id} playlist={value} />
-          ))}
+          {playlists.length === 0 ? (
+            <chakra.h2 textAlign={'center'}>No playlist found!</chakra.h2>
+          ) : (
+            <>
+              {playlists.map((value: any, id: any) => (
+                <PlaylistCard key={id} playlist={value} />
+              ))}
+            </>
+          )}
         </SimpleGrid>
       </Container>
     </>

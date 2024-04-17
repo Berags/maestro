@@ -30,7 +30,7 @@ import { BsFilePerson } from 'react-icons/bs'
 import { FiMenu } from 'react-icons/fi'
 import { GiMusicalScore } from 'react-icons/gi'
 import { IoMdSettings } from 'react-icons/io'
-import { IoAlbumsOutline } from 'react-icons/io5'
+import { IoAlbumsOutline, IoClose } from 'react-icons/io5'
 import { MdHome, MdKeyboardArrowRight } from 'react-icons/md'
 import { RiNeteaseCloudMusicLine } from 'react-icons/ri'
 import backend from '../axios.config'
@@ -134,7 +134,11 @@ const Layout = (props: Props) => {
               isOpen ? onClose() : null
             }}
           >
-            <Icon as={RiNeteaseCloudMusicLine} h={8} w={8} />
+            {isOpen ? (
+              <Icon cursor={'pointer'} as={IoClose} h={8} w={8} />
+            ) : (
+              <Icon as={RiNeteaseCloudMusicLine} h={8} w={8} />
+            )}
             <Text
               fontSize="2xl"
               ml="2"
@@ -171,7 +175,6 @@ const Layout = (props: Props) => {
                 </NavItem>
               </NextLink>
             </Collapse>
-            <NavItem icon={GiMusicalScore}>Opus</NavItem>
             <NextLink href={'/recording'}>
               <NavItem icon={BiAlbum}>Recordings</NavItem>
             </NextLink>

@@ -26,7 +26,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { FaAngleRight, FaHeart, FaPlay } from 'react-icons/fa6'
+import { FaAngleRight, FaCheck, FaHeart, FaPlay, FaPlus } from 'react-icons/fa6'
 import backend from '../../axios.config'
 import useAudioPlayer from '../../utils/useAudioPlayer'
 
@@ -46,6 +46,7 @@ type Props = {
   setUpdated: Function
   variant: string
   key?: number
+  defaultPlaylist?: any
 }
 
 const PieceCard: any = (props: Props) => {
@@ -77,7 +78,10 @@ const PieceCard: any = (props: Props) => {
       <Grid
         templateRows={{ base: 'auto auto', md: 'auto' }}
         w="100%"
-        templateColumns={{ base: 'unset', md: '1fr 8fr 1fr 1fr' }}
+        templateColumns={{
+          base: '1fr 1fr 1fr 1fr 1fr',
+          md: '1fr 8fr 1fr 1fr',
+        }}
         p={{ base: 2, sm: 4 }}
         gap={3}
         borderRadius={4}
@@ -381,99 +385,131 @@ const PieceCard: any = (props: Props) => {
             {pieceData.duration}
           </Text>
         </Stack>
-        <Stack ml={2}>
-          <Popover>
-            <PopoverTrigger>
+        {props.variant == 'sg' ? (
+          <>
+            {props.defaultPlaylist.is_in_playlist ? (
               <IconButton
-                aria-label={'Settings'}
-                icon={<BsThreeDotsVertical />}
+                variant={'link'}
+                aria-label={'Added to playlist'}
+                icon={<FaCheck />}
+              />
+            ) : (
+              <IconButton
                 variant={'ghost'}
-              ></IconButton>
-            </PopoverTrigger>
-            <PopoverContent w={'11em'}>
-              <PopoverBody>
-                <Button
-                  variant={'ghost'}
-                  w={'100%'}
-                  onClick={async () => {
-                    console.log(data.backend_session)
-
-                    const res = await backend.post(
-                      '/recording/like/' + pieceData.id,
-                      {},
-                      {
-                        headers: {
-                          Authorization: data.token,
-                        },
-                      }
-                    )
-                    toast.success(res.data.message)
-                    if (props.request) {
-                      props.setUpdated(true)
+                icon={<FaPlus />}
+                aria-label={'Add to playlist'}
+                onClick={async () => {
+                  const res = await backend.post(
+                    '/playlist/add-recording/' +
+                      props.defaultPlaylist.id +
+                      '/' +
+                      pieceData.id,
+                    {},
+                    {
+                      headers: {
+                        Authorization: data.token,
+                      },
                     }
-                  }}
-                >
-                  Like
-                </Button>
-                <Popover placement="right">
-                  <PopoverTrigger>
-                    <Button variant={'ghost'} w={'100%'}>
-                      Add/Remove to playlist
-                      <FaAngleRight />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent>
-                    <PopoverBody>
-                      <VStack>
-                        {playlists.map((value: any, key: number) => (
-                          <Button
-                            variant={'link'}
-                            onClick={async () => {
-                              const res = await backend.post(
-                                '/playlist/add-recording/' +
-                                  value.id +
-                                  '/' +
-                                  pieceData.id,
-                                {},
-                                {
-                                  headers: {
-                                    Authorization: data.token,
-                                  },
-                                }
-                              )
-                              if (res.data.message == 'Unauthorized') {
-                                toast.error('An error has occurred!')
-                                return
-                              }
-                              toast.success(res.data.message)
-                            }}
-                          >
-                            {value.name}
-                          </Button>
-                        ))}
-                      </VStack>
-                    </PopoverBody>
-                  </PopoverContent>
-                </Popover>
-                <Button
+                  )
+                  if (res.data.message == 'Unauthorized') {
+                    toast.error('An error has occurred!')
+                    return
+                  }
+                  toast.success(res.data.message)
+                  props.setUpdated(true)
+                }}
+              />
+            )}
+          </>
+        ) : (
+          <Stack ml={2}>
+            <Popover>
+              <PopoverTrigger>
+                <IconButton
+                  aria-label={'Settings'}
+                  icon={<BsThreeDotsVertical />}
                   variant={'ghost'}
-                  onClick={() => {
-                    audioPlayer.setQueue([...audioPlayer.queue, pieceData])
-                    toast.success('Added to queue!')
-                  }}
-                  w={'100%'}
-                >
-                  Add to queue
-                </Button>
-              </PopoverBody>
-            </PopoverContent>
-          </Popover>
-        </Stack>
+                ></IconButton>
+              </PopoverTrigger>
+              <PopoverContent w={'11em'}>
+                <PopoverBody>
+                  <Button
+                    variant={'ghost'}
+                    w={'100%'}
+                    onClick={async () => {
+                      const res = await backend.post(
+                        '/recording/like/' + pieceData.id,
+                        {},
+                        {
+                          headers: {
+                            Authorization: data.token,
+                          },
+                        }
+                      )
+                      toast.success(res.data.message)
+                      if (props.request) {
+                        props.setUpdated(true)
+                      }
+                    }}
+                  >
+                    Like
+                  </Button>
+                  <Popover placement="right">
+                    <PopoverTrigger>
+                      <Button variant={'ghost'} w={'100%'}>
+                        Add/Remove to playlist
+                        <FaAngleRight />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverBody>
+                        <VStack>
+                          {playlists.map((value: any, key: number) => (
+                            <Button
+                              variant={'link'}
+                              onClick={async () => {
+                                const res = await backend.post(
+                                  '/playlist/add-recording/' +
+                                    value.id +
+                                    '/' +
+                                    pieceData.id,
+                                  {},
+                                  {
+                                    headers: {
+                                      Authorization: data.token,
+                                    },
+                                  }
+                                )
+                                if (res.data.message == 'Unauthorized') {
+                                  toast.error('An error has occurred!')
+                                  return
+                                }
+                                toast.success(res.data.message)
+                              }}
+                            >
+                              {value.name}
+                            </Button>
+                          ))}
+                        </VStack>
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                  <Button
+                    variant={'ghost'}
+                    onClick={() => {
+                      audioPlayer.setQueue([...audioPlayer.queue, pieceData])
+                      toast.success('Added to queue!')
+                    }}
+                    w={'100%'}
+                  >
+                    Add to queue
+                  </Button>
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
+          </Stack>
+        )}
       </Flex>
-      <Tags
-        skills={[pieceData.composer]}
-        display={['flex', 'flex', 'none', 'none']}
-      />
     </Box>
   )
 }
