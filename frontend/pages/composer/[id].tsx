@@ -1,34 +1,34 @@
 import {
-  chakra,
-  Stack,
-  useColorModeValue,
   Box,
-  SimpleGrid,
-  Flex,
   Button,
+  Center,
+  chakra,
+  Flex,
+  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
+  SimpleGrid,
+  Stack,
   Text,
-  IconButton,
-  Divider,
-  Center,
+  useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
 import { GetServerSidePropsContext } from 'next'
-import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
-import OpusCard from '../../components/composers/OpusCard'
-import { FaHeart } from 'react-icons/fa6'
-import Separator from '../../components/Separator'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import Pagination from '../../components/Pagination'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import { FaHeart } from 'react-icons/fa6'
+import backend from '../../axios.config'
+import OpusCard from '../../components/composers/OpusCard'
+import Pagination from '../../components/Pagination'
+import Separator from '../../components/Separator'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 const Composer = ({ composerData, nOfPages, backend_api }: any) => {
   const router = useRouter()
@@ -40,11 +40,11 @@ const Composer = ({ composerData, nOfPages, backend_api }: any) => {
 
   useEffect(() => {
     const getComposers = async () => {
-      const res = await axios.get(
-        backend_api + '/composer/id/' + router.query.id + '?page=' + page,
+      const res = await backend.get(
+        '/composer/id/' + router.query.id + '?page=' + page,
         {
           headers: {
-            session: data.backend_session,
+            Authorization: data.token,
           },
         }
       )
@@ -122,16 +122,21 @@ const Composer = ({ composerData, nOfPages, backend_api }: any) => {
                   variant={'link'}
                   color={liked ? 'red.500' : 'grey.100'}
                   onClick={async () => {
-                    const res = await axios.post(
-                      backend_api + '/composer/like/' + composerData.id,
+                    const res = await backend.post(
+                      '/composer/like/' + composerData.id,
                       {},
                       {
                         headers: {
-                          session: data.backend_session,
+                          Authorization: data.token,
                         },
                       }
                     )
-                    if (res.status === 200) setLiked(!liked)
+                    if (res.status === 200) {
+                      setLiked(!liked)
+                      toast.success('Added to liked composers!')
+                    } else {
+                      toast.error('Unable to add!')
+                    }
                   }}
                 />
               </Stack>
@@ -141,7 +146,7 @@ const Composer = ({ composerData, nOfPages, backend_api }: any) => {
       </Box>
       <Box px={5}>
         <Separator text={'Opuses'} />
-        <SimpleGrid minChildWidth={'400px'} spacing={5}>
+        <SimpleGrid minChildWidth={'15em'} spacing={5}>
           {opuses.map((op: any) => (
             <OpusCard opusData={op} />
           ))}
@@ -241,14 +246,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const id = context.params.id // Get ID from slug
 
-  const res = await axios.get(
-    process.env.BACKEND_API + `/composer/id/${id}?page=0`,
-    {
-      headers: {
-        session: session.backend_session,
-      },
-    }
-  )
+  const res = await backend.get(`/composer/id/${id}?page=0`, {
+    headers: {
+      Authorization: session.token,
+    },
+  })
 
   res.data.long_description = res.data.long_description.split('\n')
 

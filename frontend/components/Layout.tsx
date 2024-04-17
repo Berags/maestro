@@ -1,39 +1,42 @@
 'use client'
 import {
-  Box,
-  Text,
-  Flex,
-  useColorModeValue,
-  Icon,
-  useDisclosure,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  IconButton,
   Avatar,
+  Box,
   Button,
-  VStack,
+  Collapse,
+  Drawer,
+  DrawerContent,
+  DrawerOverlay,
+  Flex,
+  Icon,
+  IconButton,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+  VStack,
 } from '@chakra-ui/react'
-import { ReactNode } from 'react'
-import { IoMdSettings } from 'react-icons/io'
-import { RiNeteaseCloudMusicLine } from 'react-icons/ri'
-import { BsMusicNote } from 'react-icons/bs'
-import { FiMenu } from 'react-icons/fi'
-import { MdHome } from 'react-icons/md'
 import { signOut, useSession } from 'next-auth/react'
-import { BsFilePerson } from 'react-icons/bs'
-import { BiAlbum } from 'react-icons/bi'
-import { IoAlbumsOutline } from 'react-icons/io5'
-import { GiMusicalScore } from 'react-icons/gi'
 import NextLink from 'next/link'
+import { useRouter } from 'next/router'
+import React, { ReactNode, useEffect } from 'react'
 import 'react-h5-audio-player/lib/styles.css'
-import React from 'react'
-import MusicPlayer from './MusicPlayer'
 import { Toaster } from 'react-hot-toast'
+import { BiAlbum } from 'react-icons/bi'
+import { BsFilePerson } from 'react-icons/bs'
+import { FiMenu } from 'react-icons/fi'
+import { GiMusicalScore } from 'react-icons/gi'
+import { IoMdSettings } from 'react-icons/io'
+import { IoAlbumsOutline, IoClose } from 'react-icons/io5'
+import { MdHome, MdKeyboardArrowRight } from 'react-icons/md'
+import { RiNeteaseCloudMusicLine } from 'react-icons/ri'
+import backend from '../axios.config'
+import CreatePlaylistModal from './CreatePlaylistModal'
+import MusicPlayer from './MusicPlayer'
+import AutocompleteSearchBox from './search/AutocompleteSearchBox'
 
 type Props = {
   children: ReactNode
@@ -41,12 +44,33 @@ type Props = {
 
 const Layout = (props: Props) => {
   const { isOpen, onClose, onOpen } = useDisclosure()
-  const session = useSession()
+  const router = useRouter()
+  const { data }: any = useSession()
+  const playlist = useDisclosure()
+  const createPlaylist = useDisclosure()
+
+  useEffect(() => {
+    // Configuring axios default headers
+    // Add a response interceptor
+    backend.interceptors.response.use(
+      function (response) {
+        // Any status code that lie within the range of 2xx cause this function to trigger
+        // Do something with response data
+        return response
+      },
+      function (error) {
+        // Any status codes that falls outside the range of 2xx cause this function to trigger
+        // Do something with response error
+        signOut()
+        return Promise.reject(error)
+      }
+    )
+  }, [props.children])
 
   const NavItem = (props: any) => {
     const color = useColorModeValue('gray.600', 'gray.300')
 
-    const { icon, children } = props
+    const { icon, children, ...rest } = props
     return (
       <Flex
         align="center"
@@ -61,6 +85,7 @@ const Layout = (props: Props) => {
           bg: useColorModeValue('gray.100', 'gray.900'),
           color: useColorModeValue('gray.900', 'gray.200'),
         }}
+        {...rest}
       >
         {icon && (
           <Icon
@@ -109,7 +134,11 @@ const Layout = (props: Props) => {
               isOpen ? onClose() : null
             }}
           >
-            <Icon as={RiNeteaseCloudMusicLine} h={8} w={8} />
+            {isOpen ? (
+              <Icon cursor={'pointer'} as={IoClose} h={8} w={8} />
+            ) : (
+              <Icon as={RiNeteaseCloudMusicLine} h={8} w={8} />
+            )}
             <Text
               fontSize="2xl"
               ml="2"
@@ -132,9 +161,23 @@ const Layout = (props: Props) => {
             <NextLink href={'/composer'}>
               <NavItem icon={BsFilePerson}>Composers</NavItem>
             </NextLink>
-            <NavItem icon={IoAlbumsOutline}>Albums</NavItem>
-            <NavItem icon={GiMusicalScore}>Opus</NavItem>
-            <NavItem icon={BiAlbum}>Recordings</NavItem>
+            <NavItem icon={IoAlbumsOutline} onClick={playlist.onToggle}>
+              Playlists
+              <Icon as={MdKeyboardArrowRight} ml="auto" />
+            </NavItem>
+            <Collapse in={playlist.isOpen}>
+              <NavItem pl="12" py="2" onClick={createPlaylist.onToggle}>
+                Create
+              </NavItem>
+              <NextLink href={'/playlist'}>
+                <NavItem pl="12" py="2">
+                  My Playlists
+                </NavItem>
+              </NextLink>
+            </Collapse>
+            <NextLink href={'/recording'}>
+              <NavItem icon={BiAlbum}>Recordings</NavItem>
+            </NextLink>
             <NavItem icon={IoMdSettings}>Settings</NavItem>
           </Flex>
         </Box>
@@ -152,7 +195,7 @@ const Layout = (props: Props) => {
               <Avatar
                 size={'sm'}
                 name="Ahmad"
-                src={session.data ? (session.data!.user!.image as string) : ''}
+                src={data ? (data.user!.image as string) : ''}
               />
             </MenuButton>
             <MenuList fontSize={17} zIndex={5555}>
@@ -191,7 +234,7 @@ const Layout = (props: Props) => {
             borderBottomWidth="1px"
             borderColor={useColorModeValue('inherit', 'gray.700')}
             bg={useColorModeValue('white', 'gray.800')}
-            justifyContent={{ base: 'space-between', md: 'flex-end' }}
+            justifyContent={{ base: 'space-between' }}
             boxShadow="lg"
             h="14"
             top={'0'}
@@ -205,8 +248,11 @@ const Layout = (props: Props) => {
               icon={<FiMenu />}
               size="md"
             />
+            <Flex align="center" w={'80%'} pr={6} pl={2}>
+              <AutocompleteSearchBox />
+            </Flex>
 
-            <Flex align="center">
+            <Flex align="center" justify={'flex-end'}>
               <Icon as={RiNeteaseCloudMusicLine} h={8} w={8} />
             </Flex>
           </Flex>
@@ -217,6 +263,7 @@ const Layout = (props: Props) => {
             bg={useColorModeValue('auto', 'gray.800')}
             pb={50}
           >
+            <CreatePlaylistModal disclosure={createPlaylist} />
             {props.children}
           </Box>
           <Flex

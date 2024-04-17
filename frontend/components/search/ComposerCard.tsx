@@ -25,17 +25,17 @@ type ComposerData = {
 const ComposerCard = (props: Props) => {
   const composerData = props.composerData
   return (
-    <Link href={"/composer/" + composerData.id}>
+    <Link href={'/composer/' + composerData.id}>
       <Box
         maxH="400px"
         minH="154px"
         w="250px"
-        height={"280px"}
+        height={'280px'}
         boxShadow="lg"
         rounded="md"
         p={6}
         overflow="hidden"
-        bg={"white"}
+        bg={'white'}
         cursor="pointer"
         _hover={{ boxShadow: 'lg' }}
         role="group"

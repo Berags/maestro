@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout'
-import { Box, Center, Flex, SimpleGrid } from '@chakra-ui/react'
+import { Box, Center, Flex, SimpleGrid, Skeleton } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getServerSession } from 'next-auth'
@@ -10,31 +10,50 @@ import { authOptions } from '../api/auth/[...nextauth]'
 import Pagination from '../../components/Pagination'
 import ComposerCard from '../../components/search/ComposerCard'
 import Separator from '../../components/Separator'
+import backend from '../../axios.config'
 
-const Composers: any = ({ nOfPages, backend_api }: any) => {
-  const { data }: any = useSession()
+const Composers: any = ({ nOfPages, liked_composers }: any) => {
+  const session: any = useSession()
   const [page, setPage] = useState<number>(0)
   const [composers, setComposers] = useState([])
+
+  if (!session) return <Skeleton />
+
   useEffect(() => {
     const getComposers = async () => {
-      const res = await axios.get(backend_api + '/composer/?page=' + page, {
-        headers: {
-          session: data.backend_session,
-        },
-      })
-      setComposers(res.data)
+      if (session.data) {
+        const res_pages = await backend({
+          method: 'get',
+          url: '/composer/?page=' + page,
+          headers: {
+            Authorization: session.data.token,
+          },
+        })
+        setComposers(res_pages.data)
+      }
     }
 
     getComposers()
-  }, [page])
-
-  if (!data) {
-    return <>loading</>
-  }
+  }, [page, session])
 
   return (
     <Box px={4}>
-      <Separator text="Composers" />
+      {liked_composers.length > 0 && (
+        <>
+          <Separator text="Your liked composers" />
+          <SimpleGrid
+            columns={[1, 1, 2, 3, 4, 5]}
+            spacing={5}
+            mb={5}
+            justifyItems={'center'}
+          >
+            {liked_composers.map((val: any, i: number) => (
+              <ComposerCard composerData={val} />
+            ))}
+          </SimpleGrid>
+        </>
+      )}
+      <Separator text="Top Trending Composers" />
       <SimpleGrid
         columns={[1, 1, 2, 3, 4, 5]}
         spacing={5}
@@ -58,9 +77,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return { redirect: { destination: '/' } }
   }
 
-  const res = await axios.get(process.env.BACKEND_API + `/composer/pages`, {
+  const res = await backend.get(`/composer/pages`, {
     headers: {
-      session: session.backend_session,
+      Authorization: session.token,
+    },
+  })
+
+  const res_liked = await backend.get('/composer/liked', {
+    headers: {
+      Authorization: session.token,
     },
   })
 
@@ -68,7 +93,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     props: {
       session: session ?? [],
       nOfPages: res.data.n_of_pages,
-      backend_api: process.env.BACKEND_API,
+      liked_composers: res_liked.data,
     },
   }
 }

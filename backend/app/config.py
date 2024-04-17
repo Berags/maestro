@@ -71,6 +71,21 @@ class Settings(BaseSettings):
     REDIS_PORT: int
     REDIS_PASSWORD: str
 
+    MEILI_PORT: int = 7700
+    MEILI_SERVER: str
+
+    @computed_field  # type: ignore[misc]
+    @property
+    def MEILI_HOST(self) -> str:
+        if self.ENVIRONMENT == "local":
+            return f"http://{self.MEILI_SERVER}:{self.MEILI_PORT}"
+        return f"https://{self.MEILI_SERVER}:{self.MEILI_PORT}"
+
+    MEILI_MASTER_KEY: str
+
+    CLOUDINARY_CLOUD_NAME: str
+    CLOUDINARY_API_KEY: str
+    CLOUDINARY_API_SECRET: str
 
 
 settings = Settings()  # type: ignore
