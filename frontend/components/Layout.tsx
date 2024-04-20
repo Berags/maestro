@@ -28,8 +28,6 @@ import { Toaster } from 'react-hot-toast'
 import { BiAlbum } from 'react-icons/bi'
 import { BsFilePerson } from 'react-icons/bs'
 import { FiMenu } from 'react-icons/fi'
-import { GiMusicalScore } from 'react-icons/gi'
-import { IoMdSettings } from 'react-icons/io'
 import { IoAlbumsOutline, IoClose } from 'react-icons/io5'
 import { MdHome, MdKeyboardArrowRight } from 'react-icons/md'
 import { RiNeteaseCloudMusicLine } from 'react-icons/ri'
@@ -48,6 +46,10 @@ const Layout = (props: Props) => {
   const { data }: any = useSession()
   const playlist = useDisclosure()
   const createPlaylist = useDisclosure()
+
+  useEffect(() => {
+    onClose()
+  }, [router.pathname])
 
   useEffect(() => {
     // Configuring axios default headers
@@ -178,7 +180,6 @@ const Layout = (props: Props) => {
             <NextLink href={'/recording'}>
               <NavItem icon={BiAlbum}>Recordings</NavItem>
             </NextLink>
-            <NavItem icon={IoMdSettings}>Settings</NavItem>
           </Flex>
         </Box>
 

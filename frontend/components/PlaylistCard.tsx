@@ -25,7 +25,7 @@ const PlaylistCard = ({ key, playlist, variant }: Props) => {
     return (
       <Link href={'/playlist/' + playlist.id} textDecoration="none">
         <Box
-          maxW="xs"
+          maxW="2xs"
           mx="auto"
           bg="white"
           _dark={{
@@ -40,6 +40,7 @@ const PlaylistCard = ({ key, playlist, variant }: Props) => {
               _dark={{
                 color: 'white',
               }}
+              noOfLines={[1]}
               fontWeight="bold"
               fontSize="3xl"
               textTransform="uppercase"

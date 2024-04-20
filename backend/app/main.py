@@ -4,11 +4,13 @@ import jwt
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import ORJSONResponse
 from fastapi.routing import APIRoute
+from sqlmodel import SQLModel
 from starlette.middleware.cors import CORSMiddleware
 
 from app.api.main import api_router
 from app.config import settings
 from app.core import database
+from app.core.database import engine
 
 
 def custom_generate_unique_id(route: APIRoute) -> str:

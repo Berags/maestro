@@ -111,6 +111,8 @@ async def get_last_listened(request: Request):
         recording = session.exec(
             select(Recording).where(Recording.id == redis_cache.get(f"user:{user_id}:listens")).limit(1)
         ).one_or_none()
+        if recording is None:
+            return None
         opus = session.exec(
             select(Opus).where(Opus.id == recording.opus_id).limit(1)
         ).one_or_none()

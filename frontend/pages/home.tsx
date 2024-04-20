@@ -1,12 +1,9 @@
 import { GetServerSidePropsContext, NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
 import { useWindowSize } from '../utils/useWindowSize'
-import Layout from '../components/Layout'
 import NotLoggedIn from '../components/auth/NotLoggedIn'
 import { Button, chakra, Container, SimpleGrid } from '@chakra-ui/react'
-import LoginButton from '../components/LoginButton'
 import Separator from '../components/Separator'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]'
@@ -27,7 +24,7 @@ const Home: NextPage = ({ last_listened, playlists, random }: any) => {
       <RecentListen listen={last_listened} />
       <Separator text="Playlists" />
       <Container maxW={'8xl'}>
-        <SimpleGrid minChildWidth="18em" spacingY={4} spacingX={2}>
+        <SimpleGrid columns={[1, 1, 3, 3]} spacingY={4} spacingX={2}>
           {playlists.length === 0 ? (
             <chakra.h2 textAlign={'center'}>No playlist found!</chakra.h2>
           ) : (

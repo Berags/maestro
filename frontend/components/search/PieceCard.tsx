@@ -50,7 +50,6 @@ type Props = {
 }
 
 const PieceCard: any = (props: Props) => {
-  const router = useRouter()
   const pieceData = props.pieceData
   const { data }: any = useSession()
   const audioPlayer = useAudioPlayer()
@@ -163,46 +162,33 @@ const PieceCard: any = (props: Props) => {
           </PopoverTrigger>
           <PopoverContent w={'16em'}>
             <PopoverBody>
-              <Popover placement="right">
-                <PopoverTrigger>
-                  <Button variant={'ghost'} w={'100%'}>
-                    Add/Remove to playlist
-                    <FaAngleRight />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent>
-                  <PopoverBody>
-                    <VStack>
-                      {playlists.map((value: any, key: number) => (
-                        <Button
-                          variant={'link'}
-                          onClick={async () => {
-                            const res = await backend.post(
-                              '/playlist/add-recording/' +
-                                value.id +
-                                '/' +
-                                pieceData.id,
-                              {},
-                              {
-                                headers: {
-                                  Authorization: data.token,
-                                },
-                              }
-                            )
-                            if (res.data.message == 'Unauthorized') {
-                              toast.error('An error has occurred!')
-                              return
-                            }
-                            toast.success(res.data.message)
-                          }}
-                        >
-                          {value.name}
-                        </Button>
-                      ))}
-                    </VStack>
-                  </PopoverBody>
-                </PopoverContent>
-              </Popover>
+              <Button
+                variant={'ghost'}
+                w={'100%'}
+                onClick={async () => {
+                  toast.promise(
+                    backend.delete(
+                      '/playlist/remove-recording/' +
+                        props.defaultPlaylist.id +
+                        '/' +
+                        pieceData.id,
+                      {
+                        headers: {
+                          Authorization: data.token,
+                        },
+                      }
+                    ),
+                    {
+                      loading: 'Removing from playlist...',
+                      success: 'Removed from playlist!',
+                      error: 'Failed to remove from playlist',
+                    }
+                  )
+                  props.setUpdated(true)
+                }}
+              >
+                Remove from playlist
+              </Button>
               <Button
                 variant={'ghost'}
                 onClick={() => {
@@ -274,7 +260,7 @@ const PieceCard: any = (props: Props) => {
                 <Popover placement="right">
                   <PopoverTrigger>
                     <Button variant={'ghost'} w={'100%'}>
-                      Add/Remove to playlist
+                      Add to playlist
                       <FaAngleRight />
                     </Button>
                   </PopoverTrigger>
@@ -457,7 +443,7 @@ const PieceCard: any = (props: Props) => {
                   <Popover placement="right">
                     <PopoverTrigger>
                       <Button variant={'ghost'} w={'100%'}>
-                        Add/Remove to playlist
+                        Add to playlist
                         <FaAngleRight />
                       </Button>
                     </PopoverTrigger>

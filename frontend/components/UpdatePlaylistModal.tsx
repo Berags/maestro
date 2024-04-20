@@ -27,11 +27,11 @@ import backend from '../axios.config'
 type Props = {
   disclosure: UseDisclosureReturn
   update: any
+  setUpdated: Function
 }
 
-const UpdatePlaylistModal = ({ disclosure, update }: Props) => {
+const UpdatePlaylistModal = ({ disclosure, update, setUpdated }: Props) => {
   const { data }: any = useSession()
-  const router = useRouter()
   const [image, setImage]: any = useState([update.image_url])
   const [description, setDescription]: any = useState(update.description)
   const [title, setTitle] = useState(update.name)
@@ -53,8 +53,8 @@ const UpdatePlaylistModal = ({ disclosure, update }: Props) => {
     )
 
     toast.success(res.data.message)
-    router.reload()
     disclosure.onClose()
+    setUpdated(true)
   }
 
   return (

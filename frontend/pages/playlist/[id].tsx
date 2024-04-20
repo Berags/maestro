@@ -188,6 +188,7 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
       <UpdatePlaylistModal
         disclosure={updatePlaylistDisclose}
         update={playlistData}
+        setUpdated={setUpdated}
       />
       <Separator text="Recordings" />
       <SimpleGrid
@@ -202,7 +203,17 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
       >
         {playlistData.recordings.map((rec: any, i: any) => (
           <Box w={'100%'}>
-            <PieceCard variant="pl" pieceData={rec} />
+            <PieceCard
+              variant="pl"
+              pieceData={rec}
+              setUpdated={setUpdated}
+              defaultPlaylist={{
+                ...playlistData,
+                is_in_playlist: playlistData.recordings.some(
+                  (rec: any) => rec.id === rec.id
+                ),
+              }}
+            />
           </Box>
         ))}
       </SimpleGrid>

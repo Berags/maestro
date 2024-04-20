@@ -9,6 +9,7 @@ import {
   Stack,
   Text,
   VStack,
+  Skeleton,
 } from '@chakra-ui/react'
 import { prominent } from 'color.js'
 import { useRouter } from 'next/router'
@@ -30,6 +31,15 @@ const RecentListen = ({ listen }: Props) => {
   const size = useWindowSize()
   const audioPlayer = useAudioPlayer()
   const [colors, setColors] = useState<any>(['#000000', '#000000'])
+
+  if (!listen) {
+    return (
+      <Container maxW="5xl" textAlign={'center'}>
+        No recent listens!
+      </Container>
+    )
+  }
+
   useEffect(() => {
     const fetchColor = async () => {
       const color = await prominent(listen.recording.image_url, {
@@ -56,7 +66,7 @@ const RecentListen = ({ listen }: Props) => {
       <Fragment key={listen.recording.id}>
         <Stack
           direction={{ base: 'column', sm: 'row' }}
-          bgColor={colors[1]}
+          bgColor={colors[0]}
           spacing={{ base: 0, sm: 10 }}
           p={{ base: 4, sm: 10 }}
           rounded="lg"

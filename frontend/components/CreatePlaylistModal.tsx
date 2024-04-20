@@ -36,6 +36,10 @@ const CreatePlaylistModal = ({ disclosure }: Props) => {
   }
 
   const create = async () => {
+    if (image.length <= 0) {
+      toast.error('Please upload an image')
+      return
+    }
     const formData = new FormData()
     formData.append('image', image[0].file, title + data.accountId)
     const res_image = await backend.post('/playlist/upload', formData, {
@@ -79,7 +83,7 @@ const CreatePlaylistModal = ({ disclosure }: Props) => {
               }}
             />
           </FormControl>
-          <FormControl mt={2}>
+          <FormControl mt={2} isRequired>
             <FormLabel>Image</FormLabel>
             <ImageUploading
               multiple

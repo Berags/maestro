@@ -28,8 +28,9 @@ services:
 
   backend:
     image: '${DOCKER_IMAGE_BACKEND?Variable not set}:${TAG-latest}'
-    expose:
-      - 8000
+    ports:
+      - 80:80
+      - 443:443
     restart: always
     depends_on:
       - db
@@ -50,41 +51,20 @@ services:
       - REDIS_HOST=${REDIS_HOST?Variable not set}
       - REDIS_PORT=${REDIS_PORT?Variable not set}
       - REDIS_PASSWORD=${REDIS_PASSWORD?Variable not set}
-    labels:  # new
-      - "traefik.enable=true"
-      - "traefik.http.routers.fastapi.rule=Host(`api.maestrofm.tech`)"
-      - "traefik.http.services.backend.loadbalancer.server.port=8000"
-      - "traefik.http.routers.fastapi.tls=true"
-      - "traefik.http.routers.fastapi.tls.certresolver=letsencrypt"
 
     build:
+      context: .
       args:
         INSTALL_DEV: ${INSTALL_DEV-false}
     # platform: linux/amd64
+    #
 
-  traefik: # new
-    image: traefik:v2.9.6
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - "./traefik.prod.toml:/etc/traefik/traefik.toml"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./traefik-public-certificates:/certificates"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`dashboard.maestrofm.tech`) && (PathPrefix(`/`)"
-      - "traefik.http.routers.dashboard.tls=true"
-      - "traefik.http.routers.dashboard.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.dashboard.service=api@internal"
-      - "traefik.http.routers.dashboard.middlewares=auth"
-      - "traefik.http.middlewares.auth.basicauth.users=testuser:$$apr1$$jIKW.bdS$$eKXe4Lxjgy/rH65wP1iQe1"
   meilisearch:
     image: getmeili/meilisearch:v1.1.1
     volumes:
       - ./data.ms:/data.ms
-    expose:
-      - "7700:7700"
+    ports:
+      - 7700:7700
     environment:
       - MEILI_MASTER_KEY=${MEILI_MASTER_KEY:-ms}
     healthcheck:
@@ -92,5 +72,3 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-volumes:
-  traefik-public-certificates:

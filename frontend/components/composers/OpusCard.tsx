@@ -14,7 +14,6 @@ import {
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import axios from 'axios'
 import { useEffect } from 'react'
 import getConfig from 'next/config'
 import { useSession } from 'next-auth/react'
@@ -56,7 +55,6 @@ const OpusCard = (props: Props) => {
       })
 
       setRecordings(res.data)
-      console.log(res.data)
     }
 
     getRecordings()
