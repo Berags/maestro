@@ -35,7 +35,7 @@ import { authOptions } from '../api/auth/[...nextauth]'
 import { useRouter } from 'next/router'
 import { FaPlay } from 'react-icons/fa6'
 import Markdown from 'react-markdown'
-import PieceCard from '../../components/search/PieceCard'
+import PieceCard from '../../components/PieceCard'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import useAudioPlayer from '../../utils/useAudioPlayer'
@@ -149,7 +149,7 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
             variant={'ghost'}
             aria-label={'Play all'}
             colorScheme={'facebook'}
-            onClick={() => {}}
+            onClick={() => { }}
             icon={<BsThreeDots />}
           />
           <MenuList>
@@ -199,9 +199,9 @@ const PlaylistView = ({ playlist, top_recordings }: any) => {
         borderColor={'gray.200'}
         borderRadius={6}
         p={4}
-        columns={[1, 1, 1, 1, 1, 1]}
+        columns={[1]}
       >
-        {playlistData.recordings.map((rec: any, i: any) => (
+        {playlistData.recordings.map((rec: any) => (
           <Box w={'100%'}>
             <PieceCard
               variant="pl"

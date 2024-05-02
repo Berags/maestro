@@ -13,10 +13,9 @@ router = APIRouter()
 
 @router.post("/upload")
 async def upload_image(image: UploadFile):
-    print(image.filename)
     upload_response = uploader.upload(
         image.file,
-        public_id=image.filename + uuid.uuid4().__str__(),
+        public_id=image.filename + str(uuid.uuid4()),
         folder="playlist",
         transformation=
         [{"width": 600, "height": 600, "crop": "auto", "gravity": "auto", "effect": "improve:50"}]
@@ -74,8 +73,6 @@ async def add_recording_to_playlist(playlist_id: int, recording_id: int, request
         playlist_recording = session.exec(select(PlaylistRecording).where(PlaylistRecording.playlist_id == playlist_id)
                                           .where(PlaylistRecording.recording_id == recording_id)).one_or_none()
         if playlist_recording is not None:
-            session.delete(playlist_recording)
-            session.commit()
             return {"message": "Recording already in playlist"}
 
         playlist_recording = PlaylistRecording(playlist_id=playlist_id, recording_id=recording_id)
@@ -151,3 +148,4 @@ async def update_playlist(playlist_id: int, body: dict, request: Request):
         session.commit()
         session.refresh(playlist)
     return {"message": "Playlist updated successfully"}
+

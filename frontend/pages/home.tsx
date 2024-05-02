@@ -1,19 +1,15 @@
+import { chakra, Container, SimpleGrid } from '@chakra-ui/react'
 import { GetServerSidePropsContext, NextPage } from 'next'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { useWindowSize } from '../utils/useWindowSize'
-import NotLoggedIn from '../components/auth/NotLoggedIn'
-import { Button, chakra, Container, SimpleGrid } from '@chakra-ui/react'
-import Separator from '../components/Separator'
 import { getServerSession } from 'next-auth'
-import { authOptions } from './api/auth/[...nextauth]'
+import { useSession } from 'next-auth/react'
 import backend from '../axios.config'
-import RecentListen from '../components/RecentListen'
+import NotLoggedIn from '../components/auth/NotLoggedIn'
 import PlaylistCard from '../components/PlaylistCard'
+import RecentListen from '../components/RecentListen'
+import Separator from '../components/Separator'
+import { authOptions } from './api/auth/[...nextauth]'
 
 const Home: NextPage = ({ last_listened, playlists, random }: any) => {
-  const router = useRouter()
-  const size = useWindowSize()
   const { data }: any = useSession()
 
   if (!data) return <NotLoggedIn />

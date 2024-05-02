@@ -9,7 +9,6 @@ import {
   Stack,
   Text,
   VStack,
-  Skeleton,
 } from '@chakra-ui/react'
 import { prominent } from 'color.js'
 import { useRouter } from 'next/router'

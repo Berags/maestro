@@ -2,9 +2,7 @@ import type {
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
 } from 'next'
-import { useWindowSize } from '../utils/useWindowSize'
 import { getProviders, signIn } from 'next-auth/react'
-import { useRouter } from 'next/router'
 import { Box, Button, chakra, Stack, Text } from '@chakra-ui/react'
 import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]'
@@ -12,8 +10,6 @@ import { authOptions } from './api/auth/[...nextauth]'
 const Home: any = ({
   providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const size = useWindowSize()
-  const router = useRouter()
 
   return (
     <Box px={8} py={24} mx="auto">

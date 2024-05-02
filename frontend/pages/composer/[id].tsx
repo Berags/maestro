@@ -30,7 +30,7 @@ import Pagination from '../../components/Pagination'
 import Separator from '../../components/Separator'
 import { authOptions } from '../api/auth/[...nextauth]'
 
-const Composer = ({ composerData, nOfPages, backend_api }: any) => {
+const Composer = ({ composerData, nOfPages }: any) => {
   const router = useRouter()
   const { data }: any = useSession()
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -259,7 +259,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       session: session ?? [],
       composerData: res.data,
       nOfPages: res.data.n_of_pages,
-      backend_api: process.env.BACKEND_API,
     },
   }
 }

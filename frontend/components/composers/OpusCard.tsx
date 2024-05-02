@@ -10,14 +10,11 @@ import {
   MenuButton,
   Button,
   MenuList,
-  Flex,
 } from '@chakra-ui/react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import getConfig from 'next/config'
 import { useSession } from 'next-auth/react'
-import PieceCard from '../search/PieceCard'
+import PieceCard from '../PieceCard'
 import backend from '../../axios.config'
 import { useWindowSize } from '../../utils/useWindowSize'
 import NextLink from 'next/link'
@@ -40,11 +37,8 @@ type OpusData = {
 const OpusCard = (props: Props) => {
   const opusData = props.opusData
   const size = useWindowSize()
-  const { publicRuntimeConfig } = getConfig()
   const { data }: any = useSession()
-  const { BACKEND_API } = publicRuntimeConfig
   const [recordings, setRecordings] = React.useState([])
-  const router = useRouter()
 
   useEffect(() => {
     const getRecordings = async () => {

@@ -1,32 +1,16 @@
 import {
-  chakra,
-  Stack,
-  useColorModeValue,
-  Box,
-  SimpleGrid,
-  Text,
-  Flex,
-  Link,
-  Button,
-  useDisclosure,
-  Modal,
+  Box, Button, chakra, Flex, Modal,
   ModalBody,
   ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
+  ModalContent, ModalHeader,
+  ModalOverlay, SimpleGrid, Stack, Text, useColorModeValue, useDisclosure
 } from '@chakra-ui/react'
-import Layout from '../../components/Layout'
-import { useRouter } from 'next/router'
 import { GetServerSidePropsContext } from 'next'
-import { authOptions } from '../api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
-import PieceCard from '../../components/search/PieceCard'
+import PieceCard from '../../components/PieceCard'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 const Performer = () => {
-  const router = useRouter()
-  const composerId = router.query.id
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   //TODO: query from backend

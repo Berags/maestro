@@ -1,29 +1,16 @@
-import { GetServerSidePropsContext, NextPage } from 'next'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import { useWindowSize } from '../utils/useWindowSize'
-import Layout from '../components/Layout'
-import NotLoggedIn from '../components/auth/NotLoggedIn'
 import {
-  AbsoluteCenter,
-  Box,
-  Button,
-  Center,
-  Divider,
-  SimpleGrid,
+  Box, SimpleGrid
 } from '@chakra-ui/react'
-import LoginButton from '../components/LoginButton'
-import ComposerCard from '../components/search/ComposerCard'
-import PieceCard from '../components/search/PieceCard'
-import Separator from '../components/Separator'
-import AutocompleteSearchBox from '../components/search/AutocompleteSearchBox'
+import { GetServerSidePropsContext, NextPage } from 'next'
 import { getServerSession } from 'next-auth'
+import { useSession } from 'next-auth/react'
+import NotLoggedIn from '../components/auth/NotLoggedIn'
+import PieceCard from '../components/PieceCard'
+import AutocompleteSearchBox from '../components/search/AutocompleteSearchBox'
+import Separator from '../components/Separator'
 import { authOptions } from './api/auth/[...nextauth]'
 
 const Search: NextPage = () => {
-  const router = useRouter()
-  const size = useWindowSize()
   const { data }: any = useSession()
 
   if (!data) return <NotLoggedIn />

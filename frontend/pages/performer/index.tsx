@@ -1,24 +1,14 @@
+import {
+  Box, SimpleGrid
+} from '@chakra-ui/react'
 import { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import {
-  AbsoluteCenter,
-  Box,
-  Button,
-  Center,
-  Divider,
-  SimpleGrid,
-} from '@chakra-ui/react'
-import Separator from '../../components/Separator'
 import NotLoggedIn from '../../components/auth/NotLoggedIn'
+import PieceCard from '../../components/PieceCard'
 import PerformerCard from '../../components/search/PerformerCard'
-import PieceCard from '../../components/search/PieceCard'
-import { useWindowSize } from '../../utils/useWindowSize'
+import Separator from '../../components/Separator'
 
 const Search: NextPage = () => {
-  const router = useRouter()
-  const size = useWindowSize()
   const { data }: any = useSession()
 
   if (!data) return <NotLoggedIn />

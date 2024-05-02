@@ -46,15 +46,15 @@ routes_without_middleware = [settings.API_V1_STR + "/auth/login",
 @app.middleware("http")
 async def check_auth(request: Request, call_next):
     response = {}
-    if request.method not in ["GET", "POST"]:
+    # Allow "Options" request method
+    if request.method not in ["GET", "POST", "DELETE", "PUT"]:
         return await call_next(request)
     if request.url.path in routes_without_middleware:
         return await call_next(request)
 
     try:
         jwt.decode(request.headers["authorization"], settings.SECRET_KEY, algorithms=["HS256"])
-        response = await call_next(request)
-        return response
+        return await call_next(request)
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Unauthorized")
 

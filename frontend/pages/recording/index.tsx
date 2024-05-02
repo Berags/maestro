@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import backend from '../../axios.config'
 import Pagination from '../../components/Pagination'
 import RecentListen from '../../components/RecentListen'
-import PieceCard from '../../components/search/PieceCard'
+import PieceCard from '../../components/PieceCard'
 import Separator from '../../components/Separator'
 import { authOptions } from '../api/auth/[...nextauth]'
 

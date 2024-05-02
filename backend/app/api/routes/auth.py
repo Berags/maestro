@@ -27,14 +27,13 @@ async def login(body: Body):
     request_user = None
     response_body = {}
 
-    session_token = security.make_token()
-
-    with (Session(engine) as session):
+    with Session(engine) as session:
         request_user = session.exec(
             select(User)
             .where(User.id == providers_string[body.provider] + str(body.id))
         ).one_or_none()
 
+    # User does not exist -> create one
     if request_user is None:
         request_user = User(
             id=providers_string[body.provider] + str(body.id),
@@ -49,7 +48,6 @@ async def login(body: Body):
         session.refresh(request_user)
         response_body["message"] = "User created successfully"
 
-    redis_cache.set(session_token, request_user.id)
     encoded = jwt.encode({
         "id": providers_string[body.provider] + str(body.id),
     }, settings.SECRET_KEY, algorithm="HS256")
@@ -59,7 +57,6 @@ async def login(body: Body):
 
 @router.get("/identity")
 async def get_identity(id: str, request: Request) -> User:
-    print(id)
     user = None
     with (Session(engine) as session):
         user = session.exec(select(User).where(User.id == id)).one_or_none()
@@ -72,4 +69,3 @@ async def unauthorized(response: Response):
     response.status_code = status.HTTP_401_UNAUTHORIZED
     return {"message": "Unauthorized"}
 
-# TODO: add logout

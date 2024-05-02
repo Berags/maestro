@@ -1,18 +1,15 @@
-import { Flex, Avatar, Text, Skeleton } from '@chakra-ui/react'
+import { Avatar, Text, } from '@chakra-ui/react'
 import {
   AutoComplete,
   AutoCompleteInput,
   AutoCompleteList,
-  AutoCompleteItem,
   AutoCompleteGroup,
-  AutoCompleteGroupTitle,
+  AutoCompleteItem,
 } from '@choc-ui/chakra-autocomplete'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import backend from '../../axios.config'
 import { useSession } from 'next-auth/react'
-import Separator from '../Separator'
 import { useRouter } from 'next/router'
-import { Fa0 } from 'react-icons/fa6'
 
 const AutocompleteSearchBox = () => {
   const session: any = useSession()

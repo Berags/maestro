@@ -4,13 +4,12 @@ import backend from '../../../axios.config'
 
 export const authOptions = {
   secret: process.env.AUTH_SECRET,
-  // Configure one or more authentication providers
+  // Auth Providers
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
-    // ...add more providers here
   ],
   callbacks: {
     async jwt({ token, account, profile }) {

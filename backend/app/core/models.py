@@ -29,6 +29,7 @@ class User(SQLModel, table=True):
     description: str | None = Field(default=None)
     created_at: datetime = Field(default=datetime.now())
     updated_at: datetime = Field(default=datetime.now())
+    is_admin: bool = Field(default=False)
 
     liked_composers: list["Composer"] = Relationship(back_populates="liked_by", link_model=UserComposerLike)
     liked_recordings: list["Recording"] = Relationship(back_populates="liked_by", link_model=UserRecordingLike)
