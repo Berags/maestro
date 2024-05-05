@@ -37,3 +37,25 @@ async def create_composer(body: Composer, request: Request):
         composer = Composer(**body.dict())
         session.add(composer)
         session.commit()
+
+
+@router.put("/composer/update/{id}")
+async def update_composer(id: int, body: Composer, request: Request):
+    with Session(engine) as session:
+        current_user = session.exec(
+            select(User).where(User.id == security.get_id(request.headers["authorization"]))).one_or_none()
+        if not current_user.is_admin:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="You are not an admin")
+        
+        composer = session.exec(select(Composer).where(Composer.id == id)).one_or_none()
+        portait = composer.portrait
+        if composer is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Composer not found")
+        
+        for key, value in body.dict().items():
+            setattr(composer, key, value)
+        composer.id = id
+        composer.portrait = portait
+        session.add(composer)
+        session.commit()
+

@@ -66,7 +66,7 @@ const Layout = (props: Props) => {
       function(error) {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
-        signOut()
+        //signOut()
         return Promise.reject(error)
       }
     )

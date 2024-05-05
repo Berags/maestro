@@ -1,12 +1,14 @@
-import { Box, chakra, Grid, useColorModeValue, Stack, Avatar, HStack, IconButton, useToast } from "@chakra-ui/react"
+import { Avatar, Box, chakra, Grid, HStack, IconButton, Stack, useColorModeValue, useDisclosure, useToast } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { Fragment } from "react"
 import { IoPencil, IoTrashBin } from "react-icons/io5"
 import backend from "../../axios.config"
+import UpdateComposerModal from "./UpdateComposerModal"
 
 const ComposerPiece = ({ composer, index, setUpdated }: any) => {
   const session: any = useSession()
   const toast = useToast()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const deleteComposer = async () => {
     const res = await backend.delete(`/composer/id/${composer.id}`, {
@@ -59,7 +61,8 @@ const ComposerPiece = ({ composer, index, setUpdated }: any) => {
           justifySelf="flex-end"
           alignItems="center"
         >
-          <IconButton aria-label="edit" icon={<IoPencil />} />
+          <UpdateComposerModal onClose={onClose} isOpen={isOpen} setUpdated={setUpdated} composerId={composer.id} />
+          <IconButton aria-label="edit" icon={<IoPencil />} onClick={onOpen} />
           <IconButton aria-label="delete" icon={<IoTrashBin />} onClick={deleteComposer} />
         </Stack>
       </Grid>
