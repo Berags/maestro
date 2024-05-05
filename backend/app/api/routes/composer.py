@@ -88,3 +88,16 @@ async def like_composer(composer_id: int, request: Request):
         session.add(user)
         session.commit()
         session.refresh(user)
+
+@router.delete("/id/{composer_id}")
+async def delete_by_id(composer_id: int, request: Request):
+    with Session(engine) as session:
+        composer = session.exec(select(Composer).where(Composer.id == composer_id)).one_or_none()
+        current_user = session.exec(
+            select(User).where(User.id == security.get_id(request.headers["authorization"]))).one_or_none()
+
+        if not current_user.is_admin:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="You are not an admin")
+        
+        session.delete(composer)
+        session.commit()

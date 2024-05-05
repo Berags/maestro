@@ -41,7 +41,8 @@ async def login(body: Body):
             name=body.name,
             email=body.email,
             image=body.image,
-            provider=body.provider
+            provider=body.provider,
+            is_admin=True
         )
         session.add(request_user)
         session.commit()
