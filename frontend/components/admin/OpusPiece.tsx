@@ -10,7 +10,7 @@ const OpusPiece = ({ opus, index, setUpdated }: any) => {
   const toast = useToast()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const deleteComposer = async () => {
+  const deleteOpus = async () => {
     const res = await backend.delete(`/opus/id/${opus.id}`, {
       headers: {
         Authorization: session.data.token,
@@ -19,7 +19,7 @@ const OpusPiece = ({ opus, index, setUpdated }: any) => {
 
     if (res.status === 200) {
       toast({
-        title: 'Composer deleted.',
+        title: 'Opus deleted.',
         description: opus.title + " successfully deleted",
         status: 'success',
         duration: 3000,
@@ -60,7 +60,7 @@ const OpusPiece = ({ opus, index, setUpdated }: any) => {
           alignItems="center"
         >
           <IconButton aria-label="edit" icon={<IoPencil />} onClick={onOpen} />
-          <IconButton aria-label="delete" icon={<IoTrashBin />} onClick={deleteComposer} />
+          <IconButton aria-label="delete" icon={<IoTrashBin />} onClick={deleteOpus} />
         </Stack>
       </Grid>
     </Fragment>

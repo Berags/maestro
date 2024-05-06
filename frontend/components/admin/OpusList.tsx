@@ -30,7 +30,7 @@ const OpusList = () => {
     }
 
     getNOfPages()
-  }, [session, search])
+  }, [search])
 
   useEffect(() => {
     const getComposers = async () => {
@@ -48,7 +48,7 @@ const OpusList = () => {
 
     getComposers()
     setUpdated(false)
-  }, [page, session, updated, search])
+  }, [search, page, updated])
 
   return (
     <Box>
