@@ -31,6 +31,8 @@ async def get_composer(composer_id: int, page: int | None, request: Request):
                     "is_liked": current_user in composer.liked_by,
                     "n_of_pages": math.ceil(len(composer.opuses) / limit)}
         else:
+            if composer is None:
+                return None
             return composer.__dict__
 
 
@@ -88,6 +90,7 @@ async def like_composer(composer_id: int, request: Request):
         session.add(user)
         session.commit()
         session.refresh(user)
+
 
 @router.delete("/id/{composer_id}")
 async def delete_by_id(composer_id: int, request: Request):

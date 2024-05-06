@@ -12,6 +12,9 @@ import { IoArrowBack } from "react-icons/io5"
 import backend from "../../axios.config"
 import ComposersList from "../../components/admin/ComposersList"
 import { authOptions } from "../api/auth/[...nextauth]"
+import dynamic from 'next/dynamic'
+
+const OpusList = dynamic(() => import('../../components/admin/OpusList'))
 
 const Dashboard = ({ user }: any) => {
   return (
@@ -71,6 +74,7 @@ const Dashboard = ({ user }: any) => {
           </TabList>
           <TabPanels>
             <TabPanel w={"100vw"} px={{ base: 8, sm: 16, md: 32 }}><ComposersList /></TabPanel>
+            <TabPanel w={"100vw"} px={{ base: 8, sm: 16, md: 32 }}><OpusList /></TabPanel>
           </TabPanels>
         </Tabs>
         <Spacer />
