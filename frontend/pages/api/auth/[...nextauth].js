@@ -12,6 +12,11 @@ export const authOptions = {
     }),
   ],
   callbacks: {
+    async signOut() {
+      console.log('signOut')
+      const { redirect } = require('next/router')
+      redirect('/')
+    },
     async jwt({ token, account, profile }) {
       // Persist the OAuth access_token to the token right after signin
       if (account && profile) {

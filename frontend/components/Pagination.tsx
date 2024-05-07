@@ -4,6 +4,19 @@ import { useWindowSize } from '../utils/useWindowSize'
 
 const Pagination = ({ index, nOfPages, setPage }: any) => {
   const size = useWindowSize()
+  const [pages, setPages] = useState<number[]>([])
+
+  useEffect(() => {
+    if (nOfPages < 5)
+      setPages([...Array(nOfPages)].map((x, i) => i))
+    else if (nOfPages >= 5 && index < 4)
+      setPages([0, 1, 2, 3, nOfPages - 1])
+    else if (nOfPages >= 5 && index + 2 < nOfPages)
+      setPages([0, index - 1, index, index + 1, nOfPages - 1])
+    else
+      setPages([0, nOfPages - 3, nOfPages - 2, nOfPages - 1])
+  }, [nOfPages, index])
+
   return (
     <Flex
       as="nav"
@@ -21,17 +34,17 @@ const Pagination = ({ index, nOfPages, setPage }: any) => {
           setPage(index - 1)
         }}
       >
-        {size.width > 400 ? "Next" : "<"}
+        {size.width > 400 ? "Back" : "<"}
       </PaginationButton>
-      {[...Array(nOfPages)].map((x, i) => (
+      {pages.map((x, i) => (
         <PaginationButton
           onClick={() => {
-            setPage(i)
+            setPage(x)
           }}
-          isActive={index == i}
+          isActive={index == x}
           key={i}
         >
-          {i + 1}
+          {x + 1}
         </PaginationButton>
       ))}
       <PaginationButton

@@ -1,5 +1,5 @@
 import jwt
-from fastapi import APIRouter, Request, Response
+from fastapi import APIRouter, Request, Response, HTTPException
 from pydantic import BaseModel
 from sqlmodel import Session, select
 from starlette import status
@@ -41,7 +41,8 @@ async def login(body: Body):
             name=body.name,
             email=body.email,
             image=body.image,
-            provider=body.provider
+            provider=body.provider,
+            is_admin=True
         )
         session.add(request_user)
         session.commit()
@@ -56,11 +57,16 @@ async def login(body: Body):
 
 
 @router.get("/identity")
-async def get_identity(id: str, request: Request) -> User:
-    user = None
-    with (Session(engine) as session):
-        user = session.exec(select(User).where(User.id == id)).one_or_none()
-    return user
+async def get_identity(id: str, request: Request) -> User | None:
+    try:
+        user = None
+        with (Session(engine) as session):
+            user = session.exec(select(User).where(User.id == id)).one_or_none()
+        if user is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+        return user
+    except:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     # user_id = request.session.get("user_id")
 
 

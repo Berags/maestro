@@ -116,6 +116,8 @@ async def get_last_listened(request: Request):
         opus = session.exec(
             select(Opus).where(Opus.id == recording.opus_id).limit(1)
         ).one_or_none()
+        if opus is None:
+            return None
         return {"recording": recording, "opus": opus, "composer": opus.composer}
 
 

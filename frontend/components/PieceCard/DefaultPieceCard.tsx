@@ -165,7 +165,7 @@ const DefaultPieceCard = (props: any) => {
                   <PopoverContent>
                     <PopoverBody>
                       <VStack>
-                        {playlists.map((value: any, key: number) => (
+                        {playlists && playlists.map((value: any, key: number) => (
                           <Button
                             variant={'link'}
                             onClick={async () => {

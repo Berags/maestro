@@ -9,7 +9,7 @@ from fastapi import APIRouter, Request, HTTPException, status
 from sqlalchemy import func
 from sqlmodel import Session, select
 
-from app.core.database import engine, redis_cache
+from app.core.database import engine, redis_cache, search
 from app.core.models import Composer, Opus, User
 from app.utils import security
 
@@ -31,6 +31,8 @@ async def get_composer(composer_id: int, page: int | None, request: Request):
                     "is_liked": current_user in composer.liked_by,
                     "n_of_pages": math.ceil(len(composer.opuses) / limit)}
         else:
+            if composer is None:
+                return None
             return composer.__dict__
 
 
@@ -88,3 +90,18 @@ async def like_composer(composer_id: int, request: Request):
         session.add(user)
         session.commit()
         session.refresh(user)
+
+
+@router.delete("/id/{composer_id}")
+async def delete_by_id(composer_id: int, request: Request):
+    with Session(engine) as session:
+        composer = session.exec(select(Composer).where(Composer.id == composer_id)).one_or_none()
+        current_user = session.exec(
+            select(User).where(User.id == security.get_id(request.headers["authorization"]))).one_or_none()
+
+        if not current_user.is_admin:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="You are not an admin")
+        
+        session.delete(composer)
+        session.commit()
+        search.index("composers").delete_document(composer_id)
