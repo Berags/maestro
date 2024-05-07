@@ -27,7 +27,7 @@ async def upload_image(image: UploadFile):
 
 
 @router.post("/composer/create")
-async def create_composer(body: Composer, request: Request):
+async def create_composer(body: CreateComposer, request: Request):
     with Session(engine) as session:
         current_user = session.exec(
             select(User).where(User.id == security.get_id(request.headers["authorization"]))).one_or_none()
@@ -38,7 +38,19 @@ async def create_composer(body: Composer, request: Request):
         session.add(composer)
         session.commit()
         session.refresh(composer)
-        search.index("composers").add_documents([composer.dict()])
+        composer_for_search = {
+            "id": composer.id,
+            "name": composer.name,
+            "epoch": composer.epoch,
+            "birth_date": composer.birth_date,
+            "birth_place": composer.birth_place,
+            "death_date": composer.death_date,
+            "death_place": composer.death_place,
+            "portrait": composer.portrait,
+            "short_description": composer.short_description,
+            "long_description": composer.long_description
+        }
+        search.index("composers").add_documents([composer_for_search])
 
 
 @router.put("/composer/update/{id}")
