@@ -18,7 +18,7 @@ import {
   Text,
   useColorModeValue,
   useDisclosure,
-  VStack,
+  VStack
 } from '@chakra-ui/react'
 import { signOut, useSession } from 'next-auth/react'
 import NextLink from 'next/link'
@@ -28,6 +28,7 @@ import 'react-h5-audio-player/lib/styles.css'
 import { Toaster } from 'react-hot-toast'
 import { BiAlbum } from 'react-icons/bi'
 import { BsFilePerson } from 'react-icons/bs'
+import { FaExternalLinkAlt } from "react-icons/fa"
 import { FiMenu } from 'react-icons/fi'
 import { IoAlbumsOutline, IoClose } from 'react-icons/io5'
 import { MdHome, MdKeyboardArrowRight } from 'react-icons/md'
@@ -36,7 +37,6 @@ import backend from '../axios.config'
 import CreatePlaylistModal from './CreatePlaylistModal'
 import MusicPlayer from './MusicPlayer'
 import AutocompleteSearchBox from './search/AutocompleteSearchBox'
-import { FaExternalLinkAlt } from "react-icons/fa"
 
 type Props = {
   children: ReactNode
@@ -53,24 +53,6 @@ const Layout = (props: Props) => {
   useEffect(() => {
     onClose()
   }, [router.pathname])
-
-  useEffect(() => {
-    // Configuring axios default headers
-    // Add a response interceptor
-    backend.interceptors.response.use(
-      function(response) {
-        // Any status code that lie within the range of 2xx cause this function to trigger
-        // Do something with response data
-        return response
-      },
-      function(error) {
-        // Any status codes that falls outside the range of 2xx cause this function to trigger
-        // Do something with response error
-        //signOut()
-        return Promise.reject(error)
-      }
-    )
-  }, [props.children])
 
   const NavItem = (props: any) => {
     const color = useColorModeValue('gray.600', 'gray.300')

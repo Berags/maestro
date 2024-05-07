@@ -70,7 +70,7 @@ const SmallPieceCardVariant = (props: any) => {
                 <PopoverContent w={'11em'}>
                   <PopoverBody>
                     <VStack>
-                      {playlists.map((value: any, key: number) => (
+                      {playlists ? playlists.map((value: any, key: number) => (
                         <Button
                           variant={'link'}
                           onClick={async () => {
@@ -95,7 +95,7 @@ const SmallPieceCardVariant = (props: any) => {
                         >
                           {value.name}
                         </Button>
-                      ))}
+                      )) : <>No playlists</>}
                     </VStack>
                   </PopoverBody>
                 </PopoverContent>

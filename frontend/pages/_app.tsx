@@ -1,10 +1,12 @@
 //import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { SessionProvider } from 'next-auth/react'
+import { SessionProvider, signOut } from 'next-auth/react'
 import { ChakraProvider } from '@chakra-ui/react'
 import Head from 'next/head'
 import Layout from '../components/Layout'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import backend from '../axios.config'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const { asPath } = useRouter()

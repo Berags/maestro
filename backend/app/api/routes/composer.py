@@ -9,7 +9,7 @@ from fastapi import APIRouter, Request, HTTPException, status
 from sqlalchemy import func
 from sqlmodel import Session, select
 
-from app.core.database import engine, redis_cache
+from app.core.database import engine, redis_cache, search
 from app.core.models import Composer, Opus, User
 from app.utils import security
 
@@ -104,3 +104,4 @@ async def delete_by_id(composer_id: int, request: Request):
         
         session.delete(composer)
         session.commit()
+        search.index("composers").delete_document(composer_id)
