@@ -129,3 +129,33 @@ async def create_opus(body: CreateOpus, request: Request):
         session.refresh(opus)
         search.index("opuses").add_documents([opus.dict()])
 
+
+class UpdateOpus(BaseModel):
+    title: str
+    description: str
+    genre: str
+    composer_id: int
+
+@router.put("/opus/update/{id}")
+async def update_opus(id: int, body: UpdateOpus, request: Request):
+    with Session(engine) as session:
+        current_user = session.exec(
+            select(User).where(User.id == security.get_id(request.headers["authorization"]))).one_or_none()
+        if not current_user.is_admin:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="You are not an admin")
+        
+        opus = session.exec(select(Opus).where(Opus.id == id)).one_or_none()
+        if opus is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Opus not found")
+        
+        opus_id = opus.id
+        recordings = opus.recordings
+        for key, value in body.dict().items():
+            setattr(opus, key, value)
+        opus.id = opus_id
+        opus.recordings = recordings
+        session.add(opus)
+        session.commit()
+        session.refresh(opus)
+        search.index("opuses").update_documents([opus.dict()])
+

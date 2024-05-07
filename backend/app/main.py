@@ -63,9 +63,9 @@ async def check_auth(request: Request, call_next):
 def startup():
     lock = threading.Lock()
     with lock:
-        SQLModel.metadata.drop_all(engine)
+        #SQLModel.metadata.drop_all(engine)
         print("Starting the database...")
-        SQLModel.metadata.create_all(engine)
-        database.populate_db()
+        #SQLModel.metadata.create_all(engine)
+        #database.populate_db()
         database.add_data_to_search()
         print("Database started!")

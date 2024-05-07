@@ -152,7 +152,7 @@ const UpdateComposerModal = ({ onClose, isOpen, setUpdated, composerId }: any) =
             toast.promise(createComposer, {
               success: { title: 'Composer Updated!', description: 'Looks great' },
               error: { title: 'Unable to create composer', description: 'Please fill all the fields' },
-              loading: { title: 'Promise pending', description: 'Please wait' },
+              loading: { title: 'Uploading', description: 'Please wait' },
             })
           }}>Update</Button>
         </ModalFooter>

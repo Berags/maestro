@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react"
 import { Fragment } from "react"
 import { IoPencil, IoTrashBin } from "react-icons/io5"
 import backend from "../../axios.config"
+import UpdateOpusModal from "./UpdateOpusModal"
 
 const OpusPiece = ({ opus, index, setUpdated }: any) => {
   const session: any = useSession()
@@ -39,6 +40,7 @@ const OpusPiece = ({ opus, index, setUpdated }: any) => {
 
   return (
     <Fragment key={index}>
+      <UpdateOpusModal opusId={opus.id} isOpen={isOpen} onClose={onClose} setUpdated={setUpdated} />
       <Grid
         w="100%"
         templateColumns={'4fr 2fr 2fr'}

@@ -1,3 +1,4 @@
+
 import { Modal, ModalOverlay, useToast, Text, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, FormControl, FormLabel, Input, InputGroup, InputLeftAddon, Textarea, VStack, Button, ModalFooter, Avatar, HStack, Stack, Grid, IconButton } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { DeleteIcon } from "@chakra-ui/icons"
@@ -13,7 +14,7 @@ import UploadFile from "../UploadFile"
 import { useSession } from "next-auth/react"
 import UploadAudio from "./UploadAudio"
 
-const CreateNewOpusModal = ({ isOpen, onClose, setUpdated }: any) => {
+const UpdateOpusModal = ({ opusId, isOpen, onClose, setUpdated }: any) => {
   const toast = useToast()
   const session: any = useSession()
   const [title, setTitle] = useState('')
@@ -25,6 +26,41 @@ const CreateNewOpusModal = ({ isOpen, onClose, setUpdated }: any) => {
   const [recordings, setRecordings] = useState<any[]>([])
 
   const [composersDataSearch, setComposersDataSearch] = useState<any[]>([])
+
+  useEffect(() => {
+    const getOpus = async () => {
+      if (isOpen) {
+        const res = await backend.get(`/opus/${opusId}`, {
+          headers: {
+            Authorization: session.data.token,
+          },
+        })
+        const opus = res.data
+
+        const res_composer = await backend.get(`/composer/id/${opus.composer_id}?page=0`, {
+          headers: {
+            Authorization: session.data.token,
+          },
+        })
+        const composer = res_composer.data
+
+        const res_recordings = await backend.get(`/recording/by-opus/${opusId}`, {
+          headers: {
+            Authorization: session.data.token,
+          },
+        })
+        const rec = res_recordings.data
+
+        setTitle(opus.title)
+        setDescription(opus.description)
+        setGenre(opus.genre)
+        setSearchValue(composer.name)
+        setComposerId(composer.id)
+        setRecordings(rec)
+      }
+    }
+    getOpus()
+  }, [opusId, isOpen])
 
   useEffect(() => {
     const getResults = async () => {
@@ -62,11 +98,11 @@ const CreateNewOpusModal = ({ isOpen, onClose, setUpdated }: any) => {
                 <VStack spacing={2}>
                   <InputGroup>
                     <InputLeftAddon w={"15vw"}><Text noOfLines={1}>Title</Text></InputLeftAddon>
-                    <Input type='text' placeholder='Don Giovanni' onChange={(event) => setTitle(event.target.value)} />
+                    <Input type='text' placeholder='Don Giovanni' value={title} onChange={(event) => setTitle(event.target.value)} />
                   </InputGroup>
                   <InputGroup>
                     <InputLeftAddon w={"15vw"}><Text noOfLines={1}>Genre</Text></InputLeftAddon>
-                    <Input type='text' placeholder='Opera' onChange={(event) => setGenre(event.target.value)} />
+                    <Input type='text' placeholder='Opera' value={genre} onChange={(event) => setGenre(event.target.value)} />
                   </InputGroup>
                   <FormControl isRequired>
                     <FormLabel>Description</FormLabel>
@@ -77,6 +113,7 @@ const CreateNewOpusModal = ({ isOpen, onClose, setUpdated }: any) => {
                       <InputLeftAddon w={"15vw"}><Text noOfLines={1}>Composer</Text></InputLeftAddon>
                       <AutoCompleteInput
                         onChange={(event) => setSearchValue(event.target.value)}
+                        value={searchValue}
                         placeholder="Search"
                         autoFocus
                       />
@@ -98,10 +135,6 @@ const CreateNewOpusModal = ({ isOpen, onClose, setUpdated }: any) => {
                       ))}
                     </AutoCompleteList>
                   </AutoComplete>
-                  <VStack>
-                    <Text>Cover</Text>
-                    <UploadFile setImage={setCover} />
-                  </VStack>
                 </VStack>
               </FormControl>
             </AccordionPanel>
@@ -115,28 +148,18 @@ const CreateNewOpusModal = ({ isOpen, onClose, setUpdated }: any) => {
               <AccordionIcon />
             </AccordionButton>
             <AccordionPanel pb={4}>
-              <Button colorScheme={"green"} onClick={() => {
-                setRecordings([...recordings, { id: Math.random() }])
-              }}>Add</Button>
               <VStack spacing={4}>
                 {recordings.map((recording, i) => (
                   <Stack direction={['column', 'row']}>
                     <InputGroup>
                       <InputLeftAddon w={"15vw"}><Text noOfLines={1}>Title</Text></InputLeftAddon>
-                      <Input type='text' placeholder='Opera' onChange={(event) => {
+                      <Input type='text' isDisabled value={recording.title} placeholder='Opera' onChange={(event) => {
                         const newRecordings = [...recordings]
                         newRecordings[i].title = event.target.value
                         setRecordings(newRecordings)
                       }} />
                     </InputGroup>
-                    <VStack>
-                      <UploadAudio setFile={(file: any) => {
-                        const newRecordings = [...recordings]
-                        newRecordings[i].file = file
-                        setRecordings(newRecordings)
-                      }} />
-                    </VStack>
-                    <IconButton aria-label="Remove" icon={<DeleteIcon />} colorScheme={"red"} onClick={() => {
+                    <IconButton aria-label="Remove" icon={<DeleteIcon />} isDisabled colorScheme={"red"} onClick={() => {
                       const newRecordings = [...recordings]
                       newRecordings.splice(i, 1)
                       setRecordings(newRecordings)
@@ -154,43 +177,16 @@ const CreateNewOpusModal = ({ isOpen, onClose, setUpdated }: any) => {
         </Button>
         <Button colorScheme={"green"} onClick={() => {
           const createOpus = new Promise(async (resolve, reject) => {
-            if (!title || !description || !genre || !composerId || !cover || !recordings) {
+            if (!title || !description || !genre || !composerId) {
               reject({ status: 400 })
               return
             }
 
-            const formData = new FormData()
-            formData.append('image', cover.file, title)
-            const res_image = await backend.post('/admin/opus/upload-image', formData, {
-              headers: {
-                Authorization: session.data.token,
-                'Content-Type': 'multipart/form-data;',
-              },
-            })
-            const image_url = res_image.data.url
-            const uploadRecordings = recordings
-            await Promise.all(recordings.map(async (recording, i) => {
-              const formDataOpus = new FormData()
-              formDataOpus.append('audio', recording.file, recording.title)
-
-              const audio_url = await backend.post('/admin/opus/upload-audio', formDataOpus, {
-                headers: {
-                  Authorization: session.data.token,
-                  'Content-Type': 'multipart/form-data;',
-                },
-              })
-              const newRecordings = [...recordings]
-              newRecordings[i].file_url = audio_url.data.url
-              uploadRecordings[i] = newRecordings[i]
-            }))
-
-            const res: any = await backend.post('/admin/opus/create', {
+            const res: any = await backend.put('/admin/opus/update/' + opusId, {
               title,
               genre,
               description,
               composer_id: composerId,
-              cover: image_url,
-              recordings: uploadRecordings
             }, {
               headers: {
                 Authorization: session.data.token,
@@ -205,14 +201,14 @@ const CreateNewOpusModal = ({ isOpen, onClose, setUpdated }: any) => {
             }
           })
           toast.promise(createOpus, {
-            success: { title: 'Opus Created!', description: 'Looks great' },
-            error: { title: 'Unable to create Opus', description: 'Please fill all the fields' },
-            loading: { title: 'Uploading', description: 'Please wait' },
+            success: { title: 'Opus Updated!', description: 'Looks great' },
+            error: { title: 'Unable to update the opus', description: 'Please fill all the fields' },
+            loading: { title: 'Updating', description: 'Please wait' },
           })
-        }}>Create</Button>
+        }}>Update</Button>
       </ModalFooter>
     </ModalContent>
   </Modal >
 }
 
-export default CreateNewOpusModal
+export default UpdateOpusModal
