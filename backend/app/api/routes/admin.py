@@ -38,19 +38,7 @@ async def create_composer(body: CreateComposer, request: Request):
         session.add(composer)
         session.commit()
         session.refresh(composer)
-        composer_for_search = {
-            "id": composer.id,
-            "name": composer.name,
-            "epoch": composer.epoch,
-            "birth_date": str(composer.birth_date),
-            "birth_place": composer.birth_place,
-            "death_date": str(composer.death_date),
-            "death_place": composer.death_place,
-            "portrait": composer.portrait,
-            "short_description": composer.short_description,
-            "long_description": composer.long_description
-        }
-        search.index("composers").add_documents([composer_for_search])
+        search.index("composers").add_documents([composer.as_dict()])
 
 
 @router.put("/composer/update/{id}")

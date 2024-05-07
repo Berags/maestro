@@ -52,6 +52,9 @@ class Composer(SQLModel, table=True):
     opuses: list["Opus"] = Relationship(back_populates="composer")
     liked_by: list["User"] = Relationship(back_populates="liked_composers", link_model=UserComposerLike)
 
+    def as_dict(self):
+        return {c.name: str(getattr(self, c.name)) for c in self.__table__.columns}
+
 
 class Opus(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
